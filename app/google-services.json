@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1066466306799",
+    "firebase_url": "https://mealer-app-58f99-default-rtdb.firebaseio.com",
+    "project_id": "mealer-app-58f99",
+    "storage_bucket": "mealer-app-58f99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066466306799:android:0ce6d3f48fe3edaa9c891a",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066466306799-mbm306fnv3r8qlv9heo9ldf3rkrkqjgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZnYer1XMX293w6NvKNTKcENgnK7odd1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066466306799-mbm306fnv3r8qlv9heo9ldf3rkrkqjgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066466306799:android:6fcb4a9f80ccdf129c891a",
+        "android_client_info": {
+          "package_name": "com.mealer.ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066466306799-mbm306fnv3r8qlv9heo9ldf3rkrkqjgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZnYer1XMX293w6NvKNTKcENgnK7odd1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066466306799-mbm306fnv3r8qlv9heo9ldf3rkrkqjgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

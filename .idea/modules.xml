@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RealMealer.iml" filepath="$PROJECT_DIR$/.idea/modules/RealMealer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealMealer.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealMealer.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealMealer.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealMealer.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealMealer.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealMealer.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealMealer.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealMealer.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Mealer.iml" filepath="$PROJECT_DIR$/.idea/modules/Mealer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.unitTest.iml" />
     </modules>
   </component>
 </project>

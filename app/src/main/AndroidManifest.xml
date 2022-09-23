@@ -14,13 +14,13 @@
         android:theme="@style/Theme.RealMealer"
         tools:targetApi="31">
         <activity
-            android:name=".ui.GetStartedPage"
+            android:name="GetStartedPage"
             android:exported="false" />
         <activity
-            android:name=".ui.SignUpPage"
+            android:name="SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

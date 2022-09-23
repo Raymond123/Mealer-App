@@ -1,4 +1,4 @@
-package com.example.realmealer;
+package com.mealer.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.mealer.app.*;
 
+//SIGN UP
 public class SignUpPage extends AppCompatActivity {
 
     EditText email;
@@ -30,7 +31,7 @@ public class SignUpPage extends AppCompatActivity {
         createAccount.setOnClickListener(v -> {
             String passwordText = password.getText().toString();
             if(passwordText.equals(confirmPassword.getText().toString())) {
-                User signedIn = new CookUser("first", "last", email.getText().toString(), "address",
+                User signedIn = new CookUser("first", "last", email.getText().toString(), "123 456 7890", "address",
                         passwordText, "description");
             }
         });

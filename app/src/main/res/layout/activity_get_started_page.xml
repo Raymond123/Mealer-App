@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Cream"
-    tools:context=".GetStartedPage">
+    tools:context=".LoginPage">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.432"
-        app:srcCompat="@drawable/getstartedimage" />
+        app:srcCompat="@drawable/getstartedimage"
+        android:contentDescription="@string/mealerlogo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,9 +46,12 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintVertical_bias="0.782"
+        tools:ignore="TextContrastCheck,TextContrastCheck" />
 
+    <!--TODO: accountExists needs to be a button so it is clickable-->
     <TextView
+        android:id="@+id/accountExists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

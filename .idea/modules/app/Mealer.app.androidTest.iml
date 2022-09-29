@@ -22,6 +22,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/70d63c0e2c23fb4e6b41170d2e120c9c/transformed/appcompat-1.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b80493662c1aff021ab530ec2a4c6339/transformed/viewpager2-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/431c28af6b35798de8ebae986a106e65/transformed/firebase-database-20.0.6-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/e2c2f741ca01e5d2c45a2368eda84e67/transformed/firebase-storage-20.0.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/90362cffbc9b04d8438cdd9cebc91fd0/transformed/firebase-appcheck-interop-16.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3d8d54fd1bf5aa71940222452d0aa13e/transformed/firebase-database-collection-18.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7353aa3e9ee7d686d985bba513406375/transformed/firebase-ui-auth-7.2.0-api.jar</arg>
@@ -253,6 +254,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-installations-interop:17.0.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-measurement-connector:19.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-measurement-sdk:21.1.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-storage:20.0.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.firebaseui:firebase-ui-auth:7.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-auth:21.0.8@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.browser:browser:1.4.0@aar" level="project" />

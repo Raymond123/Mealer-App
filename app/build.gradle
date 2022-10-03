@@ -57,4 +57,7 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 
+    // implement LottiFiles animations
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
 }

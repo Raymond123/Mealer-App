@@ -14,4 +14,6 @@
     <string name="userfirstName">First Name</string>
     <string name="createEmail">Email</string>
     <string name="mealerlogo">mealerlogo</string>
+    <string name="user_account">User account</string>
+    <string name="cook_on_mealer">Cook on Mealer</string>
 </resources>

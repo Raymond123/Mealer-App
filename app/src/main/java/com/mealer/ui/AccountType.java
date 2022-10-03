@@ -20,7 +20,7 @@ public class AccountType extends AppCompatActivity {
         btnChoice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSignUpPage();
+                openSignUpPageClient();
 
             }
         });
@@ -35,8 +35,8 @@ public class AccountType extends AppCompatActivity {
         });
     }
 
-    public void openSignUpPage(){
-        Intent intent = new Intent(this, SignUpPage.class);
+    public void openSignUpPageClient(){
+        Intent intent = new Intent(this, SignUpPageClient.class);
         startActivity(intent);
     }
     public void openSignUpPageCook(){

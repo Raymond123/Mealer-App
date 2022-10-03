@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.mealer.app.*;
 
 //SIGN UP
-public class SignUpPage extends AppCompatActivity {
+public class SignUpPageClient extends AppCompatActivity {
 
     EditText email;
     EditText password;

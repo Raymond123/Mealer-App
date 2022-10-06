@@ -50,19 +50,22 @@
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
     <!--TODO: accountExists needs to be a button so it is clickable-->
-    <TextView
+
+    <Button
         android:id="@+id/accountExists"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/alreadyHaveAccountGSPage"
         android:textColor="@color/lightGreen"
+        android:background="@color/fui_transparent"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+        app:layout_constraintVertical_bias="0.885"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.104" />
 
+    <!--TODO: Add first and last name, phone number, and address inputs-->
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="229dp"

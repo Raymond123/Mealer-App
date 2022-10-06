@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Cream"
+    tools:context=".DietaryPreferences">
+
+    <TextView
+        android:id="@+id/textViewMealPref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mealPreferences"
+        android:textSize="25sp"
+        android:textColor="@color/darkGreen"
+        tools:layout_editor_absoluteX="171dp"
+        tools:layout_editor_absoluteY="62dp"
+        app:fontFamily="sans-serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104"/>
+
+    <View
+        android:layout_width="300dp"
+        android:layout_height="2dp"
+        android:background="@color/darkBrown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.205" />
+
+    <Button
+        android:id="@+id/buttonVegan"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cream"
+        android:text="@string/veganBtn"
+        android:textColor="@color/darkGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.304" />
+
+    <Button
+        android:id="@+id/buttonKosher"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cream"
+        android:text="@string/kosherBtn"
+        android:textColor="@color/darkGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <Button
+        android:id="@+id/buttonGlutenFree"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cream"
+        android:text="@string/glutenFreeBtn"
+        android:textColor="@color/darkGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.604" />
+
+    <Button
+        android:id="@+id/mealPrefNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightBrown"
+        android:text="@string/nextBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.904" />
+
+    <Button
+        android:id="@+id/buttonOther"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cream"
+        android:text="@string/otherBtn"
+        android:textColor="@color/darkGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.805" />
+
+    <Button
+        android:id="@+id/buttonPeanutFree"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cream"
+        android:text="@string/peanutFreeBtn"
+        android:textColor="@color/darkGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.704" />
+
+    <Button
+        android:id="@+id/buttonHalal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Cream"
+        android:text="@string/halalBtn"
+        android:textColor="@color/darkGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.404" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

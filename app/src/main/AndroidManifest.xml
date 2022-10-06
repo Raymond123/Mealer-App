@@ -14,21 +14,21 @@
         android:theme="@style/Theme.RealMealer"
         tools:targetApi="31">
         <activity
-            android:name=".AccountType"
+            android:name=".DietaryPreferences"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignUpPageCook"
+            android:name=".PickingUserType"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginPage"
+            android:name=".GetStartedPage"
             android:exported="false" />
         <activity
             android:name=".SignUpPage"

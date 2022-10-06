@@ -14,6 +14,42 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
+<<<<<<< HEAD
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/eb311bd33ccaa61c8ed85387e798f5e0/transformed/junit-1.1.3-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/2f5dd650ea01f18fb000f60dcb4cd884/transformed/espresso-core-3.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/491a70cbe04ea52ee2eba7dd6b762b64/transformed/material-1.6.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/5f7b60c0cfb56164a4d6c684c63e4cda/transformed/appcompat-1.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/75e43825c2aed9b35e1f62a51340134f/transformed/viewpager2-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/9a11c50b02f12a36f57d2f3772c89562/transformed/firebase-database-20.0.6-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/73ca4c988375c240a480c986c8bb9de9/transformed/firebase-appcheck-interop-16.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/0b7b3d233f95a98e12f091b79e27112e/transformed/firebase-database-collection-18.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/3476b73a5ab270137aad12e3d3e6244b/transformed/firebase-ui-auth-7.2.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/993b717d0f7d416cc768d13ac2066654/transformed/play-services-auth-19.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/b71c8d4a0c6cf7b44dfea9bf6411a204/transformed/play-services-auth-base-17.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/9a503c41c94eaa7b5665a52e18b3376c/transformed/firebase-auth-21.0.8-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/10c96938b8f53462ec5204df2a901122/transformed/play-services-auth-api-phone-17.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/72d8407613bb0ab2bd5f01e0122d8fa2/transformed/play-services-safetynet-17.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/5e4603bd9986fe7962809ae2d7472369/transformed/play-services-base-18.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/379290d1b7356e8ef8e5eab59f9e80b5/transformed/firebase-analytics-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/fc673912cab5285cd0072c8af783dfd3/transformed/play-services-measurement-api-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/79a8f7793f9013862fbfe3e05ad5e4f7/transformed/firebase-auth-interop-20.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/68513ba92821b0db490e5aaeeab50751/transformed/firebase-installations-17.0.2-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/fe991ae21c8583fb9b8533530bf4b93a/transformed/firebase-common-20.1.2-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/cc30aa553210257ee7030ead8713302d/transformed/firebase-installations-interop-17.0.2-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/2444d25eb9742da183a41f8261ec4516/transformed/play-services-tasks-18.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/638100f7a333ae3da717a5a0bcd943a5/transformed/play-services-measurement-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/885dda72a76952d92871a90a12ddcf5d/transformed/play-services-measurement-sdk-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/873633a0eb4d8c5007fb39e88196eaae/transformed/play-services-measurement-impl-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/66711fe03378838926f2058ca308af38/transformed/play-services-ads-identifier-18.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/da74f351e0dd7537e748ff7a9ae761db/transformed/play-services-measurement-sdk-api-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/a079a7acb4a2559e58c60df6d041ee21/transformed/play-services-measurement-base-21.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/783495370249005a5388315e5d9d39f6/transformed/play-services-stats-17.0.2-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/34a6110a6c58c8236c18c1d53271f13c/transformed/firebase-measurement-connector-19.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/3499c1b87e7e75f2810f3b7ddac22aec/transformed/play-services-basement-18.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/1ed2f0ed0bc453931a305fab5441cdfe/transformed/fragment-1.3.6-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/b7ecc4fc9c4114698646e0fab1420ba6/transformed/activity-1.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/409349f62c182681d891f8fcd26a9350/transformed/lifecycle-viewmodel-savedstate-2.5.1-api.jar</arg>
+=======
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/44f4086e1e8dcc0b7236ad62f731afd4/transformed/junit-1.1.3-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/204c74238f15ea33dffbc5cfde959cd1/transformed/espresso-core-3.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1203eebac0966b8d025dbb996f56ef82/transformed/material-1.6.1-api.jar</arg>
@@ -49,58 +85,63 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/280aa7feebf52247be54b8ed15c65621/transformed/fragment-1.3.6-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2ede05167688a2d4e9ae94dc138f845a/transformed/activity-1.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5a0a9a87c58084b58f20203f1ac0f6fb/transformed/lifecycle-viewmodel-savedstate-2.5.1-api.jar</arg>
+>>>>>>> origin/main
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.6.1/97fd74ccf54a863d221956ffcd21835e168e2aaa/kotlinx-coroutines-core-jvm-1.6.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.6.1/4e61fcdcc508cbaa37c4a284a50205d7c7767e37/kotlinx-coroutines-android-1.6.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.7.10/d70d7d2c56371f7aa18f32e984e3e2e998fe9081/kotlin-stdlib-jdk8-1.7.10.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/6f25b4d47a7b27c355035559d3a387bc/transformed/runner-1.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/fc33bdcce7a59a14105ae1adafdaab42/transformed/runner-1.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-integration/1.3/5de0c73fef18917cd85d0ab70bb23818685e4dfd/hamcrest-integration-1.3.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-library/1.3/4785a3c21320980282f9f33d0d1264a69040538f/hamcrest-library-1.3.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/23748db20f17936c58a64c3e34281c75/transformed/core-1.4.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/2ec49d219ab345bfa8dd33a6c13f2617/transformed/core-ktx-1.9.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/2e6037c760b2f1de904abae9642f9699/transformed/storage-1.4.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/ca3fc3f09ed7bee43dd573757d33a004/transformed/monitor-1.4.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/923eab17d60bc73a6fc83c5b782246e2/transformed/appcompat-resources-1.5.1-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/98dac15b7e4bd23574118daaa9b7f578/transformed/drawerlayout-1.1.1-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/c87cdb0c9d61b636b4c1998fe5c63605/transformed/coordinatorlayout-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/6006b5093ca583c87939643abb28f24a/transformed/dynamicanimation-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/eb08d5c32dbe8b73e4fa11e956c927da/transformed/transition-1.2.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/ec852034d8650e75fae0fd19f8eca16d/transformed/vectordrawable-animated-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/88ae381f9fb4b6dab5b471e31e3b3a01/transformed/vectordrawable-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/dff5c1020f3ac08bac1cc216b28def46/transformed/viewpager-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/5b2749f456bc0bdc6210adfbc5a27493/transformed/legacy-support-core-utils-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/cbb70402cecc5a77f5a57149258c4a74/transformed/loader-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/f49a5f91fe7fbfe3b313b729f4666923/transformed/recyclerview-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/792b5daa0459adc8bc9c397bd1649c40/transformed/customview-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/ee734fbab2d5c5bb213774c508efbdf7/transformed/browser-1.4.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/fc435721b862aa22ae3527facdc62204/transformed/core-1.9.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/bfbaa65447516b8f8f337e0f7d5fa234/transformed/cursoradapter-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/d2f9812b9dc0988c2fb1d78e83fafcda/transformed/savedstate-1.2.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/f81a13f6d83eab18ddbdb1aa73c4aef7/transformed/cardview-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/43ad28ebb18109ada568b80aff2a54ed/transformed/firebase-components-17.0.1-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/a23935e4c9cef1831e40de30ea3e3b39/transformed/lifecycle-runtime-2.5.1-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/13e8c85ed8c5165edfe82732058c63f9/transformed/lifecycle-livedata-2.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/ab22abe99104dcaf7b5b3c9ad49f3b5e/transformed/lifecycle-livedata-core-2.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/3d315f83012208b0d33a45add4bd22af/transformed/core-1.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/5a9ae0bdab19967150cdb5976298f413/transformed/core-ktx-1.9.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/bdb6f27fccce92198b4556dc584efcd8/transformed/storage-1.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/458f88880eda35fc328f7b84b766998b/transformed/monitor-1.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/b9c6e2c8d28dc5092ca828a3c6d96b3e/transformed/appcompat-resources-1.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/d318ced9ec5b331033dce7f395bc7c37/transformed/drawerlayout-1.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/ebf4ab49020de4201315909cdf2dcb41/transformed/coordinatorlayout-1.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/94038c0132a77fbb52dc812b8a32daba/transformed/dynamicanimation-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/42f2ef2d7bb614fba25c54a283569086/transformed/transition-1.2.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/ae462ee5c57ba2b9f7839e741feb8659/transformed/vectordrawable-animated-1.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/f5c5643a47034e53e1045a4412f38ae9/transformed/vectordrawable-1.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/87e447fa18363af7c2148c83423b8373/transformed/viewpager-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/e7a6bc11db0eb9234b682a136903d45c/transformed/legacy-support-core-utils-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/aeaf08216bf4a6a68d061584376d1bd8/transformed/loader-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/f89e0c2eca1ab97a04791269026933af/transformed/recyclerview-1.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/4c1f21eb06aeae4fb08a898106234ef2/transformed/customview-1.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/586929a8b02b67e9925ddd6f4d1082af/transformed/browser-1.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/3e98d5738ab241634b685ac3a002c2ca/transformed/core-1.9.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/b0b4a299db3923ded92468ccf9773311/transformed/cursoradapter-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/7a357a8678a49b605259bac72f42d016/transformed/savedstate-1.2.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/45553973d66d298f8d38cb932f9aa47b/transformed/cardview-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/54d27e35d0b17c502db138e23da20644/transformed/firebase-components-17.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/5051a10e01cffda35a71d397a97ec64e/transformed/lifecycle-runtime-2.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/be7e894c0a30a9bd9d355d72fb01586b/transformed/lifecycle-livedata-2.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/02a3db2c9f35396ddeb18f1c93aa9afe/transformed/lifecycle-livedata-core-2.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.5.1/1fdb7349701e9cf2f0a69fc10642b6fef6bb3e12/lifecycle-common-2.5.1.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/45951e138ee6dae6342be7a1c0171f6b/transformed/versionedparcelable-1.1.1-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/f7def45a9e38e1f0869a16b75a10eb2a/transformed/lifecycle-viewmodel-2.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/e5d9ddce79e7aabddd92c5e6d398e0b3/transformed/versionedparcelable-1.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/7899eb627d67c3f1987ebedc3ba2d2b9/transformed/lifecycle-viewmodel-2.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/74e67919cec24823b7a0be4f270cac76/transformed/localbroadcastmanager-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/bef7ed6b5ac0159239d10a7c6c586025/transformed/core-runtime-2.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/ee0a180c5a8c43a7cfecd2e5895658b9/transformed/localbroadcastmanager-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/b8d1a3c04859d74e46ea64b8c59828de/transformed/core-runtime-2.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/39c807ffc99f6b614b4d0796512b3bf7/transformed/interpolator-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/25b3d78d876effb05e279b011b54c730/transformed/documentfile-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/4c7a4a9d5e28ca51dcd72dc0c09ce813/transformed/print-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/a5934e4a70a1db91d12ceb2a05063fe0/transformed/interpolator-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/cd919362b02322116edd6c4bd43e49a2/transformed/documentfile-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/2e9705f16f3ac9dae81621181adb2bfd/transformed/print-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.3.0/21f49f5f9b85fc49de712539f79123119740595/annotation-1.3.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/44a959988eb797928a2a19dedac3f449/transformed/espresso-idling-resource-3.4.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/bfab7ba9b3bc58fd4f164ee7dd07fd19/transformed/espresso-idling-resource-3.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.1.1/67ff45d9ae02e583d0f9b3432a5ebbe05c30c966/javawriter-2.1.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar</arg>
+<<<<<<< HEAD
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/a5100398ad9ac7b0647cdeb37fef5b26/transformed/constraintlayout-2.1.4-api.jar</arg>
+=======
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/db3b5665d9d9839f5e8d7b6f257f6ea3/transformed/constraintlayout-2.1.4-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/baa4a48f8963704e290896bbb61c3ffe/transformed/lottie-5.2.0-api.jar</arg>
+>>>>>>> origin/main
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.7.10/1ef73fee66f45d52c67e2aca12fd945dbe0659bf/kotlin-stdlib-jdk7-1.7.10.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/80cf19dedf77044e78bf0091e5a8f5e0/transformed/annotation-experimental-1.3.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/f0d5ef85b29d84ef9edd0661d07c3afd/transformed/annotation-experimental-1.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.10/d2abf9e77736acc4450dc4a3f707fa2c10f5099d/kotlin-stdlib-1.7.10.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.7.10/bac80c520d0a9e3f3673bc2658c6ed02ef45a76a/kotlin-stdlib-common-1.7.10.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>

@@ -7,6 +7,8 @@
     android:background="@color/Cream"
     tools:context=".AccountType">
 
+    <!--TODO: add icon or change buttons to take up more screen space-->
+
     <Button
         android:id="@+id/btnChoice1"
         android:layout_width="243dp"

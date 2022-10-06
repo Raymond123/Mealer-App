@@ -6,4 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SignUpPageCook">
 
+    <!--TODO: Add all inputs and 'copy' design of other sign up page-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

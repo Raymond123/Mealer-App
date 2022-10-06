@@ -24,9 +24,13 @@
     <string name="peanutFreeBtn">Peanut-Free</string>
     <string name="otherBtn">Other</string>
     <string name="clientImageButtonDescription">This is a picture of a client</string>
-=======
+    =======
     <string name="mealerlogo">mealerlogo</string>
     <string name="user_account">User account</string>
     <string name="cook_on_mealer">Cook on Mealer</string>
->>>>>>> origin/main
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="getting_to_know_you">Getting to know you</string>
+    <string name="age">Age</string>
+    >>>>>>> origin/main
 </resources>

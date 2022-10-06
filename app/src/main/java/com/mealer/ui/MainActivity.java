@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         signIn = findViewById(R.id.getStartedButton);
         signIn.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, SignUpPage.class));
+            startActivity(new Intent(MainActivity.this, SignUpPageClient.class));
         });
     }
 }

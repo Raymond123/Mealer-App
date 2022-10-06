@@ -7,6 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mealer.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mealer.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.Mealer.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.Mealer.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.Mealer.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.Mealer.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.Mealer.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.Mealer.app.unitTest.iml" />
     </modules>
   </component>
 </project>

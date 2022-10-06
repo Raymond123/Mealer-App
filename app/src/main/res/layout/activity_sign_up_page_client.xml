@@ -5,103 +5,209 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Cream"
-    tools:context=".SignUpPage">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/createAccount"
-        android:textColor="@color/darkGreen"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104" />
+    tools:context=".SignUpPageCook">
 
     <!--TODO: Add first and last name, phone number, and address inputs-->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="229dp"
-        android:layout_height="250dp"
-        app:srcCompat="@drawable/createaccountimage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24"
-        android:contentDescription="@string/mealerlogo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/createAccountEmail"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:backgroundTint="@color/darkGreen"
-        android:hint="@string/createEmail"
-        android:autofillHints="name"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.550" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
 
-    <EditText
-        android:id="@+id/createAccountPassword"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:backgroundTint="@color/darkGreen"
-        android:hint="@string/password"
-        android:autofillHints="password"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.650" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/createClientAccount"
+            android:textColor="@color/darkGreen"
+            android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/createAccountPassword2"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:autofillHints="password"
-        android:backgroundTint="@color/darkGreen"
-        android:ems="10"
-        android:hint="@string/confirmPassword"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.750"
-        tools:ignore="TextContrastCheck" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <Button
-        android:id="@+id/signupButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/lightBrown"
-        android:padding="12dp"
-        android:text="@string/signupButtonCaps"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.870"
-        tools:ignore="TextContrastCheck,TextContrastCheck" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="242dp"
+            android:layout_height="186dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/mealerlogo"
+            app:srcCompat="@drawable/createaccountimage" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personal_information"
+                    android:textSize="25sp"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/createAccountFirstName"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:ems="10"
+                    android:hint="@string/first_name"
+                    android:inputType="text"
+                    android:layout_margin="5dp"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountLastName"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/last_name"
+                    android:inputType="text"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountEmail"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/createEmail"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountPassword"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="password"
+                    android:backgroundTint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountPassword2"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="password"
+                    android:backgroundTint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/confirmPassword"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/createAccountAddress"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/address"
+                    android:inputType="text"
+                    android:padding="10dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/cardInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cardInformation"
+                    android:textSize="25sp"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/createAccountCardNumber"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:maxLength="16"
+                    android:ems="10"
+                    android:hint="@string/creditNum"
+                    android:inputType="number"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/createAccountCardSecurity"
+                        android:layout_width="155dp"
+                        android:layout_height="55dp"
+                        android:layout_margin="5dp"
+                        android:autofillHints="name"
+                        android:backgroundTint="@color/darkGreen"
+                        android:ems="10"
+                        android:hint="@string/creditSecurity"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="10dp" />
+
+                    <EditText
+                        android:id="@+id/createAccountCardExpiry"
+                        android:layout_width="155dp"
+                        android:layout_height="55dp"
+                        android:layout_margin="5dp"
+                        android:autofillHints="name"
+                        android:backgroundTint="@color/darkGreen"
+                        android:ems="10"
+                        android:hint="@string/creditExpiry"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/signupButton"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/lightBrown"
+                    android:layout_margin="5dp"
+                    android:padding="12dp"
+                    android:text="@string/signupButtonCaps"
+                    tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
     <!--TODO: create account is missing (first name, last name, phone number, address)-->
 

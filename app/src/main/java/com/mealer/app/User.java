@@ -16,17 +16,17 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String phoneNumer;
     private String address;
-    private String password; //TODO: secure passwords
 
-    public User(String firstName, String lastName, String email, String phoneNumer, String address, String password){
+    public User(String firstName, String lastName, String email, String address){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.phoneNumer = phoneNumer;
         this.address = address;
-        this.password = password;
+    }
+
+    public User() {
+
     }
 
     protected DatabaseReference getReference(String path){
@@ -48,9 +48,5 @@ public class User {
 
     public String getAddress() {
         return address;
-    }
-
-    public String getId() {
-        return UUID.randomUUID().toString();
     }
 }

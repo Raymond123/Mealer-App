@@ -15,6 +15,7 @@
     <string name="nextBtn">Next</string>
     <string name="userPrompt">What account would you like to make?</string>
     <string name="createEmail">Email</string>
+<<<<<<< HEAD
     <string name="mealPreferences">Meal Preferences</string>
     <string name="cookImageButtonDescription">This is a picture of a cook</string>
     <string name="veganBtn">Vegan</string>
@@ -24,4 +25,9 @@
     <string name="peanutFreeBtn">Peanut-Free</string>
     <string name="otherBtn">Other</string>
     <string name="clientImageButtonDescription">This is a picture of a client</string>
+=======
+    <string name="mealerlogo">mealerlogo</string>
+    <string name="user_account">User account</string>
+    <string name="cook_on_mealer">Cook on Mealer</string>
+>>>>>>> origin/main
 </resources>

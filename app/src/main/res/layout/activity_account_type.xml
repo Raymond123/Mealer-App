@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Cream"
+    tools:context=".AccountType">
+
+    <!--TODO: add icon or change buttons to take up more screen space-->
+
+    <Button
+        android:id="@+id/btnChoice1"
+        android:layout_width="243dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="528dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/lightBrown"
+        android:text="@string/user_account"
+        app:layout_constraintBottom_toTopOf="@+id/btnChoice2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btnChoice2"
+        android:layout_width="243dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="74dp"
+        android:backgroundTint="@color/lightBrown"
+        android:text="@string/cook_on_mealer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChoice1"
+        tools:ignore="TextContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

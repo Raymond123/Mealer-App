@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--TODO: create new activity to send user to when they log in and make general design-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,6 +84,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.835" />
 
+    <!--TODO: forgotPasswordLogin needs to be a button so it is clickable-->
     <TextView
         android:id="@+id/forgotPasswordLogin"
         android:layout_width="wrap_content"

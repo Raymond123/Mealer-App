@@ -3,6 +3,7 @@ package com.mealer.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -51,21 +52,20 @@ public class SignUpPageClient extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful()){
                                 Log.d(TAG, "createUserWithEmailSuccess");
+                                FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
+                                assert currentFirebaseUser != null;
                                 User currentUser = new ClientUser(fName.getText().toString(), lName.getText().toString(),
                                         email.getText().toString(), address.getText().toString(), cardNumber.getText().toString(),
-                                        cardExpiry.getText().toString(), cardSecurity.getText().toString(),
-                                        passwordText);
-                                FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
-                                updateUI(currentFirebaseUser);
+                                        cardExpiry.getText().toString(), cardSecurity.getText().toString(), currentFirebaseUser.getUid());
+                                updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 //PopupWindow failWindow = new PopupWindow(View, width, height, true);
                                 //failWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
                                 Toast.makeText(SignUpPageClient.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                updateUI(null);
+                                updateUI(null, null);
                             }
                         });
             }
@@ -79,16 +79,18 @@ public class SignUpPageClient extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            updateUI(currentUser);
+            updateUI(currentUser, null); //TODO: currentUser cant be null change
         }
     }
 
-    private void updateUI(FirebaseUser currentFirebaseUser){
+    private void updateUI(FirebaseUser currentFirebaseUser, User currentUser){
         if (currentFirebaseUser == null){
             finish();
             startActivity(getIntent());
         }
 
-
+        Intent signIn = new Intent(SignUpPageClient.this, DietaryPreferences.class);
+        //signIn.putExtra("USER", currentUser);
+        startActivity(signIn);
     }
 }

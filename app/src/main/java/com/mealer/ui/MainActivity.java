@@ -9,7 +9,7 @@ import android.widget.Button;
 // GET STARTED
 public class MainActivity extends AppCompatActivity {
 
-    Button signIn;
+    Button signIn, accountExists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +17,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_started_page);
 
         signIn = findViewById(R.id.getStartedButton);
-        signIn.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, SignUpPageClient.class));
-        });
+        signIn.setOnClickListener(
+                v -> startActivity(
+                        new Intent(MainActivity.this, PickingUserType.class)
+                ));
+
+        accountExists = findViewById(R.id.accountExists);
+        accountExists.setOnClickListener(x->startActivity(
+                new Intent(MainActivity.this, LoginPage.class)
+        ));
     }
 }

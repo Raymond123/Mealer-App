@@ -38,7 +38,7 @@
             android:name=".LoginPage"
             android:exported="false" />
         <activity
-            android:name=".SignUpPage"
+            android:name=".SignUpPageClient"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -85,10 +85,11 @@
         app:layout_constraintVertical_bias="0.835" />
 
     <!--TODO: forgotPasswordLogin needs to be a button so it is clickable-->
-    <TextView
+    <Button
         android:id="@+id/forgotPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/fui_transparent"
         android:text="@string/forgotPassword"
         android:textColor="@color/lightGreen"
         app:layout_constraintBottom_toBottomOf="parent"

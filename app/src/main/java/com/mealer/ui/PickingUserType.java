@@ -11,7 +11,6 @@ public class PickingUserType extends AppCompatActivity {
     public ImageButton btnChoice1;
     public ImageButton btnChoice2;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

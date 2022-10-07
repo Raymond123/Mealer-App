@@ -43,7 +43,8 @@
     <string name="descriptionHint">Write a description of yourself</string>
     <string name="select">Select</string>
     <string name="upload">upload</string>
-    <string name="please_select_and_upload_an_image_of_a_void_cheque">Please select and upload an image of a void cheque</string>
+    <string name="please_select_and_upload_an_image_of_a_void_cheque">Please select an image of a void cheque</string>
     <string name="noneBtn">none</string>
+    <string name="preview_of_user_uploaded_image">preview of user uploaded image</string>
     >>>>>>> origin/main
 </resources>

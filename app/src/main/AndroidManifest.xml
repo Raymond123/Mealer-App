@@ -41,6 +41,9 @@
             android:name=".SignUpPageClient"
             android:exported="false" />
         <activity
+            android:name=".SignUpPageCook"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

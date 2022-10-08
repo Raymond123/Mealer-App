@@ -38,8 +38,10 @@ public class UserHomePage extends AppCompatActivity {
 
         Intent intent = getIntent();
         userType = findViewById(R.id.userType);
-        userType.setText(intent.getStringExtra("TYPE"));
-        //Log.d("firebase", intent.getStringExtra("TYPE"));
+
+        User signedIn = intent.getParcelableExtra("TYPE");
+        userType.setText(signedIn.getUserType());
+        Log.d("firebase", "userType: " + signedIn.getUserType());
 
         signOut = findViewById(R.id.signOut);
         signOut.setOnClickListener(c->signOut(null));

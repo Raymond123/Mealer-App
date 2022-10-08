@@ -44,6 +44,7 @@ public class User implements Parcelable {
         lastName = in.readString();
         email = in.readString();
         address = in.readString();
+        userType = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -93,5 +94,6 @@ public class User implements Parcelable {
         parcel.writeString(lastName);
         parcel.writeString(email);
         parcel.writeString(address);
+        parcel.writeString(userType);
     }
 }

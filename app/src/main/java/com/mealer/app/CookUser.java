@@ -14,11 +14,15 @@ public class CookUser extends User{
     private String description;
     // picture???
 
-    public CookUser(String firstName, String lastName, String email, String address, String description, String uID) {
-        super(firstName, lastName, email, address);
+    public CookUser(Object attributes){
+        super();
+    }
+
+    public CookUser(String firstName, String lastName, String email, String address, String description, String uID, String userType) {
+        super(firstName, lastName, email, address, userType);
         this.description = description;
 
-        DatabaseReference databaseReference = getReference("users/cook");
+        DatabaseReference databaseReference = getReference("users");
         databaseReference.child(uID).setValue(this);
 
     }

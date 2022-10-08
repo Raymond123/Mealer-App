@@ -52,11 +52,13 @@ public class DietaryPreferences extends AppCompatActivity {
         HashMap<String, Object> update = new HashMap<>();
         update.put("dietary restriction", type);
 
-        FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
-        assert currentFirebaseUser != null;
-        databaseReference.child(currentFirebaseUser.getUid()).updateChildren(update);
+        FirebaseUser currentFirebaseUser = this.mAuth.getCurrentUser();
+        if(currentFirebaseUser!=null){
+            databaseReference.child(currentFirebaseUser.getUid()).updateChildren(update);
+
+        }
 
         finish();
-        startActivity(new Intent(this, LoginPage.class));
+        startActivity(new Intent(this, UserHomePage.class));
     }
 }

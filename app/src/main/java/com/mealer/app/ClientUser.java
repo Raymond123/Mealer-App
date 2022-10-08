@@ -13,13 +13,13 @@ public class ClientUser extends User{
     private String cardSecurity;
 
     public ClientUser(String firstName, String lastName, String email, String address,
-                      String cardNumber, String cardExpiry, String cardSecurity, String uID){
-        super(firstName, lastName, email, address);
+                      String cardNumber, String cardExpiry, String cardSecurity, String uID, String userType){
+        super(firstName, lastName, email, address, userType);
         this.cardNumber = cardNumber;
         this.cardExpiry = cardExpiry;
         this.cardSecurity = cardSecurity;
 
-        DatabaseReference databaseReference = getReference("users/client");
+        DatabaseReference databaseReference = getReference("users");
         databaseReference.child(uID).setValue(this);
     }
 

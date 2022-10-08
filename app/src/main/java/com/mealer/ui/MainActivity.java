@@ -6,15 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.mealer.app.User;
+
 // GET STARTED
 public class MainActivity extends AppCompatActivity {
 
     Button signIn, accountExists;
 
+    FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_started_page);
+
+        mAuth = FirebaseAuth.getInstance();
 
         signIn = findViewById(R.id.getStartedButton);
         signIn.setOnClickListener(
@@ -27,4 +35,17 @@ public class MainActivity extends AppCompatActivity {
                 new Intent(MainActivity.this, LoginPage.class)
         ));
     }
+
+    // copied from firebase documentation
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            finish();
+            startActivity(new Intent(this, UserHomePage.class));
+        }
+    }
+
 }

@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.UUID;
 
+
 public class User implements Parcelable {
 
     private int mData;
@@ -23,12 +24,14 @@ public class User implements Parcelable {
     private String lastName;
     private String email;
     private String address;
+    private String userType;
 
-    public User(String firstName, String lastName, String email, String address){
+    public User(String firstName, String lastName, String email, String address, String userType){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
+        this.userType = userType;
     }
 
     public User() {
@@ -75,6 +78,8 @@ public class User implements Parcelable {
     public String getAddress() {
         return address;
     }
+
+    public String getUserType(){ return userType;}
 
     @Override
     public int describeContents() {

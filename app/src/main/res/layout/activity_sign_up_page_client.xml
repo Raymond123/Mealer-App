@@ -228,7 +228,4 @@
         </ScrollView>
     </LinearLayout>
 
-    <!--TODO: create account is missing (first name, last name, phone number, address)-->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

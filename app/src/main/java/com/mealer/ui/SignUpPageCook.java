@@ -33,7 +33,7 @@ public class SignUpPageCook extends AppCompatActivity {
     private final String TAG = "SignUpPageClient";
 
     EditText fName, lName, email, password, confirmPassword, address, description;
-    Button createAccount, selectImage, uploadImage;
+    Button createAccount, selectImage;
     ImageView imagePreview;
 
     private FirebaseAuth mAuth;
@@ -51,6 +51,8 @@ public class SignUpPageCook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page_cook);
 
+        mAuth = FirebaseAuth.getInstance();
+
         fName = findViewById(R.id.createAccountFirstName);
         lName = findViewById(R.id.createAccountLastName);
         email = findViewById(R.id.createAccountEmail);
@@ -62,7 +64,6 @@ public class SignUpPageCook extends AppCompatActivity {
         createAccount = findViewById(R.id.signupButton);
         selectImage = findViewById(R.id.selectImageButton);
         imagePreview = findViewById(R.id.imageUploadPreview);
-        //uploadImage = findViewById(R.id.uploadImageButton);
 
         // get the Firebase storage reference
         storage = FirebaseStorage.getInstance("gs://mealer-app-58f99.appspot.com");
@@ -81,9 +82,9 @@ public class SignUpPageCook extends AppCompatActivity {
                                 assert currentFirebaseUser != null;
                                 User currentUser = new CookUser(fName.getText().toString(), lName.getText().toString(),
                                         email.getText().toString(), address.getText().toString(), description.getText().toString(),
-                                        currentFirebaseUser.getUid());
+                                        currentFirebaseUser.getUid(), "cook");
                                 uploadImage(currentFirebaseUser.getUid());
-                                //updateUI(currentFirebaseUser, currentUser);
+                                updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -123,6 +124,29 @@ public class SignUpPageCook extends AppCompatActivity {
                             }
                         }
                     });
+
+    // copied from firebase documentation
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            updateUI(currentUser, null); //TODO: currentUser cant be null change
+        }
+    }
+
+    private void updateUI(FirebaseUser currentFirebaseUser, User currentUser){
+        if (currentFirebaseUser == null){
+            finish();
+            startActivity(getIntent());
+            return;
+        }
+
+        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
+        signIn.putExtra("TYPE", currentUser.getUserType());
+        startActivity(signIn);
+    }
 
 
     // image upload methods from

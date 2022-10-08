@@ -46,5 +46,10 @@
     <string name="please_select_and_upload_an_image_of_a_void_cheque">Please select an image of a void cheque</string>
     <string name="noneBtn">none</string>
     <string name="preview_of_user_uploaded_image">preview of user uploaded image</string>
+    <string name="title_activity_user_home_page">UserHomePage</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="sign_out">Sign Out</string>
     >>>>>>> origin/main
 </resources>

@@ -7,8 +7,6 @@
     android:background="@color/Cream"
     tools:context=".SignUpPageCook">
 
-    <!--TODO: Add first and last name, phone number, and address inputs-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -184,6 +182,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/please_select_and_upload_an_image_of_a_void_cheque"
+                    android:textColor="@color/darkGreen"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -241,8 +240,5 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
-    <!--TODO: create account is missing (first name, last name, phone number, address)-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

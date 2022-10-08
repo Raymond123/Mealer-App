@@ -56,7 +56,7 @@ public class SignUpPageClient extends AppCompatActivity {
                                 assert currentFirebaseUser != null;
                                 User currentUser = new ClientUser(fName.getText().toString(), lName.getText().toString(),
                                         email.getText().toString(), address.getText().toString(), cardNumber.getText().toString(),
-                                        cardExpiry.getText().toString(), cardSecurity.getText().toString(), currentFirebaseUser.getUid());
+                                        cardExpiry.getText().toString(), cardSecurity.getText().toString(), currentFirebaseUser.getUid(), "client");
                                 updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
@@ -87,10 +87,11 @@ public class SignUpPageClient extends AppCompatActivity {
         if (currentFirebaseUser == null){
             finish();
             startActivity(getIntent());
+            return;
         }
 
         Intent signIn = new Intent(SignUpPageClient.this, DietaryPreferences.class);
-        //signIn.putExtra("USER", currentUser);
+        signIn.putExtra("TYPE", currentUser.getUserType());
         startActivity(signIn);
     }
 }

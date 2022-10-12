@@ -143,15 +143,27 @@ public class SignUpPageCook extends AppCompatActivity {
             return;
         }
 
-        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
-        signIn.putExtra("TYPE", currentUser.getUserType());
-        startActivity(signIn);
+        currentFirebaseUser.sendEmailVerification()
+                .addOnCompleteListener(task->{
+                    if(task.isSuccessful()){
+                        Toast.makeText(this,
+                                "Verification email sent",
+                                Toast.LENGTH_LONG).show();
+
+                        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
+                        signIn.putExtra("TYPE", currentUser);
+                        startActivity(signIn);
+                    }else{
+                        Toast.makeText(this,
+                                "Error",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 
     // image upload methods from
     // https://www.geeksforgeeks.org/android-how-to-upload-an-image-on-firebase-storage/
-
     // Select Image method
     private void selectImage() {
         // Defining Implicit Intent to mobile gallery

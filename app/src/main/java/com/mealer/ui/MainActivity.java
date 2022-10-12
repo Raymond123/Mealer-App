@@ -22,15 +22,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_started_page);
 
+        // firebase authentication instance for checking if user is already signed in
         mAuth = FirebaseAuth.getInstance();
 
         signIn = findViewById(R.id.getStartedButton);
+        // sends to picking user type if user wishes to create new account
         signIn.setOnClickListener(
                 v -> startActivity(
                         new Intent(MainActivity.this, PickingUserType.class)
                 ));
 
         accountExists = findViewById(R.id.accountExists);
+        // sends to login page if user already has an account but needs to login
         accountExists.setOnClickListener(x->startActivity(
                 new Intent(MainActivity.this, LoginPage.class)
         ));
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+            /* if user is logged into firebase authentication already
+            sends user to login page where login page will detect the same thing,
+            and create a new user object with the users attributes */
             startActivity(new Intent(this, LoginPage.class));
         }
     }

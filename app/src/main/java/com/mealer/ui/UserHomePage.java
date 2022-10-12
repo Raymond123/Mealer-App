@@ -22,8 +22,7 @@ import com.mealer.ui.databinding.ActivityUserHomePageBinding;
 
 public class UserHomePage extends AppCompatActivity {
 
-    private ActivityUserHomePageBinding binding;
-
+    // initializing activity elements
     private TextView userType;
     private Button signOut;
 
@@ -39,7 +38,9 @@ public class UserHomePage extends AppCompatActivity {
         Intent intent = getIntent();
         userType = findViewById(R.id.userType);
 
+        // get current user object from intent
         User signedIn = intent.getParcelableExtra("TYPE");
+        // display user type on home page
         userType.setText(signedIn.getUserType());
         Log.d("firebase", "userType: " + signedIn.getUserType());
 

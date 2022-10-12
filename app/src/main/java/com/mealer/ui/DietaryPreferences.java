@@ -17,8 +17,10 @@ import java.util.HashMap;
 
 public class DietaryPreferences extends AppCompatActivity {
 
+    // initializing all buttons
     private Button vegan, halal, kosher, glutenFree, peanutFree, none;
 
+    // firebase authentication object
     FirebaseAuth mAuth;
 
     @SuppressLint("MissingInflatedId")
@@ -34,8 +36,10 @@ public class DietaryPreferences extends AppCompatActivity {
         peanutFree = findViewById(R.id.buttonPeanutFree);
         none = findViewById(R.id.buttonNone);
 
+        // getting instance of firebase authentication
         this.mAuth = FirebaseAuth.getInstance();
 
+        // setting on click listeners for each button
         vegan.setOnClickListener(v->setRestriction("vegan"));
         halal.setOnClickListener(v->setRestriction("halal"));
         kosher.setOnClickListener(v->setRestriction("kosher"));
@@ -44,6 +48,11 @@ public class DietaryPreferences extends AppCompatActivity {
         none.setOnClickListener(v->setRestriction("none"));
     }
 
+    /**
+     * method for adding a dietary restriction to the users account so meals they are not
+     * recommended meals that they can't eat
+     * @param type the type of dietary restriction the user wants to add to their account
+     */
     private void setRestriction(String type){
         DatabaseReference databaseReference =
                 FirebaseDatabase.getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
@@ -59,6 +68,9 @@ public class DietaryPreferences extends AppCompatActivity {
         }
 
         finish();
-        startActivity(new Intent(this, UserHomePage.class));
+        // send user to home page and pass on the current signed in user object
+        Intent intent = new Intent(this, UserHomePage.class);
+        intent.putExtra("TYPE", (User) getIntent().getParcelableExtra("TYPE"));
+        startActivity(intent);
     }
 }

@@ -2,14 +2,11 @@ package com.mealer.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +44,7 @@ public class SignUpPageClient extends AppCompatActivity {
         createAccount = findViewById(R.id.signupButton);
         createAccount.setOnClickListener(v -> {
             String passwordText = password.getText().toString();
-            if(passwordText.equals(confirmPassword.getText().toString())) {
+            if(passwordText.equals(confirmPassword.getText().toString()) && validateAddress() && validateName()) {
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), passwordText)
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful()){
@@ -70,6 +67,31 @@ public class SignUpPageClient extends AppCompatActivity {
                         });
             }
         });
+    }
+
+
+    // check if first and last name are empty
+    private boolean validateName(){
+        fName = (EditText)findViewById(R.id.createAccountFirstName);
+        lName = (EditText)findViewById(R.id.createAccountLastName);
+        if(fName.getText().toString().matches("")){
+            Toast.makeText(SignUpPageClient.this, "First name cannot be empty", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(lName.getText().toString().matches("")){
+            Toast.makeText(SignUpPageClient.this, "Last name cannot be empty", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+    // check if address is empty
+    private boolean validateAddress(){
+        address = (EditText)findViewById(R.id.createAccountAddress);
+        if(address.getText().toString().matches("")){
+            Toast.makeText(SignUpPageClient.this, "Address cannot be empty!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     // copied from firebase documentation

@@ -18,11 +18,10 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mealer.app.User;
-import com.mealer.ui.databinding.ActivityUserHomePageBinding;
+
 
 public class UserHomePage extends AppCompatActivity {
 
-    private ActivityUserHomePageBinding binding;
 
     private TextView userType;
     private Button signOut;

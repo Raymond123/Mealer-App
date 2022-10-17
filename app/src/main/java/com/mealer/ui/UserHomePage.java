@@ -22,7 +22,7 @@ import com.mealer.app.User;
 
 public class UserHomePage extends AppCompatActivity {
 
-
+    // initializing activity elements
     private TextView userType;
     private Button signOut;
 
@@ -38,16 +38,24 @@ public class UserHomePage extends AppCompatActivity {
         Intent intent = getIntent();
         userType = findViewById(R.id.userType);
 
+        // get current user object from intent
         User signedIn = intent.getParcelableExtra("TYPE");
+        // get current firebase user from firebase authentication
+        FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
+        // display user type on home page
         userType.setText(signedIn.getUserType());
         Log.d("firebase", "userType: " + signedIn.getUserType());
 
         signOut = findViewById(R.id.signOut);
-        signOut.setOnClickListener(c->signOut(null));
+        signOut.setOnClickListener(c->signOut(currentFirebaseUser,signedIn));
     }
 
-    private void signOut(User user){
-        if(mAuth.getCurrentUser()!=null){
+    /**
+     * signs current user that is signed in to firebase authentication out and sends to login page
+     * @param user current user that is signed in
+     */
+    private void signOut(FirebaseUser currentFirebaseUser, User user){
+        if(currentFirebaseUser!=null){
             mAuth.signOut();
         }
         finish();

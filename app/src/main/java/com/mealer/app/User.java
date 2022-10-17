@@ -20,12 +20,15 @@ public class User implements Parcelable {
 
     private int mData;
 
+    // initializing user attributes
     private String firstName;
     private String lastName;
     private String email;
+    // TODO change address
     private String address;
     private String userType;
 
+    // user constructor
     public User(String firstName, String lastName, String email, String address, String userType){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,10 +37,12 @@ public class User implements Parcelable {
         this.userType = userType;
     }
 
+    // empty user constructor required for taking firebase snapshot
     public User() {
 
     }
 
+    // user constructor required for implementing parcelable interface
     protected User(Parcel in) {
         mData = in.readInt();
         firstName = in.readString();
@@ -47,6 +52,7 @@ public class User implements Parcelable {
         userType = in.readString();
     }
 
+    // required for implementing parcelable
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel in) {
@@ -59,11 +65,17 @@ public class User implements Parcelable {
         }
     };
 
+    /**
+     * method for getting reference to firebase realtime database from user subclasses
+     * @param path the path to store the database information
+     * @return returns a database reference to the projects firebase realtime database
+     */
     protected DatabaseReference getReference(String path){
         return FirebaseDatabase.getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/").getReference(path);
     }
 
     // getMethods()
+
     public String getFirstName() {
         return firstName;
     }
@@ -82,6 +94,8 @@ public class User implements Parcelable {
 
     public String getUserType(){ return userType;}
 
+
+    // more methods required for implementing parcelable
     @Override
     public int describeContents() {
         return 0;

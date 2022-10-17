@@ -102,7 +102,6 @@ public class SignUpPageCook extends AppCompatActivity {
 
     // Activity on result
     // https://stackoverflow.com/questions/62671106/onactivityresult-method-is-deprecated-what-is-the-alternative
-
     private final ActivityResultLauncher<Intent> imageSelectedResult =
             registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(),
@@ -136,6 +135,13 @@ public class SignUpPageCook extends AppCompatActivity {
         }
     }
 
+    /**
+     * update the android ui to start a new activity and passes the currentUser object onto the next
+     * activity
+     * @param currentFirebaseUser the current user logged in through firebase authentication
+     * @param currentUser the current user logged in as a user object with all the users attributes
+     *                    and their values
+     */
     private void updateUI(FirebaseUser currentFirebaseUser, User currentUser){
         if (currentFirebaseUser == null){
             finish();
@@ -143,15 +149,27 @@ public class SignUpPageCook extends AppCompatActivity {
             return;
         }
 
-        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
-        signIn.putExtra("TYPE", currentUser.getUserType());
-        startActivity(signIn);
+        currentFirebaseUser.sendEmailVerification()
+                .addOnCompleteListener(task->{
+                    if(task.isSuccessful()){
+                        Toast.makeText(this,
+                                "Verification email sent",
+                                Toast.LENGTH_LONG).show();
+
+                        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
+                        signIn.putExtra("TYPE", currentUser);
+                        startActivity(signIn);
+                    }else{
+                        Toast.makeText(this,
+                                "Error",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 
     // image upload methods from
     // https://www.geeksforgeeks.org/android-how-to-upload-an-image-on-firebase-storage/
-
     // Select Image method
     private void selectImage() {
         // Defining Implicit Intent to mobile gallery
@@ -195,7 +213,11 @@ public class SignUpPageCook extends AppCompatActivity {
         return true;
     }
 
-    // UploadImage method
+    /**
+     * uploads the image, that the user signing up selected, to the firebase storage with
+     * the users generated id as the name of the image
+     * @param uId user id of the user signing up
+     */
     private void uploadImage(String uId) {
         if (filePath != null) {
 

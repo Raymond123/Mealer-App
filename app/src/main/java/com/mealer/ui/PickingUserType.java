@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 
 public class PickingUserType extends AppCompatActivity {
+
+    // initializing activity buttons
     public ImageButton btnChoice1;
     public ImageButton btnChoice2;
 
@@ -25,10 +27,13 @@ public class PickingUserType extends AppCompatActivity {
         btnChoice2.setOnClickListener(v -> openSignUpPageCook());
     }
 
+    // sends user to the signup page for creating a client account
     public void openSignUpPageClient(){
         Intent intent = new Intent(this, SignUpPageClient.class);
         startActivity(intent);
     }
+
+    // sends user to the signup page for creating a cook account
     public void openSignUpPageCook(){
         Intent intent = new Intent(this, SignUpPageCook.class);
         startActivity(intent);

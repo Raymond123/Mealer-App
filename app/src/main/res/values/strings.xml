@@ -53,5 +53,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="createAccount">Create New Account</string>
     <string name="please_type_your_email_below">Please type your email below</string>
+    <string name="submit">submit</string>
     >>>>>>> origin/main
 </resources>

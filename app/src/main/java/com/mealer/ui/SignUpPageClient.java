@@ -105,6 +105,13 @@ public class SignUpPageClient extends AppCompatActivity {
         }
     }
 
+    /**
+     * update the android ui to start a new activity and passes the currentUser object onto the next
+     * activity
+     * @param currentFirebaseUser the current user logged in through firebase authentication
+     * @param currentUser the current user logged in as a user object with all the users attributes
+     *                    and their values
+     */
     private void updateUI(FirebaseUser currentFirebaseUser, User currentUser){
         if (currentFirebaseUser == null){
             finish();
@@ -112,8 +119,26 @@ public class SignUpPageClient extends AppCompatActivity {
             return;
         }
 
-        Intent signIn = new Intent(SignUpPageClient.this, DietaryPreferences.class);
-        signIn.putExtra("TYPE", currentUser.getUserType());
-        startActivity(signIn);
+        // sends the user an email in order to verify their inputted email address
+        // users will not be able to login (after signing out) if email is not verified
+        currentFirebaseUser.sendEmailVerification()
+                .addOnCompleteListener(task->{
+                    if(task.isSuccessful()){
+                        //if email is successfully sent display success text
+                        Toast.makeText(this,
+                                "Verification email sent",
+                                Toast.LENGTH_LONG).show();
+
+                        // send user to next step in signup
+                        Intent signIn = new Intent(SignUpPageClient.this, DietaryPreferences.class);
+                        signIn.putExtra("TYPE", currentUser);
+                        startActivity(signIn);
+                    }else{
+                        // if error in sending email
+                        Toast.makeText(this,
+                                "Error",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

@@ -83,6 +83,13 @@ public class SignUpPageClient extends AppCompatActivity {
         }
     }
 
+    /**
+     * update the android ui to start a new activity and passes the currentUser object onto the next
+     * activity
+     * @param currentFirebaseUser the current user logged in through firebase authentication
+     * @param currentUser the current user logged in as a user object with all the users attributes
+     *                    and their values
+     */
     private void updateUI(FirebaseUser currentFirebaseUser, User currentUser){
         if (currentFirebaseUser == null){
             finish();

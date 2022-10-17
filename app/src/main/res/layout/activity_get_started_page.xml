@@ -49,8 +49,6 @@
         app:layout_constraintVertical_bias="0.782"
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
-    <!--TODO: accountExists needs to be a button so it is clickable-->
-
     <Button
         android:id="@+id/accountExists"
         android:layout_width="wrap_content"

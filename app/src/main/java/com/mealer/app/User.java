@@ -1,6 +1,10 @@
 package com.mealer.app;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
+
+import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -11,23 +15,49 @@ import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.UUID;
 
-public class User {
+
+public class User implements Parcelable {
+
+    private int mData;
 
     private String firstName;
     private String lastName;
     private String email;
-    private String phoneNumer;
     private String address;
-    private String password; //TODO: secure passwords
+    private String userType;
 
-    public User(String firstName, String lastName, String email, String phoneNumer, String address, String password){
+    public User(String firstName, String lastName, String email, String address, String userType){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.phoneNumer = phoneNumer;
         this.address = address;
-        this.password = password;
+        this.userType = userType;
     }
+
+    public User() {
+
+    }
+
+    protected User(Parcel in) {
+        mData = in.readInt();
+        firstName = in.readString();
+        lastName = in.readString();
+        email = in.readString();
+        address = in.readString();
+        userType = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     protected DatabaseReference getReference(String path){
         return FirebaseDatabase.getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/").getReference(path);
@@ -50,7 +80,20 @@ public class User {
         return address;
     }
 
-    public String getId() {
-        return UUID.randomUUID().toString();
+    public String getUserType(){ return userType;}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(mData);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(email);
+        parcel.writeString(address);
+        parcel.writeString(userType);
     }
 }

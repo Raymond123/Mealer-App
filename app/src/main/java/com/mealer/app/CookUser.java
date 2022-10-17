@@ -1,5 +1,6 @@
 package com.mealer.app;
 
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 
 import androidx.annotation.NonNull;
@@ -9,35 +10,31 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class CookUser extends User{
+import java.util.HashMap;
+
+public class CookUser extends User implements Parcelable {
 
     private String description;
     // picture???
 
-    public CookUser(String firstName, String lastName, String email, String phoneNumber, String address, String password, String description) {
-        super(firstName, lastName, email, phoneNumber, address, password);
+    public CookUser(HashMap<String, String> attributes){
+        super(attributes.get("firstName"), attributes.get("lastName"), attributes.get("email"),
+                attributes.get("address"), attributes.get("userType"));
+
+        this.description = attributes.get("description");
+    }
+
+    public CookUser(String firstName, String lastName, String email, String address, String description, String uID, String userType) {
+        super(firstName, lastName, email, address, userType);
         this.description = description;
 
-        DatabaseReference databaseReference = getReference("users/cook");
-        databaseReference.child(getId()).setValue(this);
+        DatabaseReference databaseReference = getReference("users");
+        databaseReference.child(uID).setValue(this);
 
-        /*
-        databaseReference.child(getId()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    generateNewId();
-                }
-                databaseReference.child(getId()).setValue(this);
-            }
+    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        */
-
+    public String getDescription(){
+        return this.description;
     }
 
 }

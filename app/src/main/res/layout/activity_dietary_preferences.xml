@@ -78,31 +78,18 @@
         app:layout_constraintVertical_bias="0.604" />
 
     <Button
-        android:id="@+id/mealPrefNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/lightBrown"
-        android:text="@string/nextBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
-
-    <Button
-        android:id="@+id/buttonOther"
+        android:id="@+id/buttonNone"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/Cream"
-        android:text="@string/otherBtn"
+        android:text="@string/noneBtn"
         android:textColor="@color/darkGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
+        app:layout_constraintVertical_bias="0.802" />
 
     <Button
         android:id="@+id/buttonPeanutFree"

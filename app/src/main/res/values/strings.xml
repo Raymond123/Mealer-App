@@ -10,7 +10,8 @@
     <string name="getStartedButtonCaps">GET STARTED</string>
     <string name="alreadyHaveAccountGSPage">Already have an account?</string>
     <string name="forgotPassword">Forgot Password?</string>
-    <string name="createAccount">Create Account</string>
+    <string name="createClientAccount">Create Client Account</string>
+    <string name="createCookAccount">Create Cook Account</string>
     <string name="userfirstName">First Name</string>
     <string name="nextBtn">Next</string>
     <string name="userPrompt">What account would you like to make?</string>
@@ -32,5 +33,24 @@
     <string name="last_name">Last Name</string>
     <string name="getting_to_know_you">Getting to know you</string>
     <string name="age">Age</string>
+    <string name="address">Address</string>
+    <string name="creditNum">Card Number</string>
+    <string name="creditExpiry">MMYY</string>
+    <string name="creditSecurity">XXX</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="cardInformation">Payment Information</string>
+    <string name="description">Description</string>
+    <string name="descriptionHint">Write a description of yourself</string>
+    <string name="select">Select</string>
+    <string name="upload">upload</string>
+    <string name="please_select_and_upload_an_image_of_a_void_cheque">Please select an image of a void cheque</string>
+    <string name="noneBtn">none</string>
+    <string name="preview_of_user_uploaded_image">preview of user uploaded image</string>
+    <string name="title_activity_user_home_page">UserHomePage</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="createAccount">Create New Account</string>
     >>>>>>> origin/main
 </resources>

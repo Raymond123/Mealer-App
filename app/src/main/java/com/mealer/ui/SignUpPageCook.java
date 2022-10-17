@@ -73,7 +73,7 @@ public class SignUpPageCook extends AppCompatActivity {
 
         createAccount.setOnClickListener(v->{
             String passwordText = password.getText().toString();
-            if(passwordText.equals(confirmPassword.getText().toString())) {
+            if(passwordText.equals(confirmPassword.getText().toString()) && validateAddress() && validateName() && validateImageUpload()) {
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), passwordText)
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful()){
@@ -179,6 +179,38 @@ public class SignUpPageCook extends AppCompatActivity {
         imageSelectedResult.launch(
                 Intent.createChooser(
                         intent, "Select Image"));
+    }
+    // check if first and last name are empty
+    private boolean validateName(){
+        fName = (EditText)findViewById(R.id.createAccountFirstName);
+        lName = (EditText)findViewById(R.id.createAccountLastName);
+        if(fName.getText().toString().matches("")){
+            Toast.makeText(SignUpPageCook.this, "First name cannot be empty", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(lName.getText().toString().matches("")){
+            Toast.makeText(SignUpPageCook.this, "Last name cannot be empty", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+    // check if address is empty
+    private boolean validateAddress(){
+        address = (EditText)findViewById(R.id.createAccountAddress);
+        if(address.getText().toString().matches("")){
+            Toast.makeText(SignUpPageCook.this, "Address cannot be empty!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateImageUpload(){
+        imagePreview = (ImageView)findViewById(R.id.imageUploadPreview);
+        if(imagePreview.getDrawable()==null){
+            Toast.makeText(SignUpPageCook.this, "Make sure you uploaded an image of void cheque", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     /**

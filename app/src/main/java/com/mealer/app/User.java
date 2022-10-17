@@ -24,17 +24,63 @@ public class User implements Parcelable {
     private String firstName;
     private String lastName;
     private String email;
-    // TODO change address
-    private String address;
+    private Address address;
     private String userType;
+
+    private static class Address implements Parcelable{
+        private final String street;
+        private final String houseNumber;
+        private final String city;
+
+        public Address(String city, String street, String houseNumber){
+            this.city = city;
+            this.street = street;
+            this.houseNumber = houseNumber;
+        }
+
+        protected Address(Parcel in) {
+            street = in.readString();
+            houseNumber = in.readString();
+            city = in.readString();
+        }
+
+        public static final Creator<Address> CREATOR = new Creator<Address>() {
+            @Override
+            public Address createFromParcel(Parcel in) {
+                return new Address(in);
+            }
+
+            @Override
+            public Address[] newArray(int size) {
+                return new Address[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(@NonNull Parcel parcel, int i) {
+            parcel.writeString(street);
+            parcel.writeString(houseNumber);
+            parcel.writeString(city);
+        }
+    }
 
     // user constructor
     public User(String firstName, String lastName, String email, String address, String userType){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.address = address;
+        this.address = newAddress(address);
         this.userType = userType;
+    }
+
+    private Address newAddress(String address){
+        String[] tempAddress = address.replace(",", "").split(" ");
+        return new Address(tempAddress[0], tempAddress[2], tempAddress[1]);
     }
 
     // empty user constructor required for taking firebase snapshot
@@ -48,7 +94,7 @@ public class User implements Parcelable {
         firstName = in.readString();
         lastName = in.readString();
         email = in.readString();
-        address = in.readString();
+        address = in.readParcelable(address.getClass().getClassLoader());
         userType = in.readString();
     }
 
@@ -88,7 +134,7 @@ public class User implements Parcelable {
         return email;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
@@ -107,7 +153,7 @@ public class User implements Parcelable {
         parcel.writeString(firstName);
         parcel.writeString(lastName);
         parcel.writeString(email);
-        parcel.writeString(address);
+        parcel.writeParcelable(address, i);
         parcel.writeString(userType);
     }
 }

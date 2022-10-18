@@ -6,17 +6,20 @@ import android.provider.ContactsContract;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
 
-public class User implements Parcelable {
+public class User extends Admin implements Parcelable {
 
     private int mData;
 
@@ -24,63 +27,32 @@ public class User implements Parcelable {
     private String firstName;
     private String lastName;
     private String email;
-    private Address address;
     private String userType;
 
-    private static class Address implements Parcelable{
-        private final String street;
-        private final String houseNumber;
-        private final String city;
-
-        public Address(String city, String street, String houseNumber){
-            this.city = city;
-            this.street = street;
-            this.houseNumber = houseNumber;
-        }
-
-        protected Address(Parcel in) {
-            street = in.readString();
-            houseNumber = in.readString();
-            city = in.readString();
-        }
-
-        public static final Creator<Address> CREATOR = new Creator<Address>() {
-            @Override
-            public Address createFromParcel(Parcel in) {
-                return new Address(in);
-            }
-
-            @Override
-            public Address[] newArray(int size) {
-                return new Address[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(@NonNull Parcel parcel, int i) {
-            parcel.writeString(street);
-            parcel.writeString(houseNumber);
-            parcel.writeString(city);
-        }
-    }
+    // address strings
+    private String city;
+    private String houseNumber;
+    private String street;
 
     // user constructor
-    public User(String firstName, String lastName, String email, String address, String userType){
+    public User(String firstName, String lastName, String email, String userType,
+                String city, String houseNumber, String street){
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.address = newAddress(address);
         this.userType = userType;
+        this.city = city;
+        this.houseNumber = houseNumber;
+        this.street = street;
     }
 
-    private Address newAddress(String address){
-        String[] tempAddress = address.replace(",", "").split(" ");
-        return new Address(tempAddress[0], tempAddress[2], tempAddress[1]);
+    public static String[] parseAddress(String address){
+        String[] addressMap = address.replace(",", "").split(" ");
+        if(addressMap.length > 3){
+            // combine all "arrays" in case that street name had spaces
+        }
+        return addressMap;
     }
 
     // empty user constructor required for taking firebase snapshot
@@ -94,7 +66,9 @@ public class User implements Parcelable {
         firstName = in.readString();
         lastName = in.readString();
         email = in.readString();
-        address = in.readParcelable(address.getClass().getClassLoader());
+        city = in.readString();
+        houseNumber = in.readString();
+        street = in.readString();
         userType = in.readString();
     }
 
@@ -134,9 +108,11 @@ public class User implements Parcelable {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
+    public String getCity(){ return city; }
+
+    public String getHouseNumber() { return houseNumber; }
+
+    public String getStreet() { return street; }
 
     public String getUserType(){ return userType;}
 
@@ -153,7 +129,9 @@ public class User implements Parcelable {
         parcel.writeString(firstName);
         parcel.writeString(lastName);
         parcel.writeString(email);
-        parcel.writeParcelable(address, i);
+        parcel.writeString(city);
+        parcel.writeString(houseNumber);
+        parcel.writeString(street);
         parcel.writeString(userType);
     }
 }

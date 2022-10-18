@@ -80,9 +80,10 @@ public class SignUpPageCook extends AppCompatActivity {
                                 Log.d(TAG, "createUserWithEmailSuccess");
                                 FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
                                 assert currentFirebaseUser != null;
+                                String[] addressMap = User.parseAddress(address.getText().toString());
                                 User currentUser = new CookUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(), address.getText().toString(), description.getText().toString(),
-                                        currentFirebaseUser.getUid(), "cook");
+                                        email.getText().toString(),  addressMap[0], addressMap[1], addressMap[2],
+                                        description.getText().toString(), currentFirebaseUser.getUid(), "cook");
                                 uploadImage(currentFirebaseUser.getUid());
                                 updateUI(currentFirebaseUser, currentUser);
                             }else{
@@ -182,13 +183,11 @@ public class SignUpPageCook extends AppCompatActivity {
     }
     // check if first and last name are empty
     private boolean validateName(){
-        fName = (EditText)findViewById(R.id.createAccountFirstName);
-        lName = (EditText)findViewById(R.id.createAccountLastName);
-        if(fName.getText().toString().matches("")){
+        if(fName.getText().toString().equals("")){
             Toast.makeText(SignUpPageCook.this, "First name cannot be empty", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(lName.getText().toString().matches("")){
+        if(lName.getText().toString().equals("")){
             Toast.makeText(SignUpPageCook.this, "Last name cannot be empty", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -196,8 +195,7 @@ public class SignUpPageCook extends AppCompatActivity {
     }
     // check if address is empty
     private boolean validateAddress(){
-        address = (EditText)findViewById(R.id.createAccountAddress);
-        if(address.getText().toString().matches("")){
+        if(address.getText().toString().equals("")){
             Toast.makeText(SignUpPageCook.this, "Address cannot be empty!", Toast.LENGTH_LONG).show();
             return false;
         }

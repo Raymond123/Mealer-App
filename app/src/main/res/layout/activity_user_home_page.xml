@@ -5,11 +5,13 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Cream"
     android:paddingTop="?attr/actionBarSize">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/Cream"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="56dp">
@@ -20,7 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:translationX="-175dp"
+            android:translationY="-250dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -31,7 +35,9 @@
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            android:text="@string/sign_out" />
+            android:backgroundTint="@color/lightBrown"
+            android:text="@string/sign_out"
+            android:translationY="200dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

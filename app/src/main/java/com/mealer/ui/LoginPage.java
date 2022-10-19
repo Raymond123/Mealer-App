@@ -245,6 +245,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     private boolean isAdmin(String email){
+        System.out.println(email.equals(adminEmail));
         return email.equals(adminEmail);
     }
 

@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * IMPORTANT: ACTIVITY NOT CURRENTLY BEING USED
+ * to be implemented in the next deliverable
+ */
+
 public class LandingPage extends AppCompatActivity {
 
     @Override

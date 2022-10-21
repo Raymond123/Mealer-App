@@ -33,7 +33,7 @@
     <string name="last_name">Last Name</string>
     <string name="getting_to_know_you">Getting to know you</string>
     <string name="age">Age</string>
-    <string name="address">Address (city, houseNumber street)</string>
+    <string name="address">Address (City, Street, House Number)</string>
     <string name="creditNum">Card Number</string>
     <string name="creditExpiry">MMYY</string>
     <string name="creditSecurity">XXX</string>
@@ -54,5 +54,11 @@
     <string name="createAccount">Create New Account</string>
     <string name="please_type_your_email_below">Please type your email below</string>
     <string name="submit">submit</string>
+    <string name="delivering_to">Delivering To</string>
+    <string name="_417_ladbroke_grove">417 Ladbroke Grove</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="inbox">Inbox</string>
+    <string name="profile">Profile</string>
     >>>>>>> origin/main
 </resources>

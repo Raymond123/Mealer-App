@@ -25,8 +25,9 @@ public class ClientUser extends User implements Parcelable {
      *                   attributes pulled from the firebase realtime database
      */
     public ClientUser(HashMap<String, String> attributes){
-        super(attributes.get("firstName"), attributes.get("lastName"), attributes.get("email"),
-                attributes.get("address"), attributes.get("userType"));
+        super(attributes.get("firstName"), attributes.get("lastName"),
+                attributes.get("email"), attributes.get("userType"), attributes.get("city"),
+                attributes.get("houseNumber"), attributes.get("street"));
 
         this.cardNumber = attributes.get("cardNumber");
         this.cardExpiry = attributes.get("cardExpiry");
@@ -40,9 +41,9 @@ public class ClientUser extends User implements Parcelable {
      * @param userType this attribute is always "client" for this class,
      *                but having specific attribute allows for displaying type
      */
-    public ClientUser(String firstName, String lastName, String email, String address,
+    public ClientUser(String firstName, String lastName, String email, String city, String houseNumber, String street,
                       String cardNumber, String cardExpiry, String cardSecurity, String uID, String userType){
-        super(firstName, lastName, email, address, userType);
+        super(firstName, lastName, email, userType, city, houseNumber, street);
         this.cardNumber = cardNumber;
         this.cardExpiry = cardExpiry;
         this.cardSecurity = cardSecurity;

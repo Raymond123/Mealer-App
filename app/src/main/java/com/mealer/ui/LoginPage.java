@@ -17,55 +17,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mealer.app.Admin;
 import com.mealer.app.ClientUser;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 // LOGIN PAGE
 public class LoginPage extends AppCompatActivity {
 
     private final String adminEmail = "admin@mealer.com";
 
-    protected static class Admin implements Parcelable {
-        private final String admin;
-
-        public Admin(){
-            this.admin = "administrator";
-        }
-
-        protected Admin(Parcel in) {
-            admin = in.readString();
-        }
-
-        public final Creator<Admin> CREATOR = new Creator<Admin>() {
-            @Override
-            public Admin createFromParcel(Parcel in) {
-                return new Admin(in);
-            }
-
-            @Override
-            public Admin[] newArray(int size) {
-                return new Admin[size];
-            }
-        };
-
-        public String getType() {
-            return this.admin;
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(@NonNull Parcel parcel, int i) {
-            parcel.writeString(admin);
-        }
-    }
 
     // TAG variable for marking Logs when debugging
     private final String TAG = "LoginPage";
@@ -141,7 +106,7 @@ public class LoginPage extends AppCompatActivity {
 
     private void loginAdmin() {
         Intent signIn = new Intent(this, UserHomePage.class);
-        signIn.putExtra("TYPE", new Admin());
+        signIn.putExtra("TYPE", new Admin(true));
         startActivity(signIn);
     }
 
@@ -152,7 +117,12 @@ public class LoginPage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            getUser(currentUser);
+            // if user that's logged in is not admin
+            if(!Objects.equals(currentUser.getEmail(), adminEmail)) {
+                getUser(currentUser);
+            } else if (Objects.equals(currentUser.getEmail(), adminEmail)) { // if user that's logged in is admin
+                loginAdmin();
+            }
         }
     }
 
@@ -245,7 +215,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     private boolean isAdmin(String email){
-        System.out.println(email.equals(adminEmail));
+        Log.d("Admin email", String.valueOf(email.equals(adminEmail)));
         return email.equals(adminEmail);
     }
 

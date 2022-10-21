@@ -24,8 +24,9 @@ public class CookUser extends User implements Parcelable {
      *                   attributes pulled from the firebase realtime database
      */
     public CookUser(HashMap<String, String> attributes){
-        super(attributes.get("firstName"), attributes.get("lastName"), attributes.get("email"),
-                attributes.get("address"), attributes.get("userType"));
+        super(attributes.get("firstName"), attributes.get("lastName"),
+                attributes.get("email"), attributes.get("userType"), attributes.get("city"),
+                attributes.get("houseNumber"), attributes.get("street"));
 
         this.description = attributes.get("description");
     }
@@ -38,11 +39,13 @@ public class CookUser extends User implements Parcelable {
      *                but having specific attribute allows for displaying type
      */
     public CookUser(String firstName, String lastName, String email,
-                    String address, String description, String uID, String userType) {
-        super(firstName, lastName, email, address, userType);
+                    String city, String houseNumber, String street, String description, String uID, String userType) {
+        super(firstName, lastName, email, userType, city, houseNumber, street);
         this.description = description;
 
+        // get database reference to the "users" tree
         DatabaseReference databaseReference = getReference("users");
+        // add user to database under uID
         databaseReference.child(uID).setValue(this);
 
     }

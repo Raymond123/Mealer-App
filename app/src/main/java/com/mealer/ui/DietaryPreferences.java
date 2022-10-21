@@ -56,7 +56,7 @@ public class DietaryPreferences extends AppCompatActivity {
     private void setRestriction(String type){
         DatabaseReference databaseReference =
                 FirebaseDatabase.getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
-                        .getReference("users/client");
+                        .getReference("users");
 
         HashMap<String, Object> update = new HashMap<>();
         update.put("dietary restriction", type);
@@ -64,7 +64,6 @@ public class DietaryPreferences extends AppCompatActivity {
         FirebaseUser currentFirebaseUser = this.mAuth.getCurrentUser();
         if(currentFirebaseUser!=null){
             databaseReference.child(currentFirebaseUser.getUid()).updateChildren(update);
-
         }
 
         finish();

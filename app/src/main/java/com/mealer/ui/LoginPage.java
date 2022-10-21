@@ -1,10 +1,13 @@
 package com.mealer.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,15 +17,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mealer.app.Admin;
 import com.mealer.app.ClientUser;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 // LOGIN PAGE
 public class LoginPage extends AppCompatActivity {
+
+    private final String adminEmail = "admin@mealer.com";
+
 
     // TAG variable for marking Logs when debugging
     private final String TAG = "LoginPage";
@@ -60,8 +68,10 @@ public class LoginPage extends AppCompatActivity {
                         // creates instance of firebase user
                         FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
                         assert currentFirebaseUser != null;
-                        // checks if the user has verified their email address
-                        if(currentFirebaseUser.isEmailVerified()) {
+
+                        if(isAdmin(username.getText().toString())){
+                            loginAdmin();
+                        }else if(currentFirebaseUser.isEmailVerified()) { // checks if the user has verified their email address
                             // if email is verified, will create new user object with users attributes
                             // and log them into the home page
                             getUser(currentFirebaseUser);
@@ -89,27 +99,15 @@ public class LoginPage extends AppCompatActivity {
 
         //TODO: create new activity for this action
         forgotPassword.setOnClickListener(f->{
-            if(!username.getText().toString().isEmpty()) {
-                mAuth.sendPasswordResetEmail(username.getText().toString())
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(
-                                        this,
-                                        "Email sent, If you didn't receive it check your junk mail",
-                                        Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(
-                                        this,
-                                        "User does not exist",
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        });
-            }else{
-                Toast.makeText(this, "Enter email", Toast.LENGTH_LONG).show();
-
-            }
+            startActivity(new Intent(this, ForgotPassword.class));
         });
 
+    }
+
+    private void loginAdmin() {
+        Intent signIn = new Intent(this, UserHomePage.class);
+        signIn.putExtra("TYPE", new Admin(true));
+        startActivity(signIn);
     }
 
     // copied from firebase documentation
@@ -119,7 +117,12 @@ public class LoginPage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            getUser(currentUser);
+            // if user that's logged in is not admin
+            if(!Objects.equals(currentUser.getEmail(), adminEmail)) {
+                getUser(currentUser);
+            } else if (Objects.equals(currentUser.getEmail(), adminEmail)) { // if user that's logged in is admin
+                loginAdmin();
+            }
         }
     }
 
@@ -209,6 +212,11 @@ public class LoginPage extends AppCompatActivity {
         Intent signIn = new Intent(this, UserHomePage.class);
         signIn.putExtra("TYPE", currentUser);
         startActivity(signIn);
+    }
+
+    private boolean isAdmin(String email){
+        Log.d("Admin email", String.valueOf(email.equals(adminEmail)));
+        return email.equals(adminEmail);
     }
 
 }

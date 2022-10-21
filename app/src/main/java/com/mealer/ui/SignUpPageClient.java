@@ -51,9 +51,11 @@ public class SignUpPageClient extends AppCompatActivity {
                                 Log.d(TAG, "createUserWithEmailSuccess");
                                 FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
                                 assert currentFirebaseUser != null;
+                                String[] addressMap = User.parseAddress(address.getText().toString());
                                 User currentUser = new ClientUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(), address.getText().toString(), cardNumber.getText().toString(),
-                                        cardExpiry.getText().toString(), cardSecurity.getText().toString(), currentFirebaseUser.getUid(), "client");
+                                        email.getText().toString(), addressMap[0], addressMap[1], addressMap[2],
+                                        cardNumber.getText().toString(), cardExpiry.getText().toString(),
+                                        cardSecurity.getText().toString(), currentFirebaseUser.getUid(), "client");
                                 updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
@@ -72,8 +74,6 @@ public class SignUpPageClient extends AppCompatActivity {
 
     // check if first and last name are empty
     private boolean validateName(){
-        fName = (EditText)findViewById(R.id.createAccountFirstName);
-        lName = (EditText)findViewById(R.id.createAccountLastName);
         if(fName.getText().toString().matches("")){
             Toast.makeText(SignUpPageClient.this, "First name cannot be empty", Toast.LENGTH_LONG).show();
             return false;
@@ -86,7 +86,6 @@ public class SignUpPageClient extends AppCompatActivity {
     }
     // check if address is empty
     private boolean validateAddress(){
-        address = (EditText)findViewById(R.id.createAccountAddress);
         if(address.getText().toString().matches("")){
             Toast.makeText(SignUpPageClient.this, "Address cannot be empty!", Toast.LENGTH_LONG).show();
             return false;

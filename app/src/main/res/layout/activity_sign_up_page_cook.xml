@@ -4,9 +4,244 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Cream"
     tools:context=".SignUpPageCook">
 
-    <!--TODO: Add all inputs and 'copy' design of other sign up page-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/createCookAccount"
+            android:textColor="@color/darkGreen"
+            android:textSize="30sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="242dp"
+                    android:layout_height="186dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/mealerlogo"
+                    app:srcCompat="@drawable/createaccountimage" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkGreen"
+                    android:text="@string/personal_information"
+                    android:textSize="25sp"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/createAccountFirstName"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:ems="10"
+                    android:hint="@string/first_name"
+                    android:inputType="text"
+                    android:layout_margin="5dp"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountLastName"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/last_name"
+                    android:inputType="text"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountEmail"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/createEmail"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountPassword"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="password"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/createAccountPassword2"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="password"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/confirmPassword"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/createAccountAddress"
+                    android:layout_width="310dp"
+                    android:layout_height="55dp"
+                    android:autofillHints="name"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:hint="@string/address"
+                    android:inputType="text"
+                    android:padding="10dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/userDescription"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkGreen"
+                    android:text="@string/description"
+                    android:textSize="25sp"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/userDescriptionInput"
+                    android:layout_width="320dp"
+                    android:layout_height="75dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:text="@string/descriptionHint"
+                    android:backgroundTint="@color/darkGreen"
+                    android:textColor="@color/darkGreen"
+                    android:textColorHint="@color/darkGreen"
+                    android:textSize="15sp"
+                    android:inputType="textMultiLine"
+                    android:maxLength="250"
+                    android:autofillHints="" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/selectUploadText"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/please_select_and_upload_an_image_of_a_void_cheque"
+                    android:textColor="@color/darkGreen"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/selectImageButton"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/lightBrown"
+                        android:layout_margin="5dp"
+                        android:padding="12dp"
+                        android:text="@string/select" />
+                    <!--
+                    <Button
+                        android:id="@+id/uploadImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/lightBrown"
+                        android:layout_margin="5dp"
+                        android:padding="12dp"
+                        android:text="@string/upload" />
+                        -->
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageUploadPreview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:maxWidth="320dp"
+                    android:maxHeight="250dp"
+                    android:contentDescription="@string/preview_of_user_uploaded_image"
+                    />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <Button
+                    android:id="@+id/signupButton"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/lightBrown"
+                    android:layout_margin="5dp"
+                    android:padding="12dp"
+                    android:text="@string/signupButtonCaps"
+                    tools:ignore="TextContrastCheck,TextContrastCheck" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

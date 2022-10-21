@@ -41,6 +41,8 @@
         android:layout_width="310dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/darkGreen"
+        android:textColorHint="@color/darkGreen"
+        android:textColor="@color/darkGreen"
         android:ems="10"
         android:hint="@string/username"
         android:autofillHints="username"
@@ -59,6 +61,8 @@
         android:layout_height="60dp"
         android:ems="10"
         android:backgroundTint="@color/darkGreen"
+        android:textColorHint="@color/darkGreen"
+        android:textColor="@color/darkGreen"
         android:hint="@string/password"
         android:autofillHints="password"
         android:inputType="textPassword"
@@ -84,18 +88,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.835" />
 
-    <!--TODO: forgotPasswordLogin needs to be a button so it is clickable-->
-    <TextView
+    <Button
         android:id="@+id/forgotPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/fui_transparent"
         android:text="@string/forgotPassword"
         android:textColor="@color/lightGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.907" />
+
+    <Button
+        android:id="@+id/noAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/fui_transparent"
+        android:text="@string/createAccount"
+        android:textColor="@color/lightGreen"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

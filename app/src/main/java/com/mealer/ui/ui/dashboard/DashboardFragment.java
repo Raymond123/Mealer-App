@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mealer.ui.databinding.FragmentComplaintsBinding;
@@ -24,10 +26,13 @@ public class DashboardFragment extends Fragment {
 
     private FragmentComplaintsBinding binding;
     private DatabaseReference mData;
+    private FirebaseAuth mAuth;
 
     TextView subject;
     TextView user;
     TextView description;
+
+    Button ignore;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +43,8 @@ public class DashboardFragment extends Fragment {
         View root = binding.getRoot();
         binding.getRoot().setBackgroundColor(Color.parseColor("#FEFAE0"));
 
+        mAuth = FirebaseAuth.getInstance();
+
         mData = FirebaseDatabase
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("complaints");
@@ -46,7 +53,16 @@ public class DashboardFragment extends Fragment {
         user = binding.subject2;
         description = binding.complaintDescription;
 
-        displayComplaint("0001");
+        ignore = binding.button3;
+
+        String[] list = {"0001", "0002"};
+
+        displayComplaint(list[0]);
+
+        ignore.setOnClickListener(displayNew->{
+            mData.child(list[0]).removeValue();
+            displayComplaint(list[1]);
+        });
 
         return root;
     }
@@ -82,6 +98,7 @@ public class DashboardFragment extends Fragment {
             }
         });
     }
+
 
     private void loadNewComplaint(){
 

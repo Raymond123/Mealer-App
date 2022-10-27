@@ -1,13 +1,10 @@
 package com.mealer.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -105,7 +102,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     private void loginAdmin() {
-        Intent signIn = new Intent(this, UserHomePage.class);
+        Intent signIn = new Intent(this, AdminHomePage.class);
         signIn.putExtra("TYPE", new Admin(true));
         startActivity(signIn);
     }
@@ -209,7 +206,7 @@ public class LoginPage extends AppCompatActivity {
             startActivity(getIntent());
             return;
         }
-        Intent signIn = new Intent(this, UserHomePage.class);
+        Intent signIn = new Intent(this, ClientHomePage.class);
         signIn.putExtra("TYPE", currentUser);
         startActivity(signIn);
     }

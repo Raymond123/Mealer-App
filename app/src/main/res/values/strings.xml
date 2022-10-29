@@ -25,7 +25,6 @@
     <string name="peanutFreeBtn">Peanut-Free</string>
     <string name="otherBtn">Other</string>
     <string name="clientImageButtonDescription">This is a picture of a client</string>
-    =======
     <string name="mealerlogo">mealerlogo</string>
     <string name="user_account">User account</string>
     <string name="cook_on_mealer">Cook on Mealer</string>
@@ -64,7 +63,7 @@
     <string name="complaints">Complaints</string>
     <string name="complaintstext">Complaints:</string>
     <string name="subject">Subject:</string>
-    <string name="complain_about">Complain about:</string>
+    <string name="complain_about">Complaint about:</string>
     <string name="suspend">suspend</string>
     <string name="ban">ban</string>
     <string name="ignore">ignore</string>
@@ -73,5 +72,10 @@
     <string name="accountPage">Account Page</string>
     <string name="account">Account</string>
     <string name="to_be_implemented">TO BE IMPLEMENTED</string>
-    >>>>>>> origin/main
+    <string name="refresh">refresh</string>
+    <string name="length">length</string>
+    <string-array name="monthDayChoice">
+        <item>Days</item>
+        <item>Months</item>
+    </string-array>
 </resources>

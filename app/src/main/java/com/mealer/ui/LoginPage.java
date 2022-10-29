@@ -135,13 +135,14 @@ public class LoginPage extends AppCompatActivity {
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("users");
 
+        // TODO TEST
         // gets the json object at the current firebase users uid in the realtime database
         mDatabase.child(currentFirebaseUser.getUid()).get()
                 .addOnCompleteListener(task -> {
                     if(!task.isSuccessful()){
                         // if user not in realtime database or error finding them, Log error and show toast
                         Log.e("firebase", "cannot find user", task.getException());
-                        // TODO toast
+                        Toast.makeText(this, "User not found or banned", Toast.LENGTH_LONG).show();
                     }else{
                         Log.d("firebase", String.valueOf(task.getResult().getValue()));
                         // create a hashmap out of the "json" like string that the firebase database get method returns

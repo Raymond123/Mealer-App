@@ -28,6 +28,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/complaintstext"
                 android:textColor="@color/darkGreen"
+                android:layout_gravity="center"
+                android:layout_weight="0"
                 android:textSize="20sp" />
 
             <Space
@@ -36,11 +38,25 @@
                 android:layout_weight="0" />
 
             <TextView
-                android:id="@+id/compaintsNum"
+                android:id="@+id/complaintsNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/darkGreen"
+                android:layout_weight="1"
                 android:textSize="20sp" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/refreshButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:backgroundTint="@color/lightBrown"
+                android:text="@string/refresh" />
         </LinearLayout>
 
         <Space
@@ -100,7 +116,7 @@
                     android:layout_weight="0" />
 
                 <TextView
-                    android:id="@+id/subject2"
+                    android:id="@+id/complaintAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/darkGreen"
@@ -131,7 +147,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/ignoreButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="3dp"
@@ -141,7 +157,7 @@
                     tools:ignore="NestedWeights" />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/suspendButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="3dp"
@@ -150,7 +166,7 @@
                     android:text="@string/suspend" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/banButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="3dp"

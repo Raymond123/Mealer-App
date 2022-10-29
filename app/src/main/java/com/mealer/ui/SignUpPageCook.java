@@ -82,7 +82,7 @@ public class SignUpPageCook extends AppCompatActivity {
                                 assert currentFirebaseUser != null;
                                 String[] addressMap = User.parseAddress(address.getText().toString());
                                 User currentUser = new CookUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(),  addressMap[0], addressMap[1], addressMap[2],
+                                        email.getText().toString(),  addressMap[0], addressMap[2], addressMap[1],
                                         description.getText().toString(), currentFirebaseUser.getUid(), "cook");
                                 uploadImage(currentFirebaseUser.getUid());
                                 updateUI(currentFirebaseUser, currentUser);

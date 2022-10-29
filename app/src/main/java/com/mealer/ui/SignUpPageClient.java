@@ -53,7 +53,7 @@ public class SignUpPageClient extends AppCompatActivity {
                                 assert currentFirebaseUser != null;
                                 String[] addressMap = User.parseAddress(address.getText().toString());
                                 User currentUser = new ClientUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(), addressMap[0], addressMap[1], addressMap[2],
+                                        email.getText().toString(), addressMap[0], addressMap[2], addressMap[1],
                                         cardNumber.getText().toString(), cardExpiry.getText().toString(),
                                         cardSecurity.getText().toString(), currentFirebaseUser.getUid(), "client");
                                 updateUI(currentFirebaseUser, currentUser);

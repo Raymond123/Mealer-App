@@ -52,16 +52,22 @@ public class SignUpPageClient extends AppCompatActivity {
                                 FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
                                 assert currentFirebaseUser != null;
                                 String[] addressMap = User.parseAddress(address.getText().toString());
-                                User currentUser = new ClientUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(), addressMap[0], addressMap[2], addressMap[1],
-                                        cardNumber.getText().toString(), cardExpiry.getText().toString(),
-                                        cardSecurity.getText().toString(), currentFirebaseUser.getUid(), "client");
+
+                                User currentUser = new ClientUser(
+                                        fName.getText().toString(),
+                                        lName.getText().toString(),
+                                        email.getText().toString(),
+                                        addressMap[0], addressMap[2], addressMap[1],
+                                        cardNumber.getText().toString(),
+                                        cardExpiry.getText().toString(),
+                                        cardSecurity.getText().toString(),
+                                        currentFirebaseUser.getUid(),
+                                        "client");
+
                                 updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                //PopupWindow failWindow = new PopupWindow(View, width, height, true);
-                                //failWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                                 Toast.makeText(SignUpPageClient.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null, null);
@@ -84,6 +90,7 @@ public class SignUpPageClient extends AppCompatActivity {
         }
         return true;
     }
+
     // check if address is empty
     private boolean validateAddress(){
         if(address.getText().toString().matches("")){

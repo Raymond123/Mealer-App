@@ -26,7 +26,6 @@ import com.mealer.app.CookUser;
 import com.mealer.app.User;
 
 import java.io.IOException;
-import java.util.UUID;
 
 public class SignUpPageCook extends AppCompatActivity {
 
@@ -81,19 +80,25 @@ public class SignUpPageCook extends AppCompatActivity {
                                 FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
                                 assert currentFirebaseUser != null;
                                 String[] addressMap = User.parseAddress(address.getText().toString());
-                                User currentUser = new CookUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(),  addressMap[0], addressMap[2], addressMap[1],
-                                        description.getText().toString(), currentFirebaseUser.getUid(), "cook");
+
+                                User currentUser = new CookUser(
+                                        fName.getText().toString(),
+                                        lName.getText().toString(),
+                                        email.getText().toString(),
+                                        addressMap[0], addressMap[2], addressMap[1],
+                                        description.getText().toString(),
+                                        currentFirebaseUser.getUid(),
+                                        "cook",
+                                        "0");
+
                                 uploadImage(currentFirebaseUser.getUid());
                                 updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                //PopupWindow failWindow = new PopupWindow(View, width, height, true);
-                                //failWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                                 Toast.makeText(SignUpPageCook.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                //updateUI(null, null);
+                                updateUI(null, null);
                             }
                         });
             }

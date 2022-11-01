@@ -2,7 +2,9 @@ package com.mealer.ui.ui.dashboard;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -38,6 +40,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 //TODO create complaint class
 public class DashboardFragment extends Fragment {
@@ -46,6 +49,7 @@ public class DashboardFragment extends Fragment {
 
     private FragmentComplaintsBinding binding;
     private DatabaseReference mData;
+    private DatabaseReference banRef;
     private FirebaseAuth mAuth;
     private Integer index = 0;
     private ArrayList<String> complaintList;
@@ -89,6 +93,10 @@ public class DashboardFragment extends Fragment {
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("complaints");
 
+        banRef = FirebaseDatabase
+                .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
+                .getReference("users");
+
         complaintsNum = binding.complaintsNum;
         subject = binding.subject;
         user = binding.complaintAbout;
@@ -100,38 +108,29 @@ public class DashboardFragment extends Fragment {
         ban = binding.banButton;
 
         getComplaints();
+        // sets onClick listeners for all buttons
         refresh.setOnClickListener(onClick -> getComplaints());
-
-        ban.setOnClickListener(banUser -> {
-            DatabaseReference banRef = FirebaseDatabase
-                    .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
-                    .getReference("users");
-            //banRef.child(user.getText().toString()).addValueEventListener(userListener);
-
-            banRef.child(user.getText().toString()).removeValue();
-            mData.child(complaintList.get(index)).removeValue();
-            displayComplaint(complaintList.get(++index));
-        });
-
-        suspend.setOnClickListener(suspend ->{
-            openPopup(this.getView());
-        });
-
-        ignore.setOnClickListener(displayNew->{
-            mData.child(complaintList.get(index)).removeValue();
-            displayComplaint(complaintList.get(++index));
-        });
+        ban.setOnClickListener(banUser -> displayNewComplaint("-1"));
+        suspend.setOnClickListener(suspend -> openPopup(this.getView()));
+        ignore.setOnClickListener(displayNew-> displayNewComplaint(null));
 
         return root;
     }
 
+    /**
+     * Opens a small popup window where the admin can input the length of the cooks suspension
+     * @param view androidStudio view to show popup
+     */
     @SuppressLint({"ClickableViewAccessibility", "MissingInflatedId"})
     public void openPopup(View view){
+        //TODO fix popup, not showing properly in app
         LayoutInflater inflater = getLayoutInflater();
+        @SuppressLint("InflateParams")
         View popup = inflater.inflate(R.layout.suspension_popup, null);
+        popup.setBackgroundColor(Color.BLACK);
 
         // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
 
@@ -160,28 +159,43 @@ public class DashboardFragment extends Fragment {
         });
 
         completeSuspension.setOnClickListener(suspend -> {
-            //TODO suspend user for the length specified
+            String suspensionLengthDays = suspensionLength.getText().toString();
+            if("Months".equals(monthDayChoice.getSelectedItem())){
+                /* the db stores suspension in days, so if admin inputted suspension in months,
+                multiply by 30 to get how many days to suspend */
+                suspensionLengthDays = String.valueOf(Integer.parseInt(suspensionLengthDays)*30);
+            }
+            popupWindow.dismiss();
+            displayNewComplaint(suspensionLengthDays);
         });
-
     }
 
-    private HashMap<String, String> parseComplaint(String complaintData){
-        HashMap<String, String> complaintParsed = new HashMap<>();
-        String[] splitOne =
-                complaintData.replace("{", "")
-                        .replace("}", "")
-                        .replace(" ", "")
-                        // split the string by "," in order to get an array of attributes and their values
-                        .split(",");
-
-        for(String index : splitOne){
-            String[] temp = index.split("=");
-            complaintParsed.put(temp[0], temp[1]);
+    /**
+     * Actions the previous complaint and displays the next complaint in the list to the admin
+     * @param status how to set the account status of the user of the actioned complaint
+     *               "-1" => banned
+     *               "null" => ignore the complaint
+     *               "x">0 => the number of days the user will be suspended
+     */
+    private void displayNewComplaint(String status){
+        if(status != null) {
+            HashMap<String, Object> update = new HashMap<>();
+            update.put("accountStatus", status);
+            banRef.child(user.getText().toString()).updateChildren(update);
         }
-
-        return complaintParsed;
+        //mData.child(complaintList.get(index)).removeValue();
+        try {
+            displayComplaint(complaintList.get(++index));
+        }catch (IndexOutOfBoundsException i){
+            subject.setText("NULL");
+            user.setText("NULL");
+            description.setText("No complaints");
+        }
     }
 
+    /**
+     * gets a list of all the complaints in the db
+     */
     private void getComplaints(){
         complaintList = new ArrayList<>();
         mData.get().addOnCompleteListener(task -> {
@@ -201,16 +215,18 @@ public class DashboardFragment extends Fragment {
                 }
 
                 complaintsNum.setText(String.valueOf(complaintList.size()));
+                //displayComplaint(complaintList.get(index));
+                //TODO test :
                 displayComplaint(complaintList.get(index));
-                //TODO test : testDisplay(complaintList.get(index));
             }else{
                 Log.e("firebaseDatabase", "no complaint", task.getException());
             }
         });
     }
 
+
     // test method for trying to pull data differently
-    private void testDisplay(String path){
+    private void displayComplaint(String path){
         ValueEventListener complaintListener =  new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -228,21 +244,6 @@ public class DashboardFragment extends Fragment {
             }
         };
         mData.child(path).addValueEventListener(complaintListener);
-    }
-
-    private void displayComplaint(String path){
-        mData.child(path).get().addOnCompleteListener(c->{
-            if(c.isSuccessful()){
-                Log.d("firebaseDatabase", "found complaint", c.getException());
-                HashMap<String, String> complaintData = parseComplaint(String.valueOf(c.getResult().getValue()));
-
-                subject.setText(complaintData.get("subject"));
-                user.setText(complaintData.get("user"));
-                description.setText(complaintData.get("description"));
-            }else{
-                Log.e("firebaseDatabase", "no complaint", c.getException());
-            }
-        });
     }
 
     @Override

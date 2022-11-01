@@ -16,6 +16,7 @@ public class CookUser extends User implements Parcelable {
 
     // cook specific attributes
     private String description;
+    private String accountStatus;
 
     /**
      * cook user constructor specific for when initializing a new user object
@@ -39,9 +40,11 @@ public class CookUser extends User implements Parcelable {
      *                but having specific attribute allows for displaying type
      */
     public CookUser(String firstName, String lastName, String email,
-                    String city, String houseNumber, String street, String description, String uID, String userType) {
+                    String city, String houseNumber, String street,
+                    String description, String uID, String userType, String accountStatus) {
         super(firstName, lastName, email, userType, city, houseNumber, street);
         this.description = description;
+        this.accountStatus = accountStatus;
 
         // get database reference to the "users" tree
         DatabaseReference databaseReference = getReference("users");
@@ -55,4 +58,7 @@ public class CookUser extends User implements Parcelable {
         return this.description;
     }
 
+    public String getAccountStatus() {
+        return accountStatus;
+    }
 }

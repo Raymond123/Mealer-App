@@ -140,11 +140,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent">
+
+                <Space
+                    android:layout_width="4dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
 
                 <Button
                     android:id="@+id/ignoreButton"
@@ -173,6 +178,11 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/lightBrown"
                     android:text="@string/ban" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
             </LinearLayout>
 
         </LinearLayout>

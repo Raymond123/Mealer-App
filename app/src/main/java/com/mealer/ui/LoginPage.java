@@ -19,8 +19,13 @@ import com.mealer.app.ClientUser;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 // LOGIN PAGE
@@ -136,7 +141,6 @@ public class LoginPage extends AppCompatActivity {
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("users");
 
-        // TODO TEST
         // gets the json object at the current firebase users uid in the realtime database
         mDatabase.child(currentFirebaseUser.getUid()).get()
                 .addOnCompleteListener(task -> {
@@ -164,17 +168,39 @@ public class LoginPage extends AppCompatActivity {
                             }else if ("-1".equals(userAttributes.get("accountStatus"))){
                                 Toast.makeText(this, "Account banned", Toast.LENGTH_LONG).show();
                             }else{
-                                Toast.makeText(this,
-                                        "Account suspended for " + userAttributes.get("accountStatus") + " days",
-                                        Toast.LENGTH_LONG).show();
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+                                Date localDate = new java.sql.Date(System.currentTimeMillis());
+                                try {
+                                    Date suspensionEnd = simpleDateFormat
+                                                    .parse(Objects.requireNonNull
+                                                            (userAttributes.get("suspensionEnd"))
+                                                    );
+
+                                    if(localDate.after(suspensionEnd)){
+
+                                        HashMap<String,Object> newUserAttributes = new HashMap<>();
+
+                                        newUserAttributes.put("suspensionEnd", "NULL");
+                                        newUserAttributes.put("accountStatus", "0");
+
+                                        mDatabase.child(currentFirebaseUser.getUid())
+                                                .updateChildren(newUserAttributes);
+                                        getUser(currentFirebaseUser);
+                                    }else{
+                                        Toast.makeText(this,
+                                                "Account suspended until " + userAttributes.get("suspensionEnd"),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }catch(ParseException parseException){
+                                    parseException.printStackTrace();
+                                }
                             }
                         }catch(NullPointerException ex){
                             Log.e("signIn", Arrays.toString(ex.getStackTrace()));
                             // TODO toast
                         }
                     }
-                }
-        );
+                });
     }
 
     /**
@@ -220,6 +246,9 @@ public class LoginPage extends AppCompatActivity {
             return;
         }
         Intent signIn = new Intent(this, ClientHomePage.class);
+        if("cook".equals(currentUser.getUserType())){
+            signIn = new Intent(this, CookHomePage.class);
+        }
         signIn.putExtra("TYPE", currentUser);
         startActivity(signIn);
     }

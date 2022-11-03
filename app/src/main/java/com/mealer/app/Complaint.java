@@ -1,6 +1,11 @@
 package com.mealer.app;
 
-public class Complaint {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Complaint implements Parcelable {
 
     private String subject;
     private String cookID;
@@ -16,6 +21,24 @@ public class Complaint {
         this.cookID = cookID;
     }
 
+    protected Complaint(Parcel in) {
+        subject = in.readString();
+        cookID = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<Complaint> CREATOR = new Creator<Complaint>() {
+        @Override
+        public Complaint createFromParcel(Parcel in) {
+            return new Complaint(in);
+        }
+
+        @Override
+        public Complaint[] newArray(int size) {
+            return new Complaint[size];
+        }
+    };
+
     public String getCookID() {
         return cookID;
     }
@@ -26,5 +49,17 @@ public class Complaint {
 
     public String getSubject() {
         return subject;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(subject);
+        parcel.writeString(cookID);
+        parcel.writeString(description);
     }
 }

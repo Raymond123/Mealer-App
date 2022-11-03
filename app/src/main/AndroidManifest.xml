@@ -16,14 +16,23 @@
         <activity
             android:name=".AdminHomePage"
             android:exported="false"
+            android:label="@string/title_activity_admin_home_page">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CookHomePage"
+            android:exported="false"
             android:label="@string/title_activity_cook_home_page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LandingPage"
-            android:exported="false">
+            android:name=".ClientHomePage"
+            android:exported="false"
+            android:label="@string/title_activity_client_home_page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -31,14 +40,6 @@
         <activity
             android:name=".ForgotPassword"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UserHomePage"
-            android:exported="false"
-            android:label="@string/title_activity_user_home_page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

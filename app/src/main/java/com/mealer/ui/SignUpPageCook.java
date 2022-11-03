@@ -89,7 +89,8 @@ public class SignUpPageCook extends AppCompatActivity {
                                         description.getText().toString(),
                                         currentFirebaseUser.getUid(),
                                         "cook",
-                                        "0");
+                                        "0",
+                                        "NULL");
 
                                 uploadImage(currentFirebaseUser.getUid());
                                 updateUI(currentFirebaseUser, currentUser);
@@ -137,7 +138,7 @@ public class SignUpPageCook extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            updateUI(currentUser, null); //TODO: currentUser cant be null change
+            updateUI(currentUser, null);
         }
     }
 
@@ -162,7 +163,7 @@ public class SignUpPageCook extends AppCompatActivity {
                                 "Verification email sent",
                                 Toast.LENGTH_LONG).show();
 
-                        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
+                        Intent signIn = new Intent(SignUpPageCook.this, CookHomePage.class);
                         signIn.putExtra("TYPE", currentUser);
                         startActivity(signIn);
                     }else{

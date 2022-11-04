@@ -23,7 +23,10 @@ jobs:
       - checkout
       - run:
           name: "add days test"
-          command: "./gradlew :app:testDebugUnitTest --tests \"com.mealer.ui.AddDaysTest\""
+          command: |
+            echo $JAVA_HOME
+            java -version
+            ./gradlew :app:testDebugUnitTest --tests "com.mealer.ui.AddDaysTest"
 
   date-is-after:
     docker:
@@ -32,7 +35,10 @@ jobs:
       - checkout
       - run:
           name: "date is after test"
-          command: "./gradlew :app:testDebugUnitTest --tests \"com.mealer.ui.DateIsAfterTest\""
+          command: |
+            echo $JAVA_HOME
+            java -version
+            ./gradlew :app:testDebugUnitTest --tests "com.mealer.ui.DateIsAfterTest"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

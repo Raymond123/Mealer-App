@@ -53,8 +53,7 @@ public class ComplaintFragment extends Fragment {
     private DatabaseReference mData;
     private DatabaseReference banRef;
     private FirebaseAuth mAuth;
-    private Integer index = 0;
-    private ArrayList<String> complaintList;
+    private String complaintID;
     private OnFragmentInteractionListener mListener;
 
     TextView subject;
@@ -183,7 +182,7 @@ public class ComplaintFragment extends Fragment {
             update.put("suspensionEnd", suspensionEnd);
             banRef.child(user.getText().toString()).updateChildren(update);
         }
-        //mData.child(complaintList.get(index)).removeValue();
+        mData.child(complaintID).removeValue();
         mListener.changeFragment(null,1);
     }
 
@@ -225,6 +224,7 @@ public class ComplaintFragment extends Fragment {
             subject.setText(currentComplaint.getSubject());
             user.setText(currentComplaint.getCookID());
             description.setText(currentComplaint.getDescription());
+            complaintID = currentComplaint.getComplaintID();
         }
     }
 

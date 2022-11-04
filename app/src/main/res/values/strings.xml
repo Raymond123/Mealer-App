@@ -77,6 +77,7 @@
     <string name="user">User:</string>
     <string name="title_activity_admin_home_page">AdminHomePage</string>
     <string name="title_activity_client_home_page">ClientHomePage</string>
+    <string name="complaint">complaint</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

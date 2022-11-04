@@ -5,11 +5,14 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.UUID;
+
 public class Complaint implements Parcelable {
 
     private String subject;
     private String cookID;
     private String description;
+    private String complaintID;
 
     public Complaint(){
 
@@ -19,12 +22,14 @@ public class Complaint implements Parcelable {
         this.subject = subject;
         this.description = description;
         this.cookID = cookID;
+        this.complaintID = String.valueOf(UUID.randomUUID());
     }
 
     protected Complaint(Parcel in) {
         subject = in.readString();
         cookID = in.readString();
         description = in.readString();
+        complaintID = in.readString();
     }
 
     public static final Creator<Complaint> CREATOR = new Creator<Complaint>() {
@@ -51,6 +56,10 @@ public class Complaint implements Parcelable {
         return subject;
     }
 
+    public String getComplaintID() {
+        return complaintID;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -61,5 +70,6 @@ public class Complaint implements Parcelable {
         parcel.writeString(subject);
         parcel.writeString(cookID);
         parcel.writeString(description);
+        parcel.writeString(complaintID);
     }
 }

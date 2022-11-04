@@ -15,7 +15,21 @@
         android:id="@+id/navigation_complaints"
         android:name="com.mealer.ui.ui.complaint.ComplaintsListFragment"
         android:label="@string/complaints"
-        tools:layout="@layout/fragment_complaints_list" />
+        tools:layout="@layout/fragment_complaints_list" >
+        <action
+            android:id="@+id/action_navigation_complaints_to_navigation_complaint"
+            app:destination="@id/navigation_complaint" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_complaint"
+        android:name="com.mealer.ui.ui.complaint.ComplaintFragment"
+        android:label="@string/complaint"
+        tools:layout="@layout/fragment_complaint" >
+        <action
+            android:id="@+id/action_navigation_complaint_to_navigation_complaints"
+            app:destination="@id/navigation_complaints" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"

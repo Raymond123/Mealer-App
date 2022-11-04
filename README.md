@@ -1,9 +1,12 @@
 # Mealer-App
-PROJECT MEMBERS GROUP10:
+PROJECT MEMBERS GROUP 10
 
 Easton Smith: 300189637
+
 Nizar Zariouh: 300263208
+
 Tolu Emoruwa: 300230905
+
 Amine Hanan: 300202883
 
 # Releases 

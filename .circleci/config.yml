@@ -16,7 +16,6 @@ jobs:
             sudo update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
             sudo update-alternatives --set javac /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
             java -version
-            /gradlew :app:testDebugUnitTest --tests \"com.mealer.ui.AddDaysTest\
   add-days:
     docker:
       - image: cimg/base:stable
@@ -41,11 +40,5 @@ workflows:
   build-workflow:
     jobs:
       - build
-
-  add-days-workflow:
-    jobs:
       - add-days
-
-  date-is-after-workflow:
-    jobs:
       - date-is-after

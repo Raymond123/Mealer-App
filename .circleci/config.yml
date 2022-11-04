@@ -8,23 +8,9 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build:
-    docker:
-      - image: cimg/android:2021.12.2-node
-    environment:
-      JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
-      ANDROID_HOME: "/home/circleci/android-sdk"
-    steps:
-      - run:
-          name: Install OpenJDK 11
-          command: |
-            sudo apt-get update && sudo apt-get install openjdk-11-jdk
-            sudo update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
-            sudo update-alternatives --set javac /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
-            java -version
   add-days:
     docker:
-      - image: cimg/android:2021.12.2-node
+      - image: cimg/android:2022.10
     environment:
       JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
       ANDROID_HOME: "/home/circleci/android-sdk"
@@ -37,7 +23,10 @@ jobs:
 
   date-is-after:
     docker:
-      - image: cimg/base:stable
+        - image: cimg/android:2022.10
+    environment:
+      JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+      ANDROID_HOME: "/home/circleci/android-sdk"
     steps:
       - checkout
       - run:

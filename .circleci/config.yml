@@ -5,7 +5,7 @@ version: 2.1
 machine:
   environment:
     ANDROID_HOME: /Users/eastonsmith/Library/Android/sdk
-    JAVA_HOME: /usr/lib/jvm/java-6-openjdk-amd64
+    JAVA_HOME: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 
   java:
     version: 17

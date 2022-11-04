@@ -55,7 +55,9 @@ public class SignUpPageClient extends AppCompatActivity {
         createAccount = findViewById(R.id.signupButton);
         createAccount.setOnClickListener(v -> {
             String passwordText = password.getText().toString();
-            if(passwordText.equals(confirmPassword.getText().toString()) && validateAddress() && validateName()) {
+            if(passwordText.equals(confirmPassword.getText().toString())
+                    && SignUpPage.validateAddress(address.getText().toString(), this)
+                    && SignUpPage.validateName(fName.getText().toString(), lName.getText().toString(), this)) {
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), passwordText)
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful()){
@@ -86,29 +88,6 @@ public class SignUpPageClient extends AppCompatActivity {
                         });
             }
         });
-    }
-
-
-    // check if first and last name are empty
-    private boolean validateName(){
-        if(fName.getText().toString().matches("")){
-            Toast.makeText(SignUpPageClient.this, "First name cannot be empty", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if(lName.getText().toString().matches("")){
-            Toast.makeText(SignUpPageClient.this, "Last name cannot be empty", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }
-
-    // check if address is empty
-    private boolean validateAddress(){
-        if(address.getText().toString().matches("")){
-            Toast.makeText(SignUpPageClient.this, "Address cannot be empty!", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
     }
 
     // copied from firebase documentation

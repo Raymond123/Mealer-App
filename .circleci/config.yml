@@ -10,7 +10,10 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/android:2021.12.2-node
+    environment:
+      JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+      ANDROID_HOME: "/home/circleci/android-sdk"
     steps:
       - run:
           name: Install OpenJDK 11
@@ -21,11 +24,10 @@ jobs:
             java -version
   add-days:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/android:2021.12.2-node
     environment:
       JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
       ANDROID_HOME: "/home/circleci/android-sdk"
-
     steps:
       - checkout
       - run:

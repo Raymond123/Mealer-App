@@ -1,9 +1,8 @@
 # Mealer-App
 
--GitHub repository link:https://github.com/Raymond123/Mealer-App
+# Releases 
 
-
--GitHub release tag v0.1:https://github.com/Raymond123/Mealer-App/releases/tag/v0.1
+- v0.1:https://github.com/Raymond123/Mealer-App/releases/tag/v0.1
 
 
 IMPORTANT: 

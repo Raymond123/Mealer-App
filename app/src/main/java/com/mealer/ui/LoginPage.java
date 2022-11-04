@@ -1,13 +1,10 @@
 package com.mealer.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +19,13 @@ import com.mealer.app.ClientUser;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 // LOGIN PAGE
@@ -79,6 +81,7 @@ public class LoginPage extends AppCompatActivity {
                             // if users email is not verified will ask them to verify email address
                             Toast.makeText(this, "Please verify email address.",
                                     Toast.LENGTH_SHORT).show();
+                            currentFirebaseUser.sendEmailVerification();
                         }
                     }else{
                         // If sign in fails, display a message to the user.
@@ -105,7 +108,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     private void loginAdmin() {
-        Intent signIn = new Intent(this, UserHomePage.class);
+        Intent signIn = new Intent(this, AdminHomePage.class);
         signIn.putExtra("TYPE", new Admin(true));
         startActivity(signIn);
     }
@@ -144,27 +147,60 @@ public class LoginPage extends AppCompatActivity {
                     if(!task.isSuccessful()){
                         // if user not in realtime database or error finding them, Log error and show toast
                         Log.e("firebase", "cannot find user", task.getException());
-                        // TODO toast
+                        Toast.makeText(this, "User not found", Toast.LENGTH_LONG).show();
                     }else{
                         Log.d("firebase", String.valueOf(task.getResult().getValue()));
                         // create a hashmap out of the "json" like string that the firebase database get method returns
                         HashMap<String, String> userAttributes = getUserHashMap(String.valueOf(task.getResult().getValue()));
                         try {
-                            // check user type and update ui with new user object of that type
-                            if ("cook".equals(userAttributes.get("userType"))) {
-                                updateUI(currentFirebaseUser, new CookUser(userAttributes));
-                            } else if ("client".equals(userAttributes.get("userType"))) {
-                                updateUI(currentFirebaseUser, new ClientUser(userAttributes));
+                            // check if the user is banned or suspended
+                            // -1 is banned, 0 is nothing
+                            // any value >0 is the number of days the account is suspended
+                            if("0".equals(userAttributes.get("accountStatus"))) {
+                                // check user type and update ui with new user object of that type
+                                if ("cook".equals(userAttributes.get("userType"))) {
+                                    updateUI(currentFirebaseUser, new CookUser(userAttributes));
+                                } else if ("client".equals(userAttributes.get("userType"))) {
+                                    updateUI(currentFirebaseUser, new ClientUser(userAttributes));
+                                } else {
+                                    Log.e("signIn", "failed to detemine user type, userType: " + userAttributes.get("userType"));
+                                }
+                            }else if ("-1".equals(userAttributes.get("accountStatus"))){
+                                Toast.makeText(this, "Account banned", Toast.LENGTH_LONG).show();
                             }else{
-                                Log.e("signIn", "failed to detemine user type, userType: "+userAttributes.get("userType"));
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+                                Date localDate = new java.sql.Date(System.currentTimeMillis());
+                                try {
+                                    Date suspensionEnd = simpleDateFormat
+                                                    .parse(Objects.requireNonNull
+                                                            (userAttributes.get("suspensionEnd"))
+                                                    );
+
+                                    if(localDate.after(suspensionEnd)){
+
+                                        HashMap<String,Object> newUserAttributes = new HashMap<>();
+
+                                        newUserAttributes.put("suspensionEnd", "NULL");
+                                        newUserAttributes.put("accountStatus", "0");
+
+                                        mDatabase.child(currentFirebaseUser.getUid())
+                                                .updateChildren(newUserAttributes);
+                                        getUser(currentFirebaseUser);
+                                    }else{
+                                        Toast.makeText(this,
+                                                "Account suspended until " + userAttributes.get("suspensionEnd"),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }catch(ParseException parseException){
+                                    parseException.printStackTrace();
+                                }
                             }
                         }catch(NullPointerException ex){
                             Log.e("signIn", Arrays.toString(ex.getStackTrace()));
                             // TODO toast
                         }
                     }
-                }
-        );
+                });
     }
 
     /**
@@ -209,11 +245,19 @@ public class LoginPage extends AppCompatActivity {
             startActivity(getIntent());
             return;
         }
-        Intent signIn = new Intent(this, UserHomePage.class);
+        Intent signIn = new Intent(this, ClientHomePage.class);
+        if("cook".equals(currentUser.getUserType())){
+            signIn = new Intent(this, CookHomePage.class);
+        }
         signIn.putExtra("TYPE", currentUser);
         startActivity(signIn);
     }
 
+    /**
+     * Checks if the user signing in is an admin or a regular user
+     * @param email email user used to sign in
+     * @return returns true if the email used is the admin email for the app
+     */
     private boolean isAdmin(String email){
         Log.d("Admin email", String.valueOf(email.equals(adminEmail)));
         return email.equals(adminEmail);

@@ -25,7 +25,6 @@
     <string name="peanutFreeBtn">Peanut-Free</string>
     <string name="otherBtn">Other</string>
     <string name="clientImageButtonDescription">This is a picture of a client</string>
-    =======
     <string name="mealerlogo">mealerlogo</string>
     <string name="user_account">User account</string>
     <string name="cook_on_mealer">Cook on Mealer</string>
@@ -60,5 +59,26 @@
     <string name="search">Search</string>
     <string name="inbox">Inbox</string>
     <string name="profile">Profile</string>
-    >>>>>>> origin/main
+    <string name="title_activity_cook_home_page">CookHomePage</string>
+    <string name="complaints">Complaints</string>
+    <string name="complaintstext">Complaints:</string>
+    <string name="subject">Subject:</string>
+    <string name="complain_about">Complaint about:</string>
+    <string name="suspend">suspend</string>
+    <string name="ban">ban</string>
+    <string name="ignore">ignore</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="accountPage">Account Page</string>
+    <string name="account">Account</string>
+    <string name="to_be_implemented">TO BE IMPLEMENTED</string>
+    <string name="refresh">refresh</string>
+    <string name="length">length</string>
+    <string name="user">User:</string>
+    <string name="title_activity_admin_home_page">AdminHomePage</string>
+    <string name="title_activity_client_home_page">ClientHomePage</string>
+    <string-array name="monthDayChoice">
+        <item>Days</item>
+        <item>Months</item>
+    </string-array>
 </resources>

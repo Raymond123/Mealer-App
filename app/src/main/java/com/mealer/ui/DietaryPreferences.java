@@ -68,7 +68,7 @@ public class DietaryPreferences extends AppCompatActivity {
 
         finish();
         // send user to home page and pass on the current signed in user object
-        Intent intent = new Intent(this, UserHomePage.class);
+        Intent intent = new Intent(this, ClientHomePage.class);
         intent.putExtra("TYPE", (User) getIntent().getParcelableExtra("TYPE"));
         startActivity(intent);
     }

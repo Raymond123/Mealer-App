@@ -26,7 +26,6 @@ import com.mealer.app.CookUser;
 import com.mealer.app.User;
 
 import java.io.IOException;
-import java.util.UUID;
 
 public class SignUpPageCook extends AppCompatActivity {
 
@@ -81,19 +80,26 @@ public class SignUpPageCook extends AppCompatActivity {
                                 FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
                                 assert currentFirebaseUser != null;
                                 String[] addressMap = User.parseAddress(address.getText().toString());
-                                User currentUser = new CookUser(fName.getText().toString(), lName.getText().toString(),
-                                        email.getText().toString(),  addressMap[0], addressMap[1], addressMap[2],
-                                        description.getText().toString(), currentFirebaseUser.getUid(), "cook");
+
+                                User currentUser = new CookUser(
+                                        fName.getText().toString(),
+                                        lName.getText().toString(),
+                                        email.getText().toString(),
+                                        addressMap[0], addressMap[2], addressMap[1],
+                                        description.getText().toString(),
+                                        currentFirebaseUser.getUid(),
+                                        "cook",
+                                        "0",
+                                        "NULL");
+
                                 uploadImage(currentFirebaseUser.getUid());
                                 updateUI(currentFirebaseUser, currentUser);
                             }else{
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                //PopupWindow failWindow = new PopupWindow(View, width, height, true);
-                                //failWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                                 Toast.makeText(SignUpPageCook.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                //updateUI(null, null);
+                                updateUI(null, null);
                             }
                         });
             }
@@ -132,7 +138,7 @@ public class SignUpPageCook extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            updateUI(currentUser, null); //TODO: currentUser cant be null change
+            updateUI(currentUser, null);
         }
     }
 
@@ -157,7 +163,7 @@ public class SignUpPageCook extends AppCompatActivity {
                                 "Verification email sent",
                                 Toast.LENGTH_LONG).show();
 
-                        Intent signIn = new Intent(SignUpPageCook.this, UserHomePage.class);
+                        Intent signIn = new Intent(SignUpPageCook.this, CookHomePage.class);
                         signIn.putExtra("TYPE", currentUser);
                         startActivity(signIn);
                     }else{

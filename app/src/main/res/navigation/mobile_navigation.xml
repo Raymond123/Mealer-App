@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.mealer.ui.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_complaints"
+        android:name="com.mealer.ui.ui.complaint.ComplaintsListFragment"
+        android:label="@string/complaints"
+        tools:layout="@layout/fragment_complaints_list" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.mealer.ui.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.mealer.ui.ui.account.AccountPageFragement"
+        android:label="@string/accountPage"
+        tools:layout="@layout/fragment_account_page" />
 </navigation>

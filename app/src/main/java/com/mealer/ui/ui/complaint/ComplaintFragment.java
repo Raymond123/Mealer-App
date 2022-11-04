@@ -1,10 +1,9 @@
-package com.mealer.ui.ui.dashboard;
+package com.mealer.ui.ui.complaint;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,10 +19,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,58 +29,45 @@ import com.google.firebase.database.ValueEventListener;
 import com.mealer.app.Complaint;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
+import com.mealer.ui.OnFragmentInteractionListener;
 import com.mealer.ui.R;
-import com.mealer.ui.databinding.FragmentComplaintsBinding;
+import com.mealer.ui.databinding.FragmentComplaintBinding;
 
-import org.w3c.dom.Text;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 //TODO create complaint class
-public class DashboardFragment extends Fragment {
+public class ComplaintFragment extends Fragment {
 
-    private final String TAG = "DashboardFragment";
+    private final String TAG = "ComplaintFragment";
 
-    private FragmentComplaintsBinding binding;
+    private FragmentComplaintBinding binding;
     private DatabaseReference mData;
     private DatabaseReference banRef;
     private FirebaseAuth mAuth;
     private Integer index = 0;
     private ArrayList<String> complaintList;
+    private OnFragmentInteractionListener mListener;
 
-    TextView complaintsNum;
     TextView subject;
     TextView user;
     TextView description;
 
-    Button refresh;
     Button ignore;
     Button suspend;
     Button ban;
 
-    ValueEventListener userListener =  new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            User user = snapshot.getValue(CookUser.class);
-
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-            // Getting Post failed, log a message
-            Log.w(TAG, "loadPost:onCancelled", error.toException());
-        }
-    };
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-
-        binding = FragmentComplaintsBinding.inflate(inflater, container, false);
+        binding = FragmentComplaintBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.getRoot().setBackgroundColor(Color.parseColor("#FEFAE0"));
 
@@ -97,22 +81,19 @@ public class DashboardFragment extends Fragment {
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("users");
 
-        complaintsNum = binding.complaintsNum;
         subject = binding.subject;
         user = binding.complaintAbout;
         description = binding.complaintDescription;
 
         ignore = binding.ignoreButton;
-        refresh = binding.refreshButton;
         suspend = binding.suspendButton;
         ban = binding.banButton;
 
-        getComplaints();
+        displayComplaint();
         // sets onClick listeners for all buttons
-        refresh.setOnClickListener(onClick -> getComplaints());
-        ban.setOnClickListener(banUser -> displayNewComplaint("-1"));
+        ban.setOnClickListener(banUser -> actionComplaint("-1"));
         suspend.setOnClickListener(suspend -> openPopup(this.getView()));
-        ignore.setOnClickListener(displayNew-> displayNewComplaint(null));
+        ignore.setOnClickListener(displayNew-> actionComplaint(null));
 
         return root;
     }
@@ -166,84 +147,85 @@ public class DashboardFragment extends Fragment {
                 suspensionLengthDays = String.valueOf(Integer.parseInt(suspensionLengthDays)*30);
             }
             popupWindow.dismiss();
-            displayNewComplaint(suspensionLengthDays);
+            actionComplaint(suspensionLengthDays);
         });
     }
 
     /**
-     * Actions the previous complaint and displays the next complaint in the list to the admin
+     * gets the mListener object from the fragments context in order to be able to return to
+     * previous fragment and get the complaint info passed to this fragment
+     * @param context fragment context
+     */
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnFragmentInteractionListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    /**
+     * Actions the previous complaint and returns to complaintsList
      * @param status how to set the account status of the user of the actioned complaint
      *               "-1" => banned
      *               "null" => ignore the complaint
      *               "x">0 => the number of days the user will be suspended
      */
-    private void displayNewComplaint(String status){
+    private void actionComplaint(String status){
         if(status != null) {
             HashMap<String, Object> update = new HashMap<>();
             update.put("accountStatus", status);
+
+            String suspensionEnd = addDays(status);
+            update.put("suspensionEnd", suspensionEnd);
             banRef.child(user.getText().toString()).updateChildren(update);
         }
         //mData.child(complaintList.get(index)).removeValue();
-        try {
-            displayComplaint(complaintList.get(++index));
-        }catch (IndexOutOfBoundsException i){
-            subject.setText("NULL");
-            user.setText("NULL");
-            description.setText("No complaints");
-        }
+        mListener.changeFragment(null,1);
     }
 
     /**
-     * gets a list of all the complaints in the db
+     * adds the number of days the user is going to be suspended to the current date and returns
+     * to store the date in the database
+     * @param daysToAddStr the number of days until suspension will be lifted
+     * @return returns a string in the form of yyyy-MM-dd that represents the date the suspension
+     * will be lifted
      */
-    private void getComplaints(){
-        complaintList = new ArrayList<>();
-        mData.get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                String[] split = String.valueOf(task.getResult().getValue())
-                        .replace("{", "")
-                        .replace("}", "")
-                        .replace(" ", "")
-                        // split the string by "," in order to get an array of attributes and their values
-                        .split(",");
+    private String addDays(String daysToAddStr){
+        int daysToAdd = Integer.parseInt(daysToAddStr);
+        if(daysToAdd <= 0){
+            return "NULL";
+        }
 
-                for(String title : split){
-                    String[] split2 = title.split("=");
-                    if(split2.length == 3){
-                        complaintList.add(split2[0]);
-                    }
-                }
+        Date localDate = new java.sql.Date(System.currentTimeMillis());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        Calendar calendar = Calendar.getInstance();
+        try{
+            calendar.setTime(Objects.requireNonNull(simpleDateFormat.parse(localDate.toString())));
+        }catch (ParseException parseException){
+            parseException.printStackTrace();
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, daysToAdd);
 
-                complaintsNum.setText(String.valueOf(complaintList.size()));
-                //displayComplaint(complaintList.get(index));
-                //TODO test :
-                displayComplaint(complaintList.get(index));
-            }else{
-                Log.e("firebaseDatabase", "no complaint", task.getException());
-            }
-        });
+        return simpleDateFormat.format(calendar.getTime());
     }
 
 
-    // test method for trying to pull data differently
-    private void displayComplaint(String path){
-        ValueEventListener complaintListener =  new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Complaint complaint = snapshot.getValue(Complaint.class);
+    /**
+     * gets the argument passed to the fragment, and displays the information
+     */
+    private void displayComplaint(){
+        Bundle args = getArguments();
+        if(args!=null){
+            Complaint currentComplaint = args.getParcelable("complaint");
 
-                subject.setText(complaint.getSubject());
-                user.setText(complaint.getCookID());
-                description.setText(complaint.getDescription());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", error.toException());
-            }
-        };
-        mData.child(path).addValueEventListener(complaintListener);
+            subject.setText(currentComplaint.getSubject());
+            user.setText(currentComplaint.getCookID());
+            description.setText(currentComplaint.getDescription());
+        }
     }
 
     @Override

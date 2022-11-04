@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Cream"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.complaint.ComplaintFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,54 +15,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/complaintstext"
-                android:textColor="@color/darkGreen"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:textSize="20sp" />
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/complaintsNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/darkGreen"
-                android:layout_weight="1"
-                android:textSize="20sp" />
-
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/refreshButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:backgroundTint="@color/lightBrown"
-                android:text="@string/refresh" />
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,10 +95,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:layout_marginBottom="?attr/actionBarSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
 
                 <Space
                     android:layout_width="4dp"

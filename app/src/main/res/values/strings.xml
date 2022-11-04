@@ -74,6 +74,9 @@
     <string name="to_be_implemented">TO BE IMPLEMENTED</string>
     <string name="refresh">refresh</string>
     <string name="length">length</string>
+    <string name="user">User:</string>
+    <string name="title_activity_admin_home_page">AdminHomePage</string>
+    <string name="title_activity_client_home_page">ClientHomePage</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_complaints"
-        android:name="com.mealer.ui.ui.dashboard.DashboardFragment"
+        android:name="com.mealer.ui.ui.complaint.ComplaintsListFragment"
         android:label="@string/complaints"
-        tools:layout="@layout/fragment_complaints" />
+        tools:layout="@layout/fragment_complaints_list" />
 
     <fragment
         android:id="@+id/navigation_notifications"

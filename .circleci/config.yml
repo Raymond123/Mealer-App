@@ -2,6 +2,14 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+machine:
+  environment:
+    ANDROID_HOME: /Users/eastonsmith/Library/Android/sdk
+    JAVA_HOME: /usr/lib/jvm/java-6-openjdk-amd64
+
+  java:
+    version: 17
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:

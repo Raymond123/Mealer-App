@@ -2,17 +2,20 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-machine:
-  environment:
-    ANDROID_HOME: /Users/eastonsmith/Library/Android/sdk
-    JAVA_HOME: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-
-  java:
-    version: 17
-
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  build:
+    machine:
+      image: ubuntu-1604:202007-01
+    steps:
+      - run:
+          name: Install OpenJDK 11
+          command: |
+            sudo apt-get update && sudo apt-get install openjdk-11-jdk
+            sudo update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+            sudo update-alternatives --set javac /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
+            java -version
   add-days:
     docker:
       - image: cimg/base:stable
@@ -34,6 +37,10 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
+  build-workflow:
+    jobs:
+      - build
+
   add-days-workflow:
     jobs:
       - add-days

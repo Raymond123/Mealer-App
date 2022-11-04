@@ -2,49 +2,42 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  gradle: circleci/gradle@3.0.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - run:
-          name: Install OpenJDK 11
-          command: |
-            sudo apt-get update && sudo apt-get install openjdk-11-jdk
-            sudo update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java
-            sudo update-alternatives --set javac /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
-            java -version
   add-days:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/android:2021.12.2-node
+    environment:
+      JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+      ANDROID_HOME: "/home/circleci/android-sdk"
     steps:
       - checkout
       - run:
           name: "add days test"
-          command: "./gradlew :app:testDebugUnitTest --tests \"com.mealer.ui.AddDaysTest\""
+          command: |
+            ./gradlew :app:testDebugUnitTest --tests "com.mealer.ui.AddDaysTest"
 
   date-is-after:
     docker:
-      - image: cimg/base:stable
+        - image: cimg/android:2021.12.2-node
+    environment:
+      JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+      ANDROID_HOME: "/home/circleci/android-sdk"
     steps:
       - checkout
       - run:
           name: "date is after test"
-          command: "./gradlew :app:testDebugUnitTest --tests \"com.mealer.ui.DateIsAfterTest\""
+          command: |
+            ./gradlew :app:testDebugUnitTest --tests "com.mealer.ui.DateIsAfterTest"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-workflow:
     jobs:
-      - build
-
-  add-days-workflow:
-    jobs:
       - add-days
-
-  date-is-after-workflow:
-    jobs:
       - date-is-after

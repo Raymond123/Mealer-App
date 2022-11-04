@@ -65,25 +65,8 @@ public class ComplaintFragment extends Fragment {
     Button suspend;
     Button ban;
 
-    ValueEventListener userListener =  new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            User user = snapshot.getValue(CookUser.class);
-
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-            // Getting Post failed, log a message
-            Log.w(TAG, "loadPost:onCancelled", error.toException());
-        }
-    };
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        /*ComplaintViewModel complaintViewModel =
-                new ViewModelProvider(this).get(ComplaintViewModel.class);*/
-
         binding = FragmentComplaintBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.getRoot().setBackgroundColor(Color.parseColor("#FEFAE0"));
@@ -168,6 +151,11 @@ public class ComplaintFragment extends Fragment {
         });
     }
 
+    /**
+     * gets the mListener object from the fragments context in order to be able to return to
+     * previous fragment and get the complaint info passed to this fragment
+     * @param context fragment context
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -199,6 +187,13 @@ public class ComplaintFragment extends Fragment {
         mListener.changeFragment(null,1);
     }
 
+    /**
+     * adds the number of days the user is going to be suspended to the current date and returns
+     * to store the date in the database
+     * @param daysToAddStr the number of days until suspension will be lifted
+     * @return returns a string in the form of yyyy-MM-dd that represents the date the suspension
+     * will be lifted
+     */
     private String addDays(String daysToAddStr){
         int daysToAdd = Integer.parseInt(daysToAddStr);
         if(daysToAdd <= 0){

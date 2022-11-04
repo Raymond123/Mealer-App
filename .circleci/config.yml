@@ -19,4 +19,4 @@ jobs:
 workflows:
   test-workflow:
     jobs:
-      - say-hello
+      - test-add-days

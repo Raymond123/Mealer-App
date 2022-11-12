@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.mealer.app.menu.Menu;
 
 import java.util.HashMap;
 
@@ -18,6 +19,7 @@ public class CookUser extends User implements Parcelable {
     private String description;
     private String accountStatus;
     private String suspensionEnd;
+    private Menu menu;
 
     /**
      * cook user constructor specific for when initializing a new user object
@@ -55,7 +57,7 @@ public class CookUser extends User implements Parcelable {
         DatabaseReference databaseReference = getReference("users");
         // add user to database under uID
         databaseReference.child(uID).setValue(this);
-
+        menu = new Menu(getReference("menus").child(uID));
     }
 
     // get method for cook user specific attributes
@@ -69,5 +71,9 @@ public class CookUser extends User implements Parcelable {
 
     public String getSuspensionEnd() {
         return suspensionEnd;
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 }

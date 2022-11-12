@@ -1,6 +1,7 @@
 package com.mealer.app.menu;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,14 +10,14 @@ import java.util.List;
 public class Menu {
 
     private HashMap<String, Object> menu;
-    private ArrayList<MenuItem> activeMenu;
-    private ArrayList<MenuItem> inactiveMenu;
+    private HashMap<String, MenuItem> activeMenu;
+    private HashMap<String, MenuItem> inactiveMenu;
     private DatabaseReference dbRef;
 
     public Menu(DatabaseReference dbRef){
         this.menu = new HashMap<>();
-        this.activeMenu = new ArrayList<>();
-        this.inactiveMenu = new ArrayList<>();
+        this.activeMenu = new HashMap<>();
+        this.inactiveMenu = new HashMap<>();
 
         menu.put("active", this.activeMenu);
         menu.put("inactive", this.inactiveMenu);
@@ -24,9 +25,11 @@ public class Menu {
         this.dbRef = dbRef;
     }
 
-    private void swapMenu(List<MenuItem> prev, List<MenuItem> next, MenuItem item){
-        prev.remove(item);
-        next.add(item);
+    private void swapMenu(HashMap<String, MenuItem> prev,
+                          HashMap<String, MenuItem> next,
+                          MenuItem item){
+        prev.remove(item.itemId);
+        next.put(item.itemId, item);
         item.setActive((!item.isActive()));
     }
 
@@ -39,29 +42,34 @@ public class Menu {
     }
 
     public void addNewMenuItem(MenuItem item){
-        if(item.isActive()) activeMenu.add(item);
-        else inactiveMenu.add(item);
-        dbRef.updateChildren(menu);
+        if(item.isActive()) activeMenu.put(item.itemId, item);
+        else inactiveMenu.put(item.itemId, item);
+        updateMenu();
     }
 
     public boolean removeMenuItem(MenuItem item){
         if(item.isActive()) return false;
         else{
-            inactiveMenu.remove(item);
-            dbRef.updateChildren(menu);
+            inactiveMenu.remove(item.itemId);
+            updateMenu();
             return true;
         }
     }
 
+    public void updateMenu(){
+        dbRef.updateChildren(menu);
+    }
+
+    @Exclude
     public HashMap<String, Object> getMenu() {
         return menu;
     }
 
-    public ArrayList<MenuItem> getActiveMenu() {
+    public HashMap<String, MenuItem> getActiveMenu() {
         return activeMenu;
     }
 
-    public ArrayList<MenuItem> getInactiveMenu() {
+    public HashMap<String, MenuItem> getInactiveMenu() {
         return inactiveMenu;
     }
 }

@@ -3,13 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_account">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.mealer.ui.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_cook_menu"
+        android:name="com.mealer.ui.ui.menu.MenuFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_cook_home" >
+        <action
+            android:id="@+id/action_navigation_cook_menu_to_navigation_edit_menu"
+            app:destination="@id/navigation_edit_menu" />
+        <action
+            android:id="@+id/action_navigation_cook_menu_to_navigation_edit_menu_item"
+            app:destination="@id/navigation_edit_menu_item" />
+        <action
+            android:id="@+id/action_navigation_cook_menu_to_navigation_new_menu_item"
+            app:destination="@id/navigation_new_menu_item" />
+        <action
+            android:id="@+id/action_navigation_cook_menu_to_navigation_delete_menu_item"
+            app:destination="@id/navigation_delete_menu_item" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_menu"
+        android:name="com.mealer.ui.ui.menu.MenuEditFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_edit_active_menu" >
+        <action
+            android:id="@+id/action_navigation_edit_menu_to_navigation_cook_menu"
+            app:destination="@id/navigation_cook_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_menu_item"
+        android:name="com.mealer.ui.ui.menu.MenuEditItemFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_edit_menu_item" >
+        <action
+            android:id="@+id/action_navigation_edit_menu_item_to_navigation_cook_menu"
+            app:destination="@id/navigation_cook_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_new_menu_item"
+        android:name="com.mealer.ui.ui.menu.MenuNewFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_new_menu_item" >
+        <action
+            android:id="@+id/action_navigation_new_menu_item_to_navigation_cook_menu"
+            app:destination="@id/navigation_cook_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_delete_menu_item"
+        android:name="com.mealer.ui.ui.menu.MenuDeleteFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_delete_menu_item" >
+        <action
+            android:id="@+id/action_navigation_delete_menu_item_to_navigation_cook_menu"
+            app:destination="@id/navigation_cook_menu" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_complaints"
@@ -39,7 +98,7 @@
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.mealer.ui.ui.account.AccountPageFragement"
+        android:name="com.mealer.ui.ui.account.AccountPageFragment"
         android:label="@string/accountPage"
         tools:layout="@layout/fragment_account_page" />
 </navigation>

@@ -18,7 +18,6 @@ import com.mealer.app.menu.Menu;
 import com.mealer.app.menu.MenuItem;
 import com.mealer.ui.OnFragmentInteractionListener;
 import com.mealer.ui.R;
-import com.mealer.ui.databinding.FragmentEditMenuItemBinding;
 import com.mealer.ui.databinding.FragmentMenuItemDetailsBinding;
 
 public class MenuEditItemFragment extends Fragment {

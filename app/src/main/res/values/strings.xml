@@ -85,8 +85,8 @@
     <string name="item_name">Item Name:</string>
     <string name="temp">temp</string>
     <string name="title_menu">Menu</string>
-    <string name="active_menu">Active Menu</string>
-    <string name="inactive_menu">Inactive Menu</string>
+    <string name="active_menu">Offered Meals</string>
+    <string name="inactive_menu">Unlisted Meals</string>
     <string name="new_menu_item">New menu item</string>
     <string name="edit_menu_item">edit menu item</string>
     <string name="edit_active_menu">edit active menu</string>

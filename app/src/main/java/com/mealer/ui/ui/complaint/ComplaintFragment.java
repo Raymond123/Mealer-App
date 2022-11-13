@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 
-//TODO create complaint class
+
 public class ComplaintFragment extends Fragment {
 
     private final String TAG = "ComplaintFragment";

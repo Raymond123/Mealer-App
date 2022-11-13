@@ -53,6 +53,7 @@ public class MenuItem implements Parcelable {
         }
     };
 
+    // get/set methods for MenuItem attributes
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }

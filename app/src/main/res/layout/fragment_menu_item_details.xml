@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="?attr/actionBarSize">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemNameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/darkGreen"
+            android:textSize="24sp"
+            android:text="@string/item_name" />
+
+        <EditText
+            android:id="@+id/itemNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/name_of_item"
+            android:inputType="textPersonName"
+            android:backgroundTint="@color/darkGreen"
+            android:textColorHint="@color/lightGreen"
+            android:textColor="@color/darkGreen"
+            android:minHeight="48dp"
+            android:autofillHints="" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/itemDescriptionLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/darkGreen"
+            android:textSize="24sp"
+            android:text="@string/description_item" />
+
+        <EditText
+            android:id="@+id/itemDescriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/short_description"
+            android:inputType="textMultiLine"
+            android:backgroundTint="@color/darkGreen"
+            android:textColorHint="@color/lightGreen"
+            android:textColor="@color/darkGreen"
+            android:gravity="start|top"
+            android:minHeight="48dp"
+            android:autofillHints="" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/itemCaloriesLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textColor="@color/darkGreen"
+            android:textSize="24sp"
+            android:text="@string/calories" />
+
+        <EditText
+            android:id="@+id/itemCaloriesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/calories_in_item"
+            android:backgroundTint="@color/darkGreen"
+            android:textColorHint="@color/lightGreen"
+            android:textColor="@color/darkGreen"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:autofillHints="" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/itemIngredientsLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textSize="24sp"
+            android:text="@string/ingredients"
+            android:textColor="@color/darkGreen"/>
+
+        <EditText
+            android:id="@+id/itemIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/separate_ingredients"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            android:backgroundTint="@color/darkGreen"
+            android:textColorHint="@color/lightGreen"
+            android:textColor="@color/darkGreen" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <CheckBox
+            android:id="@+id/isActiveBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:textColor="@color/darkGreen"
+            android:text="@string/set_item_as_active"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/addNewItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/lightBrown"
+            android:text="@string/add_item_to_menu" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_weight="0"/>
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/lightBrown"
+            android:text="@string/delete_menu_item" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

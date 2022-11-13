@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/Cream"
     android:orientation="vertical"
+    android:paddingHorizontal="8dp"
     tools:context=".ui.complaint.ComplaintsListFragment">
 
     <androidx.recyclerview.widget.RecyclerView

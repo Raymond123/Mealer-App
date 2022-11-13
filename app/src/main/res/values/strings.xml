@@ -91,6 +91,13 @@
     <string name="edit_menu_item">edit menu item</string>
     <string name="edit_active_menu">edit active menu</string>
     <string name="delete_menu_item">delete menu item</string>
+    <string name="name_of_item">Name of Item</string>
+    <string name="short_description">Short Description</string>
+    <string name="set_item_as_active">Set Item as Active</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="calories_in_item">Calories in Item</string>
+    <string name="separate_ingredients">Separate Ingredients by \';\'</string>
+    <string name="add_item_to_menu">save item</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/Cream">
+    android:paddingHorizontal="8dp"
+    android:backgroundTint="@color/Cream"
+    android:paddingBottom="?attr/actionBarSize">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:backgroundTint="@color/lightBrown"
-                    android:text="@string/edit_menu" />
+                    android:text="@string/new_menu_item" />
 
             </LinearLayout>
 

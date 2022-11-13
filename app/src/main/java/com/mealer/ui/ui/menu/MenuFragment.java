@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
 import com.mealer.app.menu.Menu;
@@ -30,6 +34,7 @@ import com.mealer.ui.OnFragmentInteractionListener;
 import com.mealer.ui.R;
 import com.mealer.ui.databinding.FragmentComplaintsListBinding;
 import com.mealer.ui.databinding.FragmentCookHomeBinding;
+import com.mealer.ui.ui.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,18 +46,22 @@ public class MenuFragment extends Fragment {
 
     private final String TAG = "MenuFragment";
     private final int navToNew = R.id.action_navigation_cook_menu_to_navigation_new_menu_item;
-    private final int navToEditMenu = R.id.action_navigation_cook_menu_to_navigation_edit_menu;
     private final int navToEdit = R.id.action_navigation_cook_menu_to_navigation_edit_menu_item;
-    private final int navToDelete = R.id.action_navigation_cook_menu_to_navigation_delete_menu_item;
 
     private FragmentCookHomeBinding binding;
     private DatabaseReference menuData;
+    private FirebaseUser currentUser;
     private OnFragmentInteractionListener mListener;
 
-    private Button editMenu;
+    private Button editMenuPopup;
+    private Context context;
+    private Menu userMenu;
+    private Bundle menuBundle;
 
     RecyclerView activeMenu;
     RecyclerView inactiveMenu;
+    List<MenuItem> activeMenuItems;
+    List<MenuItem> inactiveMenuItems;
 
     @Nullable
     @Override
@@ -66,53 +75,103 @@ public class MenuFragment extends Fragment {
         menuData = FirebaseDatabase
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("menus");
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        editMenu = binding.editMenu;
-
-        editMenu.setOnClickListener(x->popup(this.getView()));
+        editMenuPopup = binding.editMenu;
 
         activeMenu = binding.activeMenu;
         inactiveMenu = binding.inactiveMenu;
 
-        Context context = this.getContext();
+        context = this.getContext();
+        menuData.child(currentUser.getUid()).addValueEventListener(getMenu);
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Menu userMenu = new Menu(menuData.child(currentUser.getUid()));
-
-        MenuItem temp = new MenuItem("test",
-                "descriptdsfsdion", "calsfdfories",
-                "ingresdfsdients", false);
-
-        userMenu.addNewMenuItem(temp);
-        userMenu.moveItem(temp);
-        userMenu.addNewMenuItem(new MenuItem("nafsfme",
-                "descrifsfption", "calofsfries",
-                "ingredsfsients", false));
-
-        Collection<MenuItem> activeMenuItemCollection = userMenu.getActiveMenu().values();
-        List<MenuItem> activeMenuItems = new ArrayList<>(activeMenuItemCollection);
-
-        Collection<MenuItem> inactiveMenuItemCollection = userMenu.getInactiveMenu().values();
-        List<MenuItem> inactiveMenuItems = new ArrayList<>(inactiveMenuItemCollection);
-
-        activeMenu.setLayoutManager(new LinearLayoutManager(context));
-        activeMenu.setAdapter(new MenuAdapter(context, activeMenuItems));
-
-        inactiveMenu.setLayoutManager(new LinearLayoutManager(context));
-        inactiveMenu.setAdapter(new MenuAdapter(context, inactiveMenuItems));
+        menuBundle = new Bundle();
+        editMenuPopup.setOnClickListener(x->updateUI(menuBundle, navToNew));
 
         return root;
     }
 
-    private HashMap<String, MenuItem> castMap(HashMap<String, Object> map){
-        HashMap<String, MenuItem> newMap = new HashMap<>();
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            if(entry.getValue() instanceof String){
-                newMap.put(entry.getKey(), (MenuItem) entry.getValue());
+    protected ValueEventListener getMenu = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            HashMap<String, Object> menu = new HashMap<>();
+            for(DataSnapshot children : snapshot.getChildren()){
+                HashMap<String, MenuItem> itemList = new HashMap<>();
+                for(DataSnapshot grandChildren : children.getChildren()){
+                    MenuItem item = grandChildren.getValue(MenuItem.class);
+
+                    if("active".equals(children.getKey()))
+                        item.setActive(true);
+                    else
+                        item.setActive(false);
+                    item.setItemId(grandChildren.getKey());
+                    itemList.put(grandChildren.getKey(), item);
+                }
+                menu.put(children.getKey(), itemList);
+            }
+
+            userMenu = new Menu(menu, menuData.child(currentUser.getUid()));
+            menuBundle.putParcelable("MENU", userMenu);
+
+            if(userMenu.getActiveMenu() != null) {
+                Collection<MenuItem> activeMenuItemCollection = userMenu.getActiveMenu().values();
+                activeMenuItems = new ArrayList<>(activeMenuItemCollection);
+
+                activeMenu.setLayoutManager(new LinearLayoutManager(context));
+                activeMenu.setAdapter(new MenuAdapter(context, activeMenuItems));
+                activeMenu.addOnItemTouchListener(activeMenuItemDetails);
+            }
+
+            if(userMenu.getInactiveMenu() != null) {
+                Collection<MenuItem> inactiveMenuItemCollection = userMenu.getInactiveMenu().values();
+                inactiveMenuItems = new ArrayList<>(inactiveMenuItemCollection);
+
+                inactiveMenu.setLayoutManager(new LinearLayoutManager(context));
+                inactiveMenu.setAdapter(new MenuAdapter(context, inactiveMenuItems));
+                inactiveMenu.addOnItemTouchListener(inactiveMenuItemDetails);
             }
         }
-        return newMap;
-    }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            Log.e("VEL", error.toString());
+        }
+    };
+
+    private final RecyclerView.OnItemTouchListener activeMenuItemDetails =
+            new RecyclerItemClickListener(context, this.activeMenu,
+                    new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Bundle args = new Bundle();
+                    args.putParcelable("MENU", userMenu);
+                    args.putParcelable("ITEM", activeMenuItems.get(position));
+                    updateUI(args, navToEdit);
+                }
+
+                @Override
+                public void onLongItemClick(View view, int position) {
+
+                }
+            });
+
+    private final RecyclerView.OnItemTouchListener inactiveMenuItemDetails =
+            new RecyclerItemClickListener(context, this.inactiveMenu,
+                    new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Bundle args = new Bundle();
+                            args.putParcelable("MENU", userMenu);
+                            args.putParcelable("ITEM", inactiveMenuItems.get(position));
+                            updateUI(args, navToEdit);
+                        }
+
+                        @Override
+                        public void onLongItemClick(View view, int position) {
+
+                        }
+                    });
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -125,38 +184,13 @@ public class MenuFragment extends Fragment {
         }
     }
 
-    @SuppressLint("MissingInflatedId")
-    private void popup(View view){
-        LayoutInflater inflater = getLayoutInflater();
-        @SuppressLint("InflateParams")
-        View popup = inflater.inflate(R.layout.menu_popup, null);
-        popup.setBackgroundColor(Color.BLACK);
-
-        // create the popup window
-        int width = LinearLayout.LayoutParams.MATCH_PARENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
-
-        final PopupWindow popupWindow = new PopupWindow(popup, width, height, focusable);
-
-        Button newItem = popup.findViewById(R.id.newMenuItem);
-        Button editMenu = popup.findViewById(R.id.editActiveMenu);
-        Button editItem = popup.findViewById(R.id.editMenuItem);
-        Button removeItem = popup.findViewById(R.id.deleteMenuItem);
-
-        newItem.setOnClickListener(onClick -> updateUI(navToNew, popupWindow));
-        editMenu.setOnClickListener(onClick -> updateUI(navToEditMenu, popupWindow));
-        editItem.setOnClickListener(onClick -> updateUI(navToEdit, popupWindow));
-        removeItem.setOnClickListener(onClick -> updateUI(navToDelete, popupWindow));
-
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    private void updateUI(Bundle args, int id, PopupWindow popupWindow) {
+        mListener.changeFragment(args, id);
+        popupWindow.dismiss();
     }
 
-    private void updateUI(int id, PopupWindow popupWindow) {
-        mListener.changeFragment(null, id);
-        popupWindow.dismiss();
+    private void updateUI(Bundle args, int id) {
+        mListener.changeFragment(args, id);
     }
 
     @Override

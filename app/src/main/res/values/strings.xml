@@ -39,6 +39,7 @@
     <string name="personal_information">Personal Information</string>
     <string name="cardInformation">Payment Information</string>
     <string name="description">Description</string>
+    <string name="description_item">Description: </string>
     <string name="descriptionHint">Write a description of yourself</string>
     <string name="select">Select</string>
     <string name="upload">upload</string>
@@ -78,6 +79,25 @@
     <string name="title_activity_admin_home_page">AdminHomePage</string>
     <string name="title_activity_client_home_page">ClientHomePage</string>
     <string name="complaint">complaint</string>
+    <string name="edit_menu">Edit Menu</string>
+    <string name="my_menu">My Menu</string>
+    <string name="calories">Calories:</string>
+    <string name="item_name">Item Name:</string>
+    <string name="temp">temp</string>
+    <string name="title_menu">Menu</string>
+    <string name="active_menu">Offered Meals</string>
+    <string name="inactive_menu">Unlisted Meals</string>
+    <string name="new_menu_item">New menu item</string>
+    <string name="edit_menu_item">edit menu item</string>
+    <string name="edit_active_menu">edit active menu</string>
+    <string name="delete_menu_item">delete menu item</string>
+    <string name="name_of_item">Name of Item</string>
+    <string name="short_description">Short Description</string>
+    <string name="set_item_as_active">Currently Offering Meal?</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="calories_in_item">Calories in Item</string>
+    <string name="separate_ingredients">Separate Ingredients by \';\'</string>
+    <string name="add_item_to_menu">save item</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

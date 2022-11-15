@@ -4,14 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Cream"
-    android:paddingBottom="?attr/actionBarSize">
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.667"
-            app:layout_constraintStart_toStartOf="parent">
+    android:background="@color/Cream">
 
         <LinearLayout
             android:layout_width="410dp"
@@ -195,5 +188,5 @@
                     android:text="@string/delete_menu_item" />
 
         </LinearLayout>
-        </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,10 +76,11 @@ public class MenuEditItemFragment extends Fragment {
             if(menuItem.isActive() != isActive.isChecked()){
                 userMenu.moveItem(menuItem);
             }
-
-            userMenu.updateMenu();
-
-            updateUI();
+            ValidateMenu validateMenu = new ValidateMenu(menuItem);
+            if(validateMenu.validateAll(this.getContext())){
+                userMenu.updateMenu();
+                updateUI();
+            }
         });
 
         deleteItem.setOnClickListener(x->{

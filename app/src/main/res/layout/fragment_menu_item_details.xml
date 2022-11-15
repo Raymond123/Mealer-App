@@ -22,6 +22,7 @@
         <EditText
             android:id="@+id/itemNameText"
             android:layout_width="match_parent"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/name_of_item"
@@ -50,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -,;:()/.[]!"
             android:hint="@string/short_description"
             android:inputType="textMultiLine"
             android:backgroundTint="@color/darkGreen"
@@ -104,6 +106,7 @@
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:ems="10"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ; "
             android:gravity="start|top"
             android:hint="@string/separate_ingredients"
             android:inputType="textMultiLine"

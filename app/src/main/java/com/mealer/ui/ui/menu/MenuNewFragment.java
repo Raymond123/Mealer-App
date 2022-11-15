@@ -67,10 +67,12 @@ public class MenuNewFragment extends Fragment {
                     ingredients.getText().toString().replace(" ", ""),
                     isActive.isChecked()
             );
-
-            userMenu.addNewMenuItem(newItem);
-            System.out.println(userMenu);
-            updateUI();
+            ValidateMenu validateMenu = new ValidateMenu(newItem);
+            if(validateMenu.validateAll(this.getContext())){
+                userMenu.addNewMenuItem(newItem);
+                System.out.println(userMenu);
+                updateUI();
+            }
         });
 
         return root;

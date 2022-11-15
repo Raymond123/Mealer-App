@@ -67,8 +67,8 @@ public class MenuNewFragment extends Fragment {
                     ingredients.getText().toString().replace(" ", ""),
                     isActive.isChecked()
             );
-            ValidateMenu validateMenu = new ValidateMenu(newItem);
-            if(validateMenu.validateAll(this.getContext())){
+            ValidateMenu validateMenu = new ValidateMenu(newItem, this.getContext());
+            if(validateMenu.validateAll()){
                 userMenu.addNewMenuItem(newItem);
                 System.out.println(userMenu);
                 updateUI();

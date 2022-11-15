@@ -14,12 +14,13 @@ public class ValidateMenu {
     // ingredients should all be separated by semicolon (;)
     // description can contain these characters: ()-;,.![]:
      private MenuItem menuItem;
-
-    public ValidateMenu(MenuItem menuItem) {
+     private Context context;
+    public ValidateMenu(MenuItem menuItem, Context context) {
         this.menuItem = menuItem;
+        this.context = context;
     }
 
-    protected boolean validateItemName(Context context) {
+    protected boolean validateItemName() {
 
         if (menuItem.getItemName().equals("")) {
             if (context != null) {
@@ -31,7 +32,7 @@ public class ValidateMenu {
 
     }
 
-    protected boolean validateCalories(Context context) {
+    protected boolean validateCalories() {
         if (menuItem.getCalories().equals("")) {
             if (context != null) {
                 Toast.makeText(context, "Calories cannot be empty!", Toast.LENGTH_LONG).show();
@@ -41,7 +42,7 @@ public class ValidateMenu {
         return true;
     }
 
-    protected boolean validateDescription(Context context) {
+    protected boolean validateDescription() {
         if (menuItem.getItemDescription().equals("")) {
             if (context != null) {
                 Toast.makeText(context, "Description cannot be empty!", Toast.LENGTH_SHORT).show();
@@ -51,7 +52,7 @@ public class ValidateMenu {
         return true;
     }
 
-     protected boolean validateIngredients(Context context) {
+     protected boolean validateIngredients() {
         if (menuItem.getMainIngredients().equals("")) {
             if(context != null) {
                 Toast.makeText(context, "Ingredients cannot be empty!", Toast.LENGTH_LONG).show();
@@ -61,11 +62,8 @@ public class ValidateMenu {
         return true;
     }
 
-    public boolean validateAll(Context context){
-        if(validateItemName(context) && validateIngredients(context) && validateCalories(context) && validateDescription(context)){
-            return true;
-        }
-        return false;
+    public boolean validateAll(){
+        return validateCalories() && validateIngredients() && validateDescription() && validateItemName();
     }
 
 }

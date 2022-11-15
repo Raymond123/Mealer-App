@@ -53,7 +53,9 @@ public class ValidateMenu {
 
      protected boolean validateIngredients(Context context) {
         if (menuItem.getMainIngredients().equals("")) {
+            if(context != null) {
                 Toast.makeText(context, "Ingredients cannot be empty!", Toast.LENGTH_LONG).show();
+            }
             return false;
         }
         return true;

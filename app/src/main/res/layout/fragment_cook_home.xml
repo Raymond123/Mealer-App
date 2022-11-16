@@ -15,11 +15,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="15dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -51,6 +54,9 @@
                 android:id="@+id/activeMenuTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="15dp"
                 android:textSize="20sp"
                 android:textColor="@color/darkGreen"
                 android:text="@string/active_menu" />
@@ -58,6 +64,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/activeMenu"
                 android:layout_width="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -72,11 +80,15 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/darkGreen"
+                android:paddingLeft="15dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/inactive_menu" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/inactiveMenu"
                 android:layout_width="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>

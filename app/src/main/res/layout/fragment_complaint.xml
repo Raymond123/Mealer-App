@@ -6,6 +6,7 @@
     android:id="@+id/complaint_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="?attr/actionBarSize"
     android:background="@color/Cream"
     tools:context=".ui.complaint.ComplaintFragment">
 

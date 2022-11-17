@@ -95,6 +95,10 @@ public class MenuItem implements Parcelable {
         return mainIngredients;
     }
 
+    public String getItemId() {
+        return itemId;
+    }
+
     @Exclude
     public boolean isActive() {
         return active;

@@ -35,7 +35,7 @@ public class MenuEditItemFragment extends Fragment {
     private EditText calories;
     private EditText ingredients;
     private CheckBox isActive;
-    private ImageView foodPicture;
+//    private ImageView foodPicture;
 
     @Nullable
     @Override
@@ -59,7 +59,7 @@ public class MenuEditItemFragment extends Fragment {
         calories = binding.itemCaloriesText;
         ingredients = binding.itemIngredients;
         isActive = binding.isActiveBox;
-        foodPicture = binding.mealImage;
+//        foodPicture = binding.mealImage;
 
         if(menuItem.isActive()){
             deleteItem.setEnabled(false);

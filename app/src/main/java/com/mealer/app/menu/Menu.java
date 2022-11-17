@@ -30,6 +30,13 @@ public class Menu implements Parcelable {
         this.dbRef = dbRef;
     }
 
+    public Menu(Map<String, Object> menu){
+        this.menu = (HashMap<String, Object>) menu;
+        this.activeMenu = (HashMap<String, MenuItem>) menu.get("active");
+        this.inactiveMenu = (HashMap<String, MenuItem>) menu.get("inactive");
+        //this.dbRef = dbRef;
+    }
+
     protected Menu(Parcel in) {
         this.menu = (HashMap<String, Object>) in.readSerializable();
         this.activeMenu = (HashMap<String, MenuItem>) in.readSerializable();
@@ -190,9 +197,10 @@ public class Menu implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
+        System.out.println(dbRef);
         parcel.writeSerializable(this.menu);
         parcel.writeSerializable(this.activeMenu);
         parcel.writeSerializable(this.inactiveMenu);
-        parcel.writeValue(this.dbRef);
+//        parcel.writeValue(this.dbRef);
     }
 }

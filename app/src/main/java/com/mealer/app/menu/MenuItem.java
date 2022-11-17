@@ -22,7 +22,7 @@ public class MenuItem implements Parcelable {
 
     }
 
-    public MenuItem(String itemName, String itemDescription,
+    public MenuItem (String itemName, String itemDescription,
                     String calories, String mainIngredients, boolean active){
         this.itemId = UUID.randomUUID().toString();
         this.itemName = itemName;

@@ -85,21 +85,49 @@ public class MenuFragment extends Fragment {
         context = this.getContext();
         menuData.child(currentUser.getUid()).addValueEventListener(getMenu);
 
+        // arguments to be sent to new fragment on navigation
         menuBundle = new Bundle();
+        // this is newMenuItem button
         editMenuPopup.setOnClickListener(x->updateUI(menuBundle, navToNew));
 
         return root;
     }
 
+    /**
+     * valueEvent listener for getting menuInfo from the database.
+     * updates the menu in realtime with information from the db.
+     * structure of menus in the db is as follows,
+     * menus: {
+     *     cookId: {
+     *         active:{
+     *             menuItemId:{
+     *                 MenuItem
+     *             }
+     *         }
+     *         inactive:{
+     *             menuItemId: {
+     *                 MenuItem
+     *             }
+     *         }
+     *     }
+     * }
+     */
     protected ValueEventListener getMenu = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
+            // create new menu HashMap
             HashMap<String, Object> menu = new HashMap<>();
+            // loops through the children of the cooksID under menus in the db,
+            // this is always only active and inactive
             for(DataSnapshot children : snapshot.getChildren()){
+                // loops though the children of active/inactive menus in the db,
+                // each child is a MenuItem with the key being its itemId
                 HashMap<String, MenuItem> itemList = new HashMap<>();
                 for(DataSnapshot grandChildren : children.getChildren()){
                     MenuItem item = grandChildren.getValue(MenuItem.class);
 
+                    // active/inactive not an attribute in the db,
+                    // so set it based on whether under the active or inactive branch in the db
                     if("active".equals(children.getKey()))
                         item.setActive(true);
                     else
@@ -110,9 +138,12 @@ public class MenuFragment extends Fragment {
                 menu.put(children.getKey(), itemList);
             }
 
+            // create userMenu using the above HashMap created from the db
             userMenu = new Menu(menu, menuData.child(currentUser.getUid()));
+            // add userMenu to args to allows passing to other fragments
             menuBundle.putParcelable("MENU", userMenu);
 
+            // if menu not empty create arrayList and set items in list as recyclerView items
             if(userMenu.getActiveMenu() != null) {
                 Collection<MenuItem> activeMenuItemCollection = userMenu.getActiveMenu().values();
                 activeMenuItems = new ArrayList<>(activeMenuItemCollection);
@@ -138,6 +169,10 @@ public class MenuFragment extends Fragment {
         }
     };
 
+    /**
+     * the onTouch listener for the activeMenu item
+     * listens for when an item is touched, and opens the details fragment
+     */
     private final RecyclerView.OnItemTouchListener activeMenuItemDetails =
             new RecyclerItemClickListener(context, this.activeMenu,
                     new RecyclerItemClickListener.OnItemClickListener() {
@@ -155,6 +190,10 @@ public class MenuFragment extends Fragment {
                 }
             });
 
+    /**
+     * the onTouch listener for the inactiveMenu item
+     * listens for when an item is touched, and opens the details fragment
+     */
     private final RecyclerView.OnItemTouchListener inactiveMenuItemDetails =
             new RecyclerItemClickListener(context, this.inactiveMenu,
                     new RecyclerItemClickListener.OnItemClickListener() {
@@ -173,6 +212,11 @@ public class MenuFragment extends Fragment {
                     });
 
 
+    /**
+     * gets the mListener object from the fragments context in order to be able to return to
+     * previous fragment and get the complaint info passed to this fragment
+     * @param context fragment context
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -182,11 +226,6 @@ public class MenuFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
-
-    private void updateUI(Bundle args, int id, PopupWindow popupWindow) {
-        mListener.changeFragment(args, id);
-        popupWindow.dismiss();
     }
 
     private void updateUI(Bundle args, int id) {

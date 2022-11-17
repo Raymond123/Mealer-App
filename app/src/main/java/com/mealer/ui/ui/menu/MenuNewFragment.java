@@ -56,6 +56,7 @@ public class MenuNewFragment extends Fragment {
 
         delete.setVisibility(View.GONE);
 
+        // on add item click, create new MenuItem, add to menu, and return to menuFragment
         addItem.setOnClickListener(onCLick -> {
             Bundle args = getArguments();
             Menu userMenu = args.getParcelable("MENU");
@@ -78,6 +79,11 @@ public class MenuNewFragment extends Fragment {
         return root;
     }
 
+    /**
+     * gets the mListener object from the fragments context in order to be able to return to
+     * previous fragment and get the complaint info passed to this fragment
+     * @param context fragment context
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

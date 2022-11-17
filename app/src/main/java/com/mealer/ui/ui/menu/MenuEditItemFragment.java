@@ -44,6 +44,7 @@ public class MenuEditItemFragment extends Fragment {
         View root = binding.getRoot();
         root.setBackgroundColor(Color.parseColor("#FEFAE0"));
 
+        // gets Menu and MenuItem from argument bundle passed in navigation
         Bundle args = getArguments();
         Menu userMenu = args.getParcelable("MENU");
         MenuItem menuItem = args.getParcelable("ITEM");
@@ -67,12 +68,15 @@ public class MenuEditItemFragment extends Fragment {
         ingredients.setText(menuItem.getMainIngredients());
         isActive.setChecked(menuItem.isActive());
 
+        // on save item button set new item attrbiutes and updateMenu, then return to menuFragment
         saveItem.setOnClickListener(x->{
             menuItem.setItemName(name.getText().toString());
             menuItem.setItemDescription(description.getText().toString());
             menuItem.setCalories(calories.getText().toString());
             menuItem.setMainIngredients(ingredients.getText().toString());
 
+            // if the state of the item active check box is different to the state of the item,
+            // move the item to the other Map in the menu
             if(menuItem.isActive() != isActive.isChecked()){
                 userMenu.moveItem(menuItem);
             }
@@ -91,6 +95,11 @@ public class MenuEditItemFragment extends Fragment {
         return root;
     }
 
+    /**
+     * gets the mListener object from the fragments context in order to be able to return to
+     * previous fragment and get the complaint info passed to this fragment
+     * @param context fragment context
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

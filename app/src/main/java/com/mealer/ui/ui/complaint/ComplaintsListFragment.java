@@ -41,9 +41,6 @@ public class ComplaintsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        /*ComplaintsListViewModel complaintsListViewModel =
-                new ViewModelProvider(this).get(ComplaintsListViewModel.class);*/
-
         binding = FragmentComplaintsListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.getRoot().setBackgroundColor(Color.parseColor("#FEFAE0"));
@@ -93,6 +90,11 @@ public class ComplaintsListFragment extends Fragment {
         return root;
     }
 
+    /**
+     * gets the mListener object from the fragments context in order to be able to return to
+     * previous fragment and get the args info
+     * @param context fragment context
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

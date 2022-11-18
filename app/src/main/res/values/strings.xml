@@ -98,6 +98,8 @@
     <string name="calories_in_item">Calories in Item</string>
     <string name="separate_ingredients">Separate Ingredients by \';\'</string>
     <string name="add_item_to_menu">save item</string>
+    <string name="upload_picture_of_food">Upload picture of food</string>
+    <string name="menu_item_information">Menu Item Information</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

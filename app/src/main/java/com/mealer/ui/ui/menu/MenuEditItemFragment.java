@@ -59,7 +59,6 @@ public class MenuEditItemFragment extends Fragment {
         calories = binding.itemCaloriesText;
         ingredients = binding.itemIngredients;
         isActive = binding.isActiveBox;
-//        foodPicture = binding.mealImage;
 
         if(menuItem.isActive()){
             deleteItem.setEnabled(false);

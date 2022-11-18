@@ -16,6 +16,7 @@ public class MenuItem implements Parcelable {
     private String itemDescription;
     private String calories;
     private String mainIngredients;
+    private double price;
     private boolean active;
 
     public MenuItem(){
@@ -29,6 +30,7 @@ public class MenuItem implements Parcelable {
         this.itemDescription = itemDescription;
         this.calories = calories;
         this.mainIngredients = mainIngredients;
+        //this.price = price;
         this.active = active;
     }
 
@@ -38,6 +40,7 @@ public class MenuItem implements Parcelable {
         this.itemDescription = in.readString();
         this.calories = in.readString();
         this.mainIngredients = in.readString();
+        //this.price = in.readDouble();
         this.active = in.readInt()==1;
     }
 
@@ -95,6 +98,10 @@ public class MenuItem implements Parcelable {
         return mainIngredients;
     }
 
+    public double getPrice() {
+        return this.price;
+    }
+
     public String getItemId() {
         return itemId;
     }
@@ -116,6 +123,7 @@ public class MenuItem implements Parcelable {
         parcel.writeString(itemDescription);
         parcel.writeString(calories);
         parcel.writeString(mainIngredients);
+        //parcel.writeDouble(price);
         parcel.writeInt(active?1:0);
     }
 }

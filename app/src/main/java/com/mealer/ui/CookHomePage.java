@@ -28,6 +28,7 @@ import com.mealer.ui.ui.menu.MenuNewFragment;
 
 import java.io.IOException;
 
+
 public class CookHomePage extends AppCompatActivity implements OnFragmentInteractionListener, UploadImage{
 
     private ActivityCookHomePageBinding binding;

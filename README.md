@@ -12,6 +12,8 @@ Amine Hanan: 300202883
 # Releases 
 
 - v0.1:https://github.com/Raymond123/Mealer-App/releases/tag/v0.1
+- v0.2:https://github.com/Raymond123/Mealer-App/releases/tag/v0.2
+- v0.3:
 
 
 # Notes

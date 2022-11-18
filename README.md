@@ -44,4 +44,4 @@ We have integrated circleci into the app to run the 4 unit tests we have. (See c
 ![circleci dashboard](circleci-testsimg.png)
 
 # circle ci deliverable 3
-![circleci dashboard](circlci-testimg-3.png)
+![circleci dashboard](circleci-testimg-3.png)

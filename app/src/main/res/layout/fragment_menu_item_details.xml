@@ -47,7 +47,8 @@
                     android:gravity="center"
                     android:text="@string/upload_picture_of_food"
                     android:textColor="@color/darkGreen"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
 
                 <Space
                     android:layout_width="match_parent"

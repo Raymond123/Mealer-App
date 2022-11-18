@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.mealer.app.menu.Menu;
 
 import java.util.HashMap;
 
@@ -55,7 +56,6 @@ public class CookUser extends User implements Parcelable {
         DatabaseReference databaseReference = getReference("users");
         // add user to database under uID
         databaseReference.child(uID).setValue(this);
-
     }
 
     // get method for cook user specific attributes
@@ -70,4 +70,5 @@ public class CookUser extends User implements Parcelable {
     public String getSuspensionEnd() {
         return suspensionEnd;
     }
+
 }

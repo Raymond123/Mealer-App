@@ -54,6 +54,9 @@ public class MenuNewFragment extends Fragment {
     private ImageView itemImage;
     private TextView uploadText;
 
+    // Uri indicates, where the image will be picked from
+    private Uri filePath;
+
     private EditText name;
     private EditText description;
     private EditText calories;
@@ -113,12 +116,7 @@ public class MenuNewFragment extends Fragment {
                         isActive.isChecked()
                 );
 
-                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
                 userMenu.addNewMenuItem(newItem);
-                if (false) {
-                    uploadImage.uploadImage(currentUser.getUid(), newItem.getItemId());
-                }
                 updateUI();
             }
         });

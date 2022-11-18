@@ -19,16 +19,18 @@ Amine Hanan: 300202883
 # Notes
 
 Premade Accounts Below (username, password):
+
 Admin:
-admin@mealer.com, adminroot
+- admin@mealer.com, adminroot
 
 Cooks:
-ahana088@uottawa.ca, length123
-Fr33kzy@outlook.fr, longer42
-easton1562@gmail.com, password
+- ahana088@uottawa.ca, length123
+- Fr33kzy@outlook.fr, longer42
+- easton1562@gmail.com, password
+- eastonsmith37@gmail.com, password
 
 Client:
-tyoshiko582@gmail.com, password
+- tyoshiko582@gmail.com, password
 
 Please note that all team members have made commits. However, the commits were made to branches that are now deleted Therefore, please refer to the closed pull requests section in order to view all the commits.
 

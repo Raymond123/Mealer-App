@@ -34,8 +34,6 @@ import com.mealer.ui.OnFragmentInteractionListener;
 import com.mealer.ui.R;
 import com.mealer.ui.databinding.FragmentMenuItemDetailsBinding;
 
-import java.io.IOException;
-
 public class MenuNewFragment extends Fragment {
 
     private final int fragmentNavId = R.id.action_navigation_new_menu_item_to_navigation_cook_menu;
@@ -83,8 +81,7 @@ public class MenuNewFragment extends Fragment {
         storageReference = storage.getReference();
 
         delete.setVisibility(View.GONE);
-
-        itemImage.setOnClickListener(x->selectImage());
+        itemImage.setVisibility(View.GONE);
 
         // on add item click, create new MenuItem, add to menu, and return to menuFragment
         addItem.setOnClickListener(onCLick -> {
@@ -99,97 +96,11 @@ public class MenuNewFragment extends Fragment {
                     isActive.isChecked()
             );
 
-            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
             userMenu.addNewMenuItem(newItem);
-            uploadImage(currentUser.getUid(), newItem.getItemId());
             updateUI();
         });
 
         return root;
-    }
-
-    // Activity on result
-    // https://stackoverflow.com/questions/62671106/onactivityresult-method-is-deprecated-what-is-the-alternative
-    private final ActivityResultLauncher<Intent> imageSelectedResult =
-            registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    result -> {
-                        if(result.getResultCode() == Activity.RESULT_OK){
-                            Intent data = result.getData();
-                            if(data != null && data.getData() != null) {
-                                filePath = data.getData();
-                            }
-
-                            try {
-                                // Setting image on image view using Bitmap
-                                Bitmap bitmap = MediaStore.Images.Media
-                                        .getBitmap(this.getContext().getContentResolver(), filePath);
-                                itemImage.setImageBitmap(bitmap);
-                            } catch (IOException e) {
-                                // Log the exception
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-    // image upload methods from
-    // https://www.geeksforgeeks.org/android-how-to-upload-an-image-on-firebase-storage/
-    // Select Image method
-    private void selectImage() {
-        // Defining Implicit Intent to mobile gallery
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        imageSelectedResult.launch(
-                Intent.createChooser(
-                        intent, "Select Image"));
-    }
-
-    /**
-     * uploads the image, that the user signing up selected, to the firebase storage with
-     * the users generated id as the name of the image
-     * @param uId user id of the user signing up
-     */
-    private void uploadImage(String uId, String mealId) {
-        if (filePath != null) {
-
-            // Code for showing progressDialog while uploading
-            ProgressDialog progressDialog = new ProgressDialog(this.getContext());
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-
-            // Defining the child of storageReference
-            StorageReference ref = storageReference
-                    .child("images/" + uId + "/" + mealId);
-
-            // adding listeners on upload
-            // or failure of image
-            // Progress Listener for loading
-            // percentage on the dialog box
-            ref.putFile(filePath)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        // Image uploaded successfully
-                        // Dismiss dialog
-                        progressDialog.dismiss();
-                        Toast.makeText(this.getContext(), "Image Uploaded!!",
-                                Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        // Error, Image not uploaded
-                        progressDialog.dismiss();
-                        Toast.makeText(this.getContext(),
-                                "Failed " + e.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnProgressListener(taskSnapshot -> {
-                        double progress = (100.0
-                                * taskSnapshot.getBytesTransferred()
-                                / taskSnapshot.getTotalByteCount());
-                        progressDialog.setMessage(
-                                "Uploaded " + (int)progress + "%");
-                    });
-        }
     }
 
     /**

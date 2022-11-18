@@ -35,7 +35,6 @@ public class MenuEditItemFragment extends Fragment {
     private EditText calories;
     private EditText ingredients;
     private CheckBox isActive;
-//    private ImageView foodPicture;
 
     @Nullable
     @Override

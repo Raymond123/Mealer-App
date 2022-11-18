@@ -40,8 +40,8 @@ Upon account creation or account password recovery please check your email's spa
 
 We have integrated circleci into the app to run the 4 unit tests we have. (See circleci-testsimg to see the circleci dashboard where our tests ran succesfully)
 
-#circle ci deliverable 2
+# circle ci deliverable 2
 ![circleci dashboard](circleci-testsimg.png)
 
-#circle ci deliverable 3
+# circle ci deliverable 3
 ![circleci dashboard](circlci-testimg-3.png)

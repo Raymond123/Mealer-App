@@ -32,6 +32,7 @@ import com.mealer.ui.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
@@ -43,8 +44,6 @@ public class SearchFragment extends Fragment {
 
     private final String TAG = "SearchFragment";
     private final int navToDetails = R.id.action_navigation_client_home_to_navigation_menu_item_details;
-    private Object lock = new Object();
-    AtomicReference<CookUser> cook = new AtomicReference<>();
 
     private FragmentClientHomeBinding binding;
     private DatabaseReference menuData;
@@ -59,6 +58,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView searchResult;
 
     private ArrayList<MenuItem> results;
+    private HashMap<String, String> itemToCook;
 
     @Nullable
     @Override
@@ -99,28 +99,32 @@ public class SearchFragment extends Fragment {
         menuData.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 results = new ArrayList<>();
+                itemToCook = new HashMap<>();
                 DataSnapshot data = task.getResult();
                 for(DataSnapshot child : data.getChildren()){
-                    getCook(child.getKey());
                     try {
-                        if (!cook.get().getAccountStatus().equals("0")) {
-                            continue;
-                        }
-                        for (DataSnapshot grandchild : child.child("active").getChildren()) {
-                            MenuItem item = grandchild.getValue(MenuItem.class);
-                            for (String word : keywords) {
-                                if (item != null && item.getItemName().toLowerCase(Locale.ROOT).contains(word)) {
-                                    results.add(item);
+                        getCook(child.getKey(), cook -> {
+                            if(!"0".equals(cook.getAccountStatus())){
+                                Log.d(TAG, "cook suspended");
+                            }else{
+                                for (DataSnapshot grandchild : child.child("active").getChildren()) {
+                                    MenuItem item = grandchild.getValue(MenuItem.class);
+                                    for (String word : keywords) {
+                                        if (item != null && item.getItemName().toLowerCase(Locale.ROOT).contains(word)) {
+                                            itemToCook.put(item.getItemId(), child.getKey());
+                                            results.add(item);
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        });
                     }catch (NullPointerException nullPointerException){
                         Log.e(TAG, Arrays.toString(nullPointerException.getStackTrace()));
                     }
                 }
 
                 searchResult.setLayoutManager(new LinearLayoutManager(context));
-                searchResult.setAdapter(new MenuAdapter(context, results));
+                searchResult.setAdapter(new SearchAdapter(context, results));
                 searchResult.addOnItemTouchListener(menuItemDetails);
             }else{
                 Log.e(TAG, "Error getting menus");
@@ -136,30 +140,34 @@ public class SearchFragment extends Fragment {
         menuData.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 results = new ArrayList<>();
+                itemToCook = new HashMap<>();
                 DataSnapshot data = task.getResult();
                 for(DataSnapshot child : data.getChildren()){
-                    getCook(child.getKey());
+
                     try {
-                        if (!cook.get().getAccountStatus().equals("0")) {
-                            Log.d(TAG, "cook suspended");
-                            continue;
-                        }
-                        try {
-                            DataSnapshot grandchild = child.child("active").getChildren().iterator().next();
-                            MenuItem item = grandchild.getValue(MenuItem.class);
-                            // can use cook.get() (is a CookUser class) to display cook details,
-                            // once text boxes are added to use them
-                            results.add(item);
-                        } catch (NoSuchElementException noElem) {
-                            Log.e(TAG, "no such element");
-                        }
+                        getCook(child.getKey(), cook -> {
+                            if(!"0".equals(cook.getAccountStatus())){
+                                Log.d(TAG, "cook suspended");
+                            }else{
+                                try {
+                                    DataSnapshot grandchild = child.child("active").getChildren().iterator().next();
+                                    MenuItem item = grandchild.getValue(MenuItem.class);
+                                    if(item != null) {
+                                        itemToCook.put(item.getItemId(), child.getKey());
+                                        results.add(item);
+                                    }
+                                } catch (NoSuchElementException noElem) {
+                                    Log.e(TAG, "no such element");
+                                }
+                            }
+                        });
                     }catch (NullPointerException nullPointerException){
                         Log.e(TAG, "null cook");
                     }
                 }
 
                 searchResult.setLayoutManager(new LinearLayoutManager(context));
-                searchResult.setAdapter(new MenuAdapter(context, results));
+                searchResult.setAdapter(new SearchAdapter(context, results));
                 searchResult.addOnItemTouchListener(menuItemDetails);
             }else{
                 Log.e(TAG, "Error getting menus");
@@ -169,17 +177,22 @@ public class SearchFragment extends Fragment {
 
     /**
      * @param cookId the cook id to check if is suspended
-     * @return the boolean value of whether or not the cook is suspended
+     * @param listener cookListener callback implementation
      */
-    private void getCook(String cookId){
+    private void getCook(String cookId, CookListener listener){
+        //AtomicBoolean suspended = new AtomicBoolean(false);
         cookRef.child(cookId).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 CookUser cookUser = task.getResult().getValue(CookUser.class);
-                cook.set(cookUser);
+                if(cookUser!=null && "0".equals(cookUser.getAccountStatus())){
+                   // suspended.set(true);
+                    listener.onCookRecieved(cookUser);
+                }
             }else{
                 Log.d(TAG, "Error getting cook, " + task.getException());
             }
         });
+        //return suspended.get();
     }
 
     /**
@@ -192,7 +205,9 @@ public class SearchFragment extends Fragment {
                         @Override
                         public void onItemClick(View view, int position) {
                             Bundle args = new Bundle();
-                            args.putParcelable("ITEM", results.get(position));
+                            MenuItem item = results.get(position);
+                            args.putParcelable("ITEM", item);
+                            args.putString("COOK", itemToCook.get(item.getItemId()));
                             updateUI(args, navToDetails);
                         }
 

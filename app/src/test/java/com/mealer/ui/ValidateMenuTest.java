@@ -12,9 +12,9 @@ public class ValidateMenuTest {
 
     @Test
     public void validateAllTest(){
-        MenuItem activeItem = new MenuItem("test", "test", "test", "test", true);
-        MenuItem inactiveItem = new MenuItem("test", "test", "test", "test", false);
-        MenuItem emptyItem = new MenuItem("", "", "", "", false);
+        MenuItem activeItem = new MenuItem("test", "test", "test", "test", 20.00, true);
+        MenuItem inactiveItem = new MenuItem("test", "test", "test", "test", 20.00, false);
+        MenuItem emptyItem = new MenuItem("", "", "", "", 0, false);
 
         ValidateMenu validateActiveMenu = new ValidateMenu(activeItem, null);
         ValidateMenu validateInactiveMenu = new ValidateMenu(inactiveItem, null);

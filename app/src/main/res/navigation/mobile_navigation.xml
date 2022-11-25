@@ -6,10 +6,14 @@
     app:startDestination="@+id/navigation_account">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.mealer.ui.ui.home.HomeFragment"
+        android:id="@+id/navigation_client_home"
+        android:name="com.mealer.ui.ui.search.SearchFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_client_home" >
+        <action
+            android:id="@+id/action_navigation_client_home_to_navigation_menu_item_details"
+            app:destination="@id/navigation_menu_item_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_cook_menu"
@@ -32,6 +36,16 @@
         <action
             android:id="@+id/action_navigation_edit_menu_item_to_navigation_cook_menu"
             app:destination="@id/navigation_cook_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_menu_item_details"
+        android:name="com.mealer.ui.ui.search.SearchDetailsFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_menu_item_details" >
+        <action
+            android:id="@+id/action_navigation_menu_item_details_to_navigation_client_home"
+            app:destination="@id/navigation_client_home" />
     </fragment>
 
     <fragment

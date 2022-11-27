@@ -1,5 +1,6 @@
 package com.mealer.ui.ui.notifications;
 
+import android.text.Layout;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
     protected TextView calories;
     protected TextView description;
     protected TextView status;
+    protected View layout;
 
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -21,5 +23,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         calories = itemView.findViewById(R.id.itemCalories);
         description = itemView.findViewById(R.id.itemDescription);
         status = itemView.findViewById(R.id.itemStatus);
+        layout = itemView.findViewById(R.id.orderLayout);
     }
 }

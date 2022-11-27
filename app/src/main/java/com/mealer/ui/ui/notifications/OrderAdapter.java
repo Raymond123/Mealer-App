@@ -1,6 +1,7 @@
 package com.mealer.ui.ui.notifications;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -33,6 +34,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         MenuItem item = orderList.get(position).getOrderItem();
+
+        if(orderList.get(position).getOrderStatus().equals("accepted")){
+            holder.layout.setBackgroundColor(Color.parseColor("#047F3F"));
+        }else if(orderList.get(position).getOrderStatus().equals("rejected")){
+            holder.layout.setBackgroundColor(Color.parseColor("#9B0404"));
+        }
+
         holder.name.setText(item.getItemName());
         holder.description.setText(item.getItemDescription());
         holder.calories.setText(item.getCalories());

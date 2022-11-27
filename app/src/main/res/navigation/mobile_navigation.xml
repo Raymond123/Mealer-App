@@ -49,6 +49,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_order_item_details"
+        android:name="com.mealer.ui.ui.notifications.OrderDetailsFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_menu_item_details" >
+        <action
+            android:id="@+id/action_navigation_order_item_details_to_navigation_notifications"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_new_menu_item"
         android:name="com.mealer.ui.ui.menu.MenuNewFragment"
         android:label="@string/title_menu"
@@ -82,7 +92,11 @@
         android:id="@+id/navigation_notifications"
         android:name="com.mealer.ui.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_complaints_list" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_order_item_details"
+            app:destination="@id/navigation_order_item_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"

@@ -59,7 +59,7 @@ public class DietaryPreferences extends AppCompatActivity {
                         .getReference("users");
 
         HashMap<String, Object> update = new HashMap<>();
-        update.put("dietary restriction", type);
+        update.put("dietaryRestriction", type);
 
         FirebaseUser currentFirebaseUser = this.mAuth.getCurrentUser();
         if(currentFirebaseUser!=null){

@@ -1,5 +1,6 @@
 package com.mealer.ui.ui.search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,8 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mealer.app.CookUser;
 import com.mealer.app.menu.Menu;
 import com.mealer.app.menu.MenuItem;
@@ -59,6 +62,7 @@ public class SearchFragment extends Fragment {
 
     private ArrayList<MenuItem> results;
     private HashMap<String, String> itemToCook;
+    private SearchAdapter searchAdapter;
 
     @Nullable
     @Override
@@ -83,97 +87,107 @@ public class SearchFragment extends Fragment {
         searchText = binding.searchText;
         searchResult = binding.searchResult;
 
-        setDefaultMenuSearch();
-        searchButton.setOnClickListener(onCLick -> search(searchText.getText().toString()));
+
+        results = new ArrayList<>();
+        searchAdapter = new SearchAdapter(context, results);
+
+        searchResult.setLayoutManager(new LinearLayoutManager(context));
+        searchResult.setAdapter(searchAdapter);
+        searchResult.addOnItemTouchListener(menuItemDetails);
+
+        menuData.addValueEventListener(defaultEvent);
+        searchButton.setOnClickListener(onCLick -> {
+            if(!searchText.getText().toString().isEmpty()) {
+                menuData.removeEventListener(defaultEvent);
+                menuData.addValueEventListener(searchEvent);
+            }else{
+                menuData.addValueEventListener(defaultEvent);
+            }
+        });
 
         return root;
     }
 
-    private void search(String searchText){
-        if(searchText == null || searchText.equals("")){
-            setDefaultMenuSearch();
-            return;
-        }
+    ValueEventListener searchEvent = new ValueEventListener() {
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            results.clear();
+            itemToCook = new HashMap<>();
 
-        String[] keywords = searchText.toLowerCase(Locale.ROOT).split(" ");
-        menuData.get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                results = new ArrayList<>();
-                itemToCook = new HashMap<>();
-                DataSnapshot data = task.getResult();
-                for(DataSnapshot child : data.getChildren()){
-                    try {
-                        getCook(child.getKey(), cook -> {
-                            if(!"0".equals(cook.getAccountStatus())){
-                                Log.d(TAG, "cook suspended");
-                            }else{
-                                for (DataSnapshot grandchild : child.child("active").getChildren()) {
-                                    MenuItem item = grandchild.getValue(MenuItem.class);
-                                    for (String word : keywords) {
-                                        if (item != null && item.getItemName().toLowerCase(Locale.ROOT).contains(word)) {
-                                            itemToCook.put(item.getItemId(), child.getKey());
-                                            results.add(item);
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }catch (NullPointerException nullPointerException){
-                        Log.e(TAG, Arrays.toString(nullPointerException.getStackTrace()));
-                    }
-                }
+            String search = searchText.getText().toString();
+            String[] keywords = search.toLowerCase(Locale.ROOT).split(" ");
 
-                searchResult.setLayoutManager(new LinearLayoutManager(context));
-                searchResult.setAdapter(new SearchAdapter(context, results));
-                searchResult.addOnItemTouchListener(menuItemDetails);
-            }else{
-                Log.e(TAG, "Error getting menus");
-            }
-        });
-    }
-
-    /**
-     *
-     */
-    private void setDefaultMenuSearch(){
-        // default view when loading search, will display first active menu item for each cook
-        menuData.get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                results = new ArrayList<>();
-                itemToCook = new HashMap<>();
-                DataSnapshot data = task.getResult();
-                for(DataSnapshot child : data.getChildren()){
-
-                    try {
-                        getCook(child.getKey(), cook -> {
-                            if(!"0".equals(cook.getAccountStatus())){
-                                Log.d(TAG, "cook suspended");
-                            }else{
-                                try {
-                                    DataSnapshot grandchild = child.child("active").getChildren().iterator().next();
-                                    MenuItem item = grandchild.getValue(MenuItem.class);
-                                    if(item != null) {
+            for(DataSnapshot child : snapshot.getChildren()){
+                try {
+                    getCook(child.getKey(), cook -> {
+                        if(!"0".equals(cook.getAccountStatus())){
+                            Log.d(TAG, "cook suspended");
+                        }else{
+                            for (DataSnapshot grandchild : child.child("active").getChildren()) {
+                                MenuItem item = grandchild.getValue(MenuItem.class);
+                                for (String word : keywords) {
+                                    if (item != null && item.getItemName().toLowerCase(Locale.ROOT).contains(word)) {
                                         itemToCook.put(item.getItemId(), child.getKey());
                                         results.add(item);
+                                        searchAdapter.notifyDataSetChanged();
                                     }
-                                } catch (NoSuchElementException noElem) {
-                                    Log.e(TAG, "no such element");
                                 }
                             }
-                        });
-                    }catch (NullPointerException nullPointerException){
-                        Log.e(TAG, "null cook");
-                    }
+                        }
+                    });
+                }catch (NullPointerException nullPointerException){
+                    Log.e(TAG, Arrays.toString(nullPointerException.getStackTrace()));
                 }
-
-                searchResult.setLayoutManager(new LinearLayoutManager(context));
-                searchResult.setAdapter(new SearchAdapter(context, results));
-                searchResult.addOnItemTouchListener(menuItemDetails);
-            }else{
-                Log.e(TAG, "Error getting menus");
             }
-        });
-    }
+
+            //searchResult.setAdapter(new SearchAdapter(context, results));
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
+
+    ValueEventListener defaultEvent = new ValueEventListener() {
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            results.clear();
+            itemToCook = new HashMap<>();
+            for(DataSnapshot child : snapshot.getChildren()){
+                try {
+                    getCook(child.getKey(), cook -> {
+                        if(!"0".equals(cook.getAccountStatus())){
+                            Log.d(TAG, "cook suspended");
+                        }else{
+                            try {
+                                DataSnapshot grandchild = child.child("active").getChildren().iterator().next();
+                                MenuItem item = grandchild.getValue(MenuItem.class);
+                                if(item != null) {
+                                    itemToCook.put(item.getItemId(), child.getKey());
+                                    results.add(item);
+                                    searchAdapter.notifyDataSetChanged();
+                                }
+                            } catch (NoSuchElementException noElem) {
+                                Log.e(TAG, "no such element");
+                            }
+                        }
+                    });
+                }catch (NullPointerException nullPointerException){
+                    Log.e(TAG, "null cook");
+                }
+            }
+
+            //searchResult.setAdapter(new SearchAdapter(context, results));
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 
     /**
      * @param cookId the cook id to check if is suspended
@@ -185,7 +199,7 @@ public class SearchFragment extends Fragment {
             if(task.isSuccessful()){
                 CookUser cookUser = task.getResult().getValue(CookUser.class);
                 if(cookUser!=null && "0".equals(cookUser.getAccountStatus())){
-                   // suspended.set(true);
+                    // suspended.set(true);
                     listener.onCookRecieved(cookUser);
                 }
             }else{

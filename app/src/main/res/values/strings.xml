@@ -104,6 +104,8 @@
     <string name="meals">Meals</string>
     <string name="status_item">Status</string>
     <string name="item">Item</string>
+    <string name="channel_name">mealernotif</string>
+    <string name="channel_description">mealernotif notification channel</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

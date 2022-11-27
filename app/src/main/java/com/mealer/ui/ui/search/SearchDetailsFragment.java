@@ -1,8 +1,11 @@
 package com.mealer.ui.ui.search;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +14,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mealer.app.CookUser;
@@ -25,6 +36,7 @@ import com.mealer.ui.OnFragmentInteractionListener;
 import com.mealer.ui.R;
 import com.mealer.ui.databinding.FragmentMenuItemDetailsBinding;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class SearchDetailsFragment extends Fragment {
@@ -34,11 +46,14 @@ public class SearchDetailsFragment extends Fragment {
 
     private FragmentMenuItemDetailsBinding binding;
     private OnFragmentInteractionListener mListener;
+    NotificationManagerCompat manager;
     private DatabaseReference cookRef;
     private DatabaseReference orderRef;
     private Bundle args;
     private MenuItem item;
     private String cookId;
+
+    private FirebaseAuth mAuth;
 
     private EditText name;
     private EditText desc;
@@ -59,6 +74,8 @@ public class SearchDetailsFragment extends Fragment {
         View root = binding.getRoot();
         root.setBackgroundColor(Color.parseColor("#FEFAE0"));
 
+        manager = NotificationManagerCompat.from(this.requireContext());
+        mAuth = FirebaseAuth.getInstance();
         cookRef = FirebaseDatabase
                 .getInstance("https://mealer-app-58f99-default-rtdb.firebaseio.com/")
                 .getReference("users");
@@ -111,11 +128,56 @@ public class SearchDetailsFragment extends Fragment {
         return root;
     }
 
+    // Register the permissions callback, which handles the user's response to the
+    // system permissions dialog. Save the return value, an instance of
+    // ActivityResultLauncher, as an instance variable.
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Permission is granted. Continue the action or workflow in your
+                    // app.
+                    notify(manager);
+                    Log.d(TAG, "notifs allowed");
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // feature requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                    Toast.makeText(this.requireContext(), "Notifications Disabled", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "notifs not allowed");
+                }
+            });
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void placeOrder(MenuItem item){
-        Order order = new Order(item, "pending");
-        cookRef.child(cookId).child("orders").child(order.getOrderId()).setValue(order);
+        if(shouldShowRequestPermissionRationale(Notification.CATEGORY_EVENT)){
+            Log.d(TAG, "requesting");
+        }
+
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this.requireContext());
+        if(manager.areNotificationsEnabled()){
+            notify(manager);
+        }else{
+            requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+        }
+
+        if(mAuth.getCurrentUser() != null) {
+            Order order = new Order(item, "pending", mAuth.getCurrentUser().getUid());
+            cookRef.child(cookId).child("orders").child(order.getOrderId()).setValue(order);
+        }
 
         updateUI(null, navToSearch);
+    }
+
+    private void notify(NotificationManagerCompat notificationManagerCompat){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.requireContext(), "lemubitA")
+                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setContentTitle("Order Placed")
+                .setContentText("Your order has been placed. Please wait for the cook to action your order.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        notificationManagerCompat.notify(item.getItemId().hashCode(), builder.build());
     }
 
     /**

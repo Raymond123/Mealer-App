@@ -17,211 +17,222 @@
             app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/menuItemInfo"
-                    android:layout_width="375dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/menu_item_information"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="28sp" />
-
-                <Space
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/mealImage"
-                    android:layout_width="375dp"
-                    android:layout_height="77dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/createaccountimage"
-                    tools:visibility="visible" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/uploadImageText"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/upload_picture_of_food"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="12sp"
-                    android:visibility="gone"/>
+                                <TextView
+                                    android:id="@+id/menuItemInfo"
+                                    android:layout_width="375dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="@string/menu_item_information"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="28sp" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp" />
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp" />
 
-                <TextView
-                    android:id="@+id/itemNameLabel"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="start"
-                    android:text="@string/item_name"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="22sp" />
+                                <ImageView
+                                    android:id="@+id/mealImage"
+                                    android:layout_width="375dp"
+                                    android:layout_height="77dp"
+                                    android:layout_gravity="center"
+                                    app:srcCompat="@drawable/createaccountimage"
+                                    tools:visibility="visible" />
 
-                <EditText
-                    android:id="@+id/itemNameText"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:autofillHints=""
-                    android:backgroundTint="@color/darkGreen"
-                    android:ems="10"
-                    android:hint="@string/name_of_item"
-                    android:inputType="textPersonName"
-                    android:minHeight="48dp"
-                    android:textColor="@color/darkGreen"
-                    android:textColorHint="@color/lightGreen" />
+                                <TextView
+                                    android:id="@+id/uploadImageText"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="@string/upload_picture_of_food"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="12sp"
+                                    android:visibility="gone" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp" />
 
-                <TextView
-                    android:id="@+id/itemDescriptionLabel"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="start"
-                    android:text="@string/description_item"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="22sp" />
+                                <TextView
+                                    android:id="@+id/itemNameLabel"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="start"
+                                    android:text="@string/item_name"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="22sp" />
 
-                <EditText
-                    android:id="@+id/itemDescriptionText"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:autofillHints=""
-                    android:backgroundTint="@color/darkGreen"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="@string/short_description"
-                    android:inputType="textMultiLine"
-                    android:minHeight="48dp"
-                    android:textColor="@color/darkGreen"
-                    android:textColorHint="@color/lightGreen" />
+                                <EditText
+                                    android:id="@+id/itemNameText"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:autofillHints=""
+                                    android:backgroundTint="@color/darkGreen"
+                                    android:ems="10"
+                                    android:hint="@string/name_of_item"
+                                    android:inputType="textPersonName"
+                                    android:minHeight="48dp"
+                                    android:textColor="@color/darkGreen"
+                                    android:textColorHint="@color/lightGreen" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp" />
 
-                <TextView
-                    android:id="@+id/itemCaloriesLabel"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="start"
-                    android:text="@string/calories"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="22sp" />
+                                <TextView
+                                    android:id="@+id/itemDescriptionLabel"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="start"
+                                    android:text="@string/description_item"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="22sp" />
 
-                <EditText
-                    android:id="@+id/itemCaloriesText"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:autofillHints=""
-                    android:backgroundTint="@color/darkGreen"
-                    android:ems="10"
-                    android:hint="@string/calories_in_item"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:textColor="@color/darkGreen"
-                    android:textColorHint="@color/lightGreen" />
+                                <EditText
+                                    android:id="@+id/itemDescriptionText"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:autofillHints=""
+                                    android:backgroundTint="@color/darkGreen"
+                                    android:ems="10"
+                                    android:gravity="start|top"
+                                    android:hint="@string/short_description"
+                                    android:inputType="textMultiLine"
+                                    android:minHeight="48dp"
+                                    android:textColor="@color/darkGreen"
+                                    android:textColorHint="@color/lightGreen" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp" />
 
-                <TextView
-                    android:id="@+id/itemIngredientsLabel"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="start"
-                    android:text="@string/ingredients"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="22sp" />
+                                <TextView
+                                    android:id="@+id/itemCaloriesLabel"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="start"
+                                    android:text="@string/calories"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="22sp" />
 
-                <EditText
-                    android:id="@+id/itemIngredients"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:autofillHints=""
-                    android:backgroundTint="@color/darkGreen"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="@string/separate_ingredients"
-                    android:inputType="textMultiLine"
-                    android:minHeight="48dp"
-                    android:textColor="@color/darkGreen"
-                    android:textColorHint="@color/lightGreen" />
+                                <EditText
+                                    android:id="@+id/itemCaloriesText"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:autofillHints=""
+                                    android:backgroundTint="@color/darkGreen"
+                                    android:ems="10"
+                                    android:hint="@string/calories_in_item"
+                                    android:inputType="number"
+                                    android:minHeight="48dp"
+                                    android:textColor="@color/darkGreen"
+                                    android:textColorHint="@color/lightGreen" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp" />
 
-                <TextView
-                    android:id="@+id/itemPriceLabel"
-                    android:layout_width="347dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="start"
-                    android:text="@string/price"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="22sp" />
+                                <TextView
+                                    android:id="@+id/itemIngredientsLabel"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="start"
+                                    android:text="@string/ingredients"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="22sp" />
 
-                <EditText
-                    android:id="@+id/itemPriceText"
-                    android:layout_width="347dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:autofillHints=""
-                    android:backgroundTint="@color/darkGreen"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="@string/price_text"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:textColor="@color/darkGreen"
-                    android:textColorHint="@color/lightGreen" />
+                                <EditText
+                                    android:id="@+id/itemIngredients"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:autofillHints=""
+                                    android:backgroundTint="@color/darkGreen"
+                                    android:ems="10"
+                                    android:gravity="start|top"
+                                    android:hint="@string/separate_ingredients"
+                                    android:inputType="textMultiLine"
+                                    android:minHeight="48dp"
+                                    android:textColor="@color/darkGreen"
+                                    android:textColorHint="@color/lightGreen" />
 
-                <CheckBox
-                    android:id="@+id/isActiveBox"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:minHeight="48dp"
-                    android:text="@string/set_item_as_active"
-                    android:textColor="@color/darkGreen"
-                    android:textSize="18sp" />
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                                <TextView
+                                    android:id="@+id/itemPriceLabel"
+                                    android:layout_width="347dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="start"
+                                    android:text="@string/price"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="22sp" />
 
-                <Button
-                    android:id="@+id/addNewItem"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/lightBrown"
-                    android:text="@string/add_item_to_menu" />
+                                <EditText
+                                    android:id="@+id/itemPriceText"
+                                    android:layout_width="347dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:autofillHints=""
+                                    android:backgroundTint="@color/darkGreen"
+                                    android:ems="10"
+                                    android:gravity="start|top"
+                                    android:hint="@string/price_text"
+                                    android:inputType="number"
+                                    android:minHeight="48dp"
+                                    android:textColor="@color/darkGreen"
+                                    android:textColorHint="@color/lightGreen" />
 
-                <Button
-                    android:id="@+id/delete"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/lightBrown"
-                    android:text="@string/delete_menu_item" />
+                                <CheckBox
+                                    android:id="@+id/isActiveBox"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:minHeight="48dp"
+                                    android:text="@string/set_item_as_active"
+                                    android:textColor="@color/darkGreen"
+                                    android:textSize="18sp" />
+
+                                <Space
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp" />
+
+                                <Button
+                                    android:id="@+id/addNewItem"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:backgroundTint="@color/lightBrown"
+                                    android:text="@string/add_item_to_menu" />
+
+                                <Button
+                                    android:id="@+id/delete"
+                                    android:layout_width="350dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:backgroundTint="@color/lightBrown"
+                                    android:text="@string/delete_menu_item" />
+                        </LinearLayout>
+                </ScrollView>
 
 
         </LinearLayout>

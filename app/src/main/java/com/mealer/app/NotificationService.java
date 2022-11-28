@@ -33,8 +33,9 @@ public class NotificationService extends Service {
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
 
-    String client = "wFv7yMk5Khf4YOS8LV4RAj0vQCC2";
     DatabaseReference user;
+    String clientId;
+    User client;
 
     private final ChildEventListener childEventListener = new ChildEventListener() {
         @Override
@@ -48,9 +49,9 @@ public class NotificationService extends Service {
                 Order order = child.getValue(Order.class);
                 String cook = null;
                 if(snapshot.getValue(CookUser.class)!=null) {
-                    cook = snapshot.getValue(CookUser.class).getFirstName();
+                    cook = Objects.requireNonNull(snapshot.getValue(CookUser.class)).getFirstName();
                 }
-                if (order != null && order.getOrderFrom().equals(client)) {
+                if (order != null && order.getOrderFrom().equals(clientId)) {
                     order.setOrderId(child.getKey());
                     if(!order.getOrderStatus().equals("pending") && order.getNotifications()==0) {
                         createNotification(
@@ -96,6 +97,9 @@ public class NotificationService extends Service {
                 .getReference("users");
 
         // user.addValueEventListener(actionListener);
+        client = intent.getParcelableExtra("USER");
+        clientId = intent.getStringExtra("ID");
+
         user.addChildEventListener(childEventListener);
 
         return START_STICKY ;

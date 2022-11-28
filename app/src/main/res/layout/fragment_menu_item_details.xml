@@ -8,8 +8,8 @@
     android:paddingBottom="?attr/actionBarSize">
 
         <LinearLayout
-            android:layout_width="410dp"
-            android:layout_height="730dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="10dp"
             android:paddingTop="20dp"

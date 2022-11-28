@@ -101,6 +101,7 @@
     <string name="menu_item_information">Menu Item Information</string>
     <string name="default_menu_image">Default_menu_image</string>
     <string name="upload_picture_of_food">Upload picture of food</string>
+    <string name="price">Price</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

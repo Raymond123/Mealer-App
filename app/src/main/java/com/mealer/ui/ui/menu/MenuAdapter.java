@@ -3,6 +3,7 @@ package com.mealer.ui.ui.menu;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.name.setText(menuItemList.get(position).getItemName());
         holder.calories.setText(menuItemList.get(position).getCalories());
         holder.description.setText(menuItemList.get(position).getItemDescription());
+        holder.price.setText(String.valueOf(menuItemList.get(position).getPrice()));
 
     }
 

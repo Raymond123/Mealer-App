@@ -1,18 +1,13 @@
 package com.mealer.ui.ui.menu;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.mealer.app.menu.MenuItem;
 
 public class ValidateMenu {
 
-    //TODO: validate inputs
-    // inputs cant be empty,
-    // all fields except calories must only contain a-z
-    // everything should be lower case
-    // ingredients should all be separated by semicolon (;)
-    // description can contain these characters: ()-;,.![]:
     private MenuItem menuItem;
     private Context context;
     public ValidateMenu(MenuItem menuItem, Context context) {
@@ -62,18 +57,10 @@ public class ValidateMenu {
         return true;
     }
 
-    protected boolean validatePrice(){
-        if(String.valueOf(menuItem.getPrice()).equals("")){
-            if(context != null){
-                Toast.makeText(context, "Enter a price for your menu", Toast.LENGTH_LONG).show();
-            }
-            return false;
-        }
-        return true;
-    }
+
 
     public boolean validateAll(){
-        return validateCalories() && validateIngredients() && validateDescription() && validateItemName() && validatePrice();
+        return validateCalories() && validateIngredients() && validateDescription() && validateItemName();
     }
 
 }

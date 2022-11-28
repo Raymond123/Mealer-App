@@ -108,6 +108,7 @@
     <string name="channel_description">mealernotif notification channel</string>
     <string name="price">Price</string>
     <string name="price_text">Enter your price</string>
+    <string name="price_item">Price:</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

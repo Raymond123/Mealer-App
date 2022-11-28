@@ -21,6 +21,6 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.itemName);
         calories = itemView.findViewById(R.id.itemCalories);
         description = itemView.findViewById(R.id.itemDescription);
-        price = itemView.findViewById(R.id.itemPriceText);
+        price = itemView.findViewById(R.id.itemPriceDescription);
     }
 }

@@ -35,6 +35,7 @@ public class MenuEditItemFragment extends Fragment {
     private Button saveItem;
     private Button deleteItem;
     private EditText name;
+    private EditText price;
     private EditText description;
     private EditText calories;
     private EditText ingredients;
@@ -58,6 +59,7 @@ public class MenuEditItemFragment extends Fragment {
         deleteItem = binding.delete;
 
         name = binding.itemNameText;
+        price = binding.itemPriceText;
         description = binding.itemDescriptionText;
         calories = binding.itemCaloriesText;
         ingredients = binding.itemIngredients;
@@ -83,6 +85,7 @@ public class MenuEditItemFragment extends Fragment {
             menuItem.setItemDescription(description.getText().toString());
             menuItem.setCalories(calories.getText().toString());
             menuItem.setMainIngredients(ingredients.getText().toString());
+            menuItem.setPrice(Double.parseDouble(price.getText().toString()));
 
             // if the state of the item active check box is different to the state of the item,
             // move the item to the other Map in the menu

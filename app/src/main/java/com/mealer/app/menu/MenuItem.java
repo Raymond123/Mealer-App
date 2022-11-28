@@ -65,6 +65,10 @@ public class MenuItem implements Parcelable {
         this.calories = calories;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }

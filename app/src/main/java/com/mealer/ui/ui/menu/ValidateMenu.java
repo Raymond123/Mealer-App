@@ -62,8 +62,18 @@ public class ValidateMenu {
         return true;
     }
 
+    protected boolean validatePrice(){
+        if(String.valueOf(menuItem.getPrice()).equals("")){
+            if(context != null){
+                Toast.makeText(context, "Enter a price for your menu", Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
+        return true;
+    }
+
     public boolean validateAll(){
-        return validateCalories() && validateIngredients() && validateDescription() && validateItemName();
+        return validateCalories() && validateIngredients() && validateDescription() && validateItemName() && validatePrice();
     }
 
 }

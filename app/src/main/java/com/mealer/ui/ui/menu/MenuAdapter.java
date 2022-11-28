@@ -35,6 +35,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.name.setText(menuItemList.get(position).getItemName());
         holder.calories.setText(menuItemList.get(position).getCalories());
         holder.description.setText(menuItemList.get(position).getItemDescription());
+
     }
 
     @Override

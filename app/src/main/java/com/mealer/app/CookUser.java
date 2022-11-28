@@ -19,6 +19,11 @@ public class CookUser extends User implements Parcelable {
     private String description;
     private String accountStatus;
     private String suspensionEnd;
+    private String rating;
+
+    public CookUser(){
+
+    }
 
     /**
      * cook user constructor specific for when initializing a new user object
@@ -34,6 +39,11 @@ public class CookUser extends User implements Parcelable {
         this.description = attributes.get("description");
         this.accountStatus = attributes.get("accountStatus");
         this.suspensionEnd = attributes.get("suspensionEnd");
+        try {
+            this.rating = attributes.get("rating");
+        }catch(Exception ex){
+            this.rating = "75";
+        }
     }
 
     /**
@@ -51,6 +61,7 @@ public class CookUser extends User implements Parcelable {
         this.description = description;
         this.accountStatus = accountStatus;
         this.suspensionEnd = suspensionEnd;
+        this.rating = "75";
 
         // get database reference to the "users" tree
         DatabaseReference databaseReference = getReference("users");
@@ -71,4 +82,11 @@ public class CookUser extends User implements Parcelable {
         return suspensionEnd;
     }
 
+    public String getRating() {
+        return rating + "%";
+    }
+
+    public void setRating(int rating) {
+        this.rating = Integer.toString(rating);
+    }
 }

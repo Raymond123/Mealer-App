@@ -101,7 +101,11 @@
     <string name="menu_item_information">Menu Item Information</string>
     <string name="default_menu_image">Default_menu_image</string>
     <string name="upload_picture_of_food">Upload picture of food</string>
-    <string name="price">Price</string>
+    <string name="meals">Meals</string>
+    <string name="status_item">Status</string>
+    <string name="item">Item</string>
+    <string name="channel_name">mealernotif</string>
+    <string name="channel_description">mealernotif notification channel</string>
     <string-array name="monthDayChoice">
         <item>Days</item>
         <item>Months</item>

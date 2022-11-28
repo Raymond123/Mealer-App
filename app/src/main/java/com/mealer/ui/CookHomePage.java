@@ -27,6 +27,7 @@ import com.mealer.ui.databinding.ActivityCookHomePageBinding;
 import com.mealer.ui.ui.menu.MenuNewFragment;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class CookHomePage extends AppCompatActivity implements OnFragmentInteractionListener, UploadImage{
@@ -42,7 +43,7 @@ public class CookHomePage extends AppCompatActivity implements OnFragmentInterac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         binding = ActivityCookHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

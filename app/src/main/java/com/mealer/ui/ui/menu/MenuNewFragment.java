@@ -113,6 +113,7 @@ public class MenuNewFragment extends Fragment {
                         description.getText().toString(),
                         calories.getText().toString(),
                         ingredients.getText().toString().replace(" ", ""),
+                        0, // TODO add price input in fragment
                         isActive.isChecked()
                 );
 

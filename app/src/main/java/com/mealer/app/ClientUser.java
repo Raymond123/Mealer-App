@@ -17,6 +17,7 @@ public class ClientUser extends User implements Parcelable {
     private String cardNumber;
     private String cardExpiry;
     private String cardSecurity;
+    private String dietaryRestriction;
 
     /**
      * client user constructor specific for when initializing a new user object
@@ -32,6 +33,7 @@ public class ClientUser extends User implements Parcelable {
         this.cardNumber = attributes.get("cardNumber");
         this.cardExpiry = attributes.get("cardExpiry");
         this.cardSecurity = attributes.get("cardSecurity");
+        this.dietaryRestriction = attributes.get("dietaryRestriction");
     }
 
     /**
@@ -47,6 +49,7 @@ public class ClientUser extends User implements Parcelable {
         this.cardNumber = cardNumber;
         this.cardExpiry = cardExpiry;
         this.cardSecurity = cardSecurity;
+        this.dietaryRestriction = "none";
 
         // get database reference to the "users" tree
         DatabaseReference databaseReference = getReference("users");
@@ -68,4 +71,7 @@ public class ClientUser extends User implements Parcelable {
         return this.cardSecurity;
     }
 
+    public String getDietaryRestriction() {
+        return dietaryRestriction;
+    }
 }

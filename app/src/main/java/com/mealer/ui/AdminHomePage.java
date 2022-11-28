@@ -23,17 +23,18 @@ import com.mealer.ui.databinding.ActivityAdminHomePageBinding;
 import com.mealer.ui.ui.complaint.ComplaintFragment;
 import com.mealer.ui.ui.complaint.ComplaintsListFragment;
 
+import java.util.Objects;
+
 public class AdminHomePage extends AppCompatActivity implements OnFragmentInteractionListener {
 
     private NavController navController;
     private ActivityAdminHomePageBinding binding;
-    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         binding = ActivityAdminHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

@@ -159,12 +159,12 @@ public class LoginPage extends AppCompatActivity {
                             // check if the user is banned or suspended
                             // -1 is banned, 0 is nothing
                             // any value >0 is the number of days the account is suspended
-                            if("0".equals(userAttributes.get("accountStatus"))) {
+                            if ("client".equals(userAttributes.get("userType"))) {
+                                updateUI(currentFirebaseUser, new ClientUser(userAttributes));
+                            }else if("0".equals(userAttributes.get("accountStatus"))) {
                                 // check user type and update ui with new user object of that type
                                 if ("cook".equals(userAttributes.get("userType"))) {
                                     updateUI(currentFirebaseUser, new CookUser(userAttributes));
-                                } else if ("client".equals(userAttributes.get("userType"))) {
-                                    updateUI(currentFirebaseUser, new ClientUser(userAttributes));
                                 } else {
                                     Log.e("signIn", "failed to detemine user type, userType: " + userAttributes.get("userType"));
                                 }

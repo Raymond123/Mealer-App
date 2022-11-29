@@ -14,6 +14,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
     protected TextView name;
     protected TextView calories;
     protected TextView description;
+    protected TextView price;
     protected TextView status;
     protected View layout;
 
@@ -22,6 +23,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.itemName);
         calories = itemView.findViewById(R.id.itemCalories);
         description = itemView.findViewById(R.id.itemDescription);
+        price = itemView.findViewById(R.id.itemPriceDescription);
         status = itemView.findViewById(R.id.itemStatus);
         layout = itemView.findViewById(R.id.orderLayout);
     }

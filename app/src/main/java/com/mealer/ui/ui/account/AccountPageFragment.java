@@ -87,6 +87,7 @@ public class AccountPageFragment extends Fragment {
         if(currentFirebaseUser!=null){
             mAuth.signOut();
         }
+        setArguments(null);
         startActivity(new Intent(this.getContext(), LoginPage.class));
     }
 }

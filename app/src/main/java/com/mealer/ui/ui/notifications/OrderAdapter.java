@@ -43,6 +43,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
         holder.name.setText(item.getItemName());
         holder.description.setText(item.getItemDescription());
+        holder.price.setText(String.valueOf(item.getPrice()));
         holder.calories.setText(item.getCalories());
         holder.status.setText(orderList.get(position).getOrderStatus());
     }

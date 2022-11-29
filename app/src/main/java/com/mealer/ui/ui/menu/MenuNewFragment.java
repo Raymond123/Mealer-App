@@ -131,6 +131,12 @@ public class MenuNewFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
+
     /**
      * gets the mListener object from the fragments context in order to be able to return to
      * previous fragment and get the complaint info passed to this fragment

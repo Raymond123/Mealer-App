@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mealer.app.Admin;
+import com.mealer.app.ClientUser;
+import com.mealer.app.CookUser;
 import com.mealer.app.User;
 import com.mealer.ui.LoginPage;
 import com.mealer.ui.databinding.FragmentAccountPageBinding;
@@ -60,9 +62,20 @@ public class AccountPageFragment extends Fragment {
         // display user type on home page
         if(this.signedIn.getClass() != Admin.class){
             User currentUser = (User) this.signedIn;
-            userName.setText("Welcome " + currentUser.getFirstName() + " " + currentUser.getLastName() + "!");
-            userType.setText("User Type: " + this.signedIn.getUserType());
-            Log.d("firebase", "userType: " + this.signedIn.getUserType());
+            if(this.signedIn.getClass() != ClientUser.class){
+                userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+                userType.setText("welcome client");
+                Log.d("firebase", "userType: " + this.signedIn.getUserType());
+            }
+            else if(this.signedIn.getClass() != CookUser.class){
+                userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+                userType.setText("User Type: " + this.signedIn.getUserType() + " Rating");
+                Log.d("firebase", "userType: " + this.signedIn.getUserType());
+            }
+            else{
+
+            }
+
         }else{
             userName.setText("Welcome Admin!");
             userType.setText("User Type: " + this.signedIn.getUserType());

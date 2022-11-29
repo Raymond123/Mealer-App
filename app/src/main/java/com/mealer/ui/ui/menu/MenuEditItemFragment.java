@@ -3,6 +3,7 @@ package com.mealer.ui.ui.menu;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +37,7 @@ public class MenuEditItemFragment extends Fragment {
     private Button saveItem;
     private Button deleteItem;
     private EditText name;
+    private EditText price;
     private EditText description;
     private EditText calories;
     private EditText ingredients;
@@ -58,6 +61,7 @@ public class MenuEditItemFragment extends Fragment {
         deleteItem = binding.delete;
 
         name = binding.itemNameText;
+        price = binding.itemPriceText;
         description = binding.itemDescriptionText;
         calories = binding.itemCaloriesText;
         ingredients = binding.itemIngredients;
@@ -74,8 +78,10 @@ public class MenuEditItemFragment extends Fragment {
         name.setText(menuItem.getItemName());
         description.setText(menuItem.getItemDescription());
         calories.setText(menuItem.getCalories());
+        price.setText(String.valueOf(menuItem.getPrice()));
         ingredients.setText(menuItem.getMainIngredients());
         isActive.setChecked(menuItem.isActive());
+
 
         // on save item button set new item attrbiutes and updateMenu, then return to menuFragment
         saveItem.setOnClickListener(x->{
@@ -83,6 +89,9 @@ public class MenuEditItemFragment extends Fragment {
             menuItem.setItemDescription(description.getText().toString());
             menuItem.setCalories(calories.getText().toString());
             menuItem.setMainIngredients(ingredients.getText().toString());
+
+
+
 
             // if the state of the item active check box is different to the state of the item,
             // move the item to the other Map in the menu
@@ -92,8 +101,16 @@ public class MenuEditItemFragment extends Fragment {
 
             ValidateMenu validateMenu = new ValidateMenu(menuItem, this.getContext());
             if(validateMenu.validateAll()){
-                userMenu.updateMenu();
-                updateUI();
+                if(TextUtils.isEmpty(price.getText().toString())) {
+                    if (this.getContext() != null) {
+                        Toast.makeText(this.getContext(), "Price cannot be empty!", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    menuItem.setPrice(Double.parseDouble(price.getText().toString()));
+                    userMenu.updateMenu();
+                    updateUI();
+                }
+
             }
         });
 

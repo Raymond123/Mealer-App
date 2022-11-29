@@ -13,7 +13,7 @@ Amine Hanan: 300202883
 
 - v0.1:https://github.com/Raymond123/Mealer-App/releases/tag/v0.1
 - v0.2:https://github.com/Raymond123/Mealer-App/releases/tag/v0.2
-- v0.3:
+- v0.3:https://github.com/Raymond123/Mealer-App/releases/tag/v0.3
 
 
 # Notes
@@ -44,4 +44,4 @@ We have integrated circleci into the app to run the 4 unit tests we have. (See c
 ![circleci dashboard](circleci-testsimg.png)
 
 # circle ci deliverable 3
-![circleci dashboard](circlci-testimg-3.png)
+![circleci dashboard](circleci-testimg-3.png)

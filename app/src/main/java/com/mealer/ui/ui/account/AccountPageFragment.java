@@ -29,6 +29,7 @@ public class AccountPageFragment extends Fragment {
     // initializing activity elements
     private TextView userType;
     private TextView userName;
+    private TextView userDescription;
     private Button signOut;
 
     private Admin signedIn;
@@ -49,6 +50,7 @@ public class AccountPageFragment extends Fragment {
         Intent intent = this.getActivity().getIntent();
         userType = binding.userType;
         userName = binding.userName;
+        userDescription = binding.userCookDescription;
 
         // get current user object from intent
         try {
@@ -64,8 +66,11 @@ public class AccountPageFragment extends Fragment {
             User currentUser = (User) this.signedIn;
 
             if(currentUser.getUserType().equals("cook")){
+
+                CookUser cook = (CookUser) currentUser;
                 userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
-                userType.setText("User Type: " + this.signedIn.getUserType() + " Rating");
+                userType.setText("Cook Rating");
+                userDescription.setText(cook.getDescription());
                 Log.d("firebase", "userType: " + this.signedIn.getUserType());
             }
 

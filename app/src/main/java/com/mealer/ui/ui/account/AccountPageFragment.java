@@ -63,13 +63,13 @@ public class AccountPageFragment extends Fragment {
         if(this.signedIn.getClass() != Admin.class){
             User currentUser = (User) this.signedIn;
 
-            if(currentUser.getClass() == User.class){
+            if(currentUser.getUserType().equals("cook")){
                 userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
                 userType.setText("User Type: " + this.signedIn.getUserType() + " Rating");
                 Log.d("firebase", "userType: " + this.signedIn.getUserType());
             }
 
-            else if(currentUser.getClass() == User.class){
+            else if(currentUser.getUserType().equals("client")){
                 userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
                 userType.setText("welcome client");
                 Log.d("firebase", "userType: " + this.signedIn.getUserType());

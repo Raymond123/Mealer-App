@@ -61,11 +61,16 @@ public class AccountPageFragment extends Fragment {
         if(this.signedIn.getClass() != Admin.class){
             User currentUser = (User) this.signedIn;
             userName.setText("Welcome " + currentUser.getFirstName() + " " + currentUser.getLastName() + "!");
+            userType.setText("User Type: " + this.signedIn.getUserType());
+            Log.d("firebase", "userType: " + this.signedIn.getUserType());
         }else{
             userName.setText("Welcome Admin!");
+            userType.setText("User Type: " + this.signedIn.getUserType());
+            Log.d("firebase", "userType: " + this.signedIn.getUserType());
         }
-        userType.setText("User Type: " + this.signedIn.getUserType());
-        Log.d("firebase", "userType: " + this.signedIn.getUserType());
+
+//        userType.setText("User Type: " + this.signedIn.getUserType());
+//        Log.d("firebase", "userType: " + this.signedIn.getUserType());
 
         signOut = binding.signOut;
         signOut.setOnClickListener(c->signOut(currentFirebaseUser));

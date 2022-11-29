@@ -62,19 +62,19 @@ public class AccountPageFragment extends Fragment {
         // display user type on home page
         if(this.signedIn.getClass() != Admin.class){
             User currentUser = (User) this.signedIn;
-            if(this.signedIn.getClass() != ClientUser.class){
-                userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
-                userType.setText("welcome client");
-                Log.d("firebase", "userType: " + this.signedIn.getUserType());
-            }
-            else if(this.signedIn.getClass() != CookUser.class){
+
+            if(currentUser.getClass() == User.class){
                 userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
                 userType.setText("User Type: " + this.signedIn.getUserType() + " Rating");
                 Log.d("firebase", "userType: " + this.signedIn.getUserType());
             }
-            else{
 
+            else if(currentUser.getClass() == User.class){
+                userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+                userType.setText("welcome client");
+                Log.d("firebase", "userType: " + this.signedIn.getUserType());
             }
+
 
         }else{
             userName.setText("Welcome Admin!");

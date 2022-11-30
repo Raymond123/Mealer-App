@@ -126,7 +126,7 @@ public class NotificationsFragment extends Fragment {
             dbRef.get().addOnCompleteListener(task -> {
                 if(task.isSuccessful()){
                     DataSnapshot data = task.getResult();
-                    for(DataSnapshot child :data.getChildren()){
+                    for(DataSnapshot child : data.getChildren()){
                         try {
                             if ("cook".equals(Objects.requireNonNull(child.getValue(CookUser.class)).getUserType())) {
                                 for (DataSnapshot grandChild : child.child("orders").getChildren()) {

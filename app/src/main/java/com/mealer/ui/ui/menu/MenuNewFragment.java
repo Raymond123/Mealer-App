@@ -63,6 +63,7 @@ public class MenuNewFragment extends Fragment {
     private EditText ingredients;
     private CheckBox isActive;
     private Button delete;
+    private EditText price;
 
     private Bundle args;
 
@@ -81,6 +82,7 @@ public class MenuNewFragment extends Fragment {
         addItem = binding.addNewItem;
 
         name = binding.itemNameText;
+        price = binding.itemPriceText;
         description = binding.itemDescriptionText;
         calories = binding.itemCaloriesText;
         ingredients = binding.itemIngredients;
@@ -113,7 +115,7 @@ public class MenuNewFragment extends Fragment {
                         description.getText().toString(),
                         calories.getText().toString(),
                         ingredients.getText().toString().replace(" ", ""),
-                        0, // TODO add price input in fragment
+                        Double.parseDouble(price.getText().toString()),
                         isActive.isChecked()
                 );
 
@@ -127,6 +129,12 @@ public class MenuNewFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 
     /**

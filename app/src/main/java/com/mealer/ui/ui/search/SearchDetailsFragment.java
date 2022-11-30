@@ -43,6 +43,8 @@ public class SearchDetailsFragment extends Fragment {
 
     private final String TAG = "SearchDetailsFragment";
     private final int navToSearch = R.id.action_navigation_menu_item_details_to_navigation_client_home;
+    private final int navToAcc = R.id.action_navigation_menu_item_details_to_navigation_account;
+
 
     private FragmentMenuItemDetailsBinding binding;
     private OnFragmentInteractionListener mListener;
@@ -59,6 +61,7 @@ public class SearchDetailsFragment extends Fragment {
     private EditText desc;
     private EditText calories;
     private EditText ingredients;
+    private EditText price;
 
     private Button placeOrder;
     private CheckBox remove;
@@ -88,6 +91,7 @@ public class SearchDetailsFragment extends Fragment {
         desc = binding.itemDescriptionText;
         calories = binding.itemCaloriesText;
         ingredients = binding.itemIngredients;
+        price = binding.itemPriceText;
 
         args = getArguments();
         if(args!=null) {
@@ -100,6 +104,7 @@ public class SearchDetailsFragment extends Fragment {
             desc.setText(item.getItemDescription());
             calories.setText(item.getCalories());
             ingredients.setText(item.getMainIngredients());
+            price.setText(String.valueOf(item.getPrice()));
         }
 
         name.setEnabled(false);
@@ -114,6 +119,9 @@ public class SearchDetailsFragment extends Fragment {
         ingredients.setEnabled(false);
         ingredients.setBackgroundResource(android.R.color.transparent);
 
+        price.setEnabled(false);
+        price.setBackgroundResource(android.R.color.transparent);
+
         placeOrder = binding.delete;
         placeOrder.setText("Place Order");
 
@@ -121,9 +129,16 @@ public class SearchDetailsFragment extends Fragment {
         remove.setVisibility(View.GONE);
 
         removeButton = binding.addNewItem;
-        removeButton.setVisibility(View.GONE);
+        removeButton.setText("View Cook Account Page");
+        //removeButton.setVisibility(View.GONE);
 
         placeOrder.setOnClickListener(onCLick -> placeOrder(item));
+        removeButton.setOnClickListener(onClick -> {
+            args = new Bundle();
+            // args.putParcelable(); put cook user here / cook id
+            // go to cook account page
+            updateUI(args, navToAcc);
+        });
 
         return root;
     }
@@ -149,7 +164,7 @@ public class SearchDetailsFragment extends Fragment {
                 }
             });
 
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    //@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void placeOrder(MenuItem item){
         if(shouldShowRequestPermissionRationale(Notification.CATEGORY_EVENT)){
             Log.d(TAG, "requesting");
@@ -158,7 +173,7 @@ public class SearchDetailsFragment extends Fragment {
         NotificationManagerCompat manager = NotificationManagerCompat.from(this.requireContext());
         if(manager.areNotificationsEnabled()){
             notify(manager);
-        }else{
+        }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
         }
 

@@ -52,6 +52,7 @@ public class OrderDetailsFragment extends Fragment {
     private TextView caloriesTitle;
     private EditText name;
     private EditText desc;
+    private EditText price;
     private EditText calories;
     private EditText ingredients;
 
@@ -103,10 +104,15 @@ public class OrderDetailsFragment extends Fragment {
 
         name = binding.itemNameText;
         name.setText(menuItem.getItemName());
+
+        price = binding.itemPriceText;
+        price.setText(String.valueOf(menuItem.getPrice()));
+
         desc = binding.itemDescriptionText;
         desc.setText(menuItem.getItemDescription());
+
         calories = binding.itemCaloriesText;
-        // set calories as dietary restriction
+
         ingredients = binding.itemIngredients;
         ingredients.setText(menuItem.getMainIngredients());
 

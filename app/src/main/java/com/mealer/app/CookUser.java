@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
 import com.mealer.app.menu.Menu;
 
@@ -86,6 +87,7 @@ public class CookUser extends User implements Parcelable {
         return rating + "%";
     }
 
+    @Exclude
     public void setRating(int rating) {
         this.rating = Integer.toString(rating);
     }

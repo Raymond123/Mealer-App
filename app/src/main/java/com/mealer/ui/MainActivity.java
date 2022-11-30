@@ -87,12 +87,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStop () {
-        super .onStop() ;
-        Intent notifs = new Intent(this, NotificationService.class );
-        notifs.putExtra("USER", (User) getIntent().getParcelableExtra("TYPE"));
-        startService(notifs) ;
-    }
-
 }

@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_navigation_menu_item_details_to_navigation_client_home"
             app:destination="@id/navigation_client_home" />
+        <action
+            android:id="@+id/action_navigation_menu_item_details_to_navigation_account"
+            app:destination="@id/navigation_account" />
     </fragment>
 
     <fragment

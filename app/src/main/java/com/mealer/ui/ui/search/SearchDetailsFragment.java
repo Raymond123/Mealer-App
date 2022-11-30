@@ -140,6 +140,7 @@ public class SearchDetailsFragment extends Fragment {
                if(task.isSuccessful()){
                    DataSnapshot data = task.getResult();
                    args.putParcelable("COOK", data.getValue(CookUser.class));
+                   args.putString("ID", cookId);
                    updateUI(args, navToAcc);
                }
             });

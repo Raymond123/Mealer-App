@@ -44,6 +44,10 @@ public class ClientHomePage extends AppCompatActivity implements OnFragmentInter
 
     @Override
     public void changeFragment(Bundle args, int id) {
-        navController.navigate(id, args);
+        if(id == 0){
+
+        }else {
+            navController.navigate(id, args);
+        }
     }
 }

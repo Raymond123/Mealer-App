@@ -88,6 +88,9 @@ public class CookUser extends User implements Parcelable {
     }
 
     @Exclude
+    public int getIntRating() {return Integer.parseInt(rating); }
+
+    @Exclude
     public void setRating(int rating) {
         this.rating = Integer.toString(rating);
     }

@@ -105,5 +105,9 @@
         android:id="@+id/navigation_account"
         android:name="com.mealer.ui.ui.account.AccountPageFragment"
         android:label="@string/accountPage"
-        tools:layout="@layout/fragment_account_page" />
+        tools:layout="@layout/fragment_account_page" >
+        <action
+            android:id="@+id/action_navigation_account_self"
+            app:destination="@id/navigation_account" />
+    </fragment>
 </navigation>

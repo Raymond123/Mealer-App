@@ -27,6 +27,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mealer.app.CookUser;
@@ -48,7 +49,7 @@ public class SearchDetailsFragment extends Fragment {
 
     private FragmentMenuItemDetailsBinding binding;
     private OnFragmentInteractionListener mListener;
-    NotificationManagerCompat manager;
+    private NotificationManagerCompat manager;
     private DatabaseReference cookRef;
     private DatabaseReference orderRef;
     private Bundle args;
@@ -135,9 +136,16 @@ public class SearchDetailsFragment extends Fragment {
         placeOrder.setOnClickListener(onCLick -> placeOrder(item));
         removeButton.setOnClickListener(onClick -> {
             args = new Bundle();
+            cookRef.child(cookId).get().addOnCompleteListener(task -> {
+               if(task.isSuccessful()){
+                   DataSnapshot data = task.getResult();
+                   args.putParcelable("COOK", data.getValue(CookUser.class));
+                   updateUI(args, navToAcc);
+               }
+            });
             // args.putParcelable(); put cook user here / cook id
             // go to cook account page
-            updateUI(args, navToAcc);
+            //updateUI(args, navToAcc);
         });
 
         return root;

@@ -11,13 +11,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mealer.app.Admin;
 import com.mealer.app.ClientUser;
+import com.mealer.app.Complaint;
 import com.mealer.app.CookUser;
 import com.mealer.app.User;
 import com.mealer.ui.LoginPage;
@@ -48,12 +54,15 @@ public class AccountPageFragment extends Fragment {
     private TextView userType;
     private TextView userName;
     private TextView userDescription;
+
     private Button signOut;
+    private Button complain;
 
     private Admin signedIn;
 
     FragmentAccountPageBinding binding;
     DatabaseReference dbRef;
+    DatabaseReference cRef;
     FirebaseAuth mAuth;
 
     @SuppressLint("SetTextI18n")
@@ -81,14 +90,19 @@ public class AccountPageFragment extends Fragment {
         // get current firebase user from firebase authentication
         FirebaseUser currentFirebaseUser = mAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("users");
+        cRef = FirebaseDatabase.getInstance().getReference("complaints");
         // display user type on home page
 
         signOut = binding.signOut;
         signOut.setOnClickListener(c->signOut(currentFirebaseUser));
 
+        complain = binding.complain;
+        complain.setVisibility(View.GONE);
+
         if(this.signedIn.getClass() != Admin.class && currentFirebaseUser != null){
             if(getArguments() != null) {
                 Bundle args = requireArguments();
+                setArguments(null);
                 CookUser user = args.getParcelable("COOK");
                 String cookId = args.getString("ID");
                 userName.setText(user.getFirstName() + " " + user.getLastName());
@@ -97,18 +111,14 @@ public class AccountPageFragment extends Fragment {
                 Log.d(TAG, "userType: " + this.signedIn.getUserType());
 
                 signOut.setText("Rate Cook");
+                complain.setText("File Complaint");
+                complain.setVisibility(View.VISIBLE);
                 if(signOut.hasOnClickListeners()){
-                    signOut.setOnClickListener(onClick -> {
-                        // popup rating input
-                        HashMap<String, Object> update = new HashMap<>();
-                        int rating = (20 + user.getIntRating())/2; // 50 == rating input
-                        user.setRating(rating);
-                        update.put("rating", String.valueOf(user.getIntRating()));
-                        dbRef.child(cookId).updateChildren(update);
-
-                        updateUI(getArguments(), reload);
-                    });
+                    signOut.setOnClickListener(
+                            onClick -> openPopup(this.getView(), user, cookId));
                 }
+                complain.setOnClickListener(
+                        onClick -> fileComplain(this.getView(), user, cookId));
             }else {
                 dbRef.child(currentFirebaseUser.getUid()).get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -157,10 +167,100 @@ public class AccountPageFragment extends Fragment {
         return root;
     }
 
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
+    private void fileComplain(View view, CookUser user, String cookId) {
+        LayoutInflater inflater = getLayoutInflater();
+        @SuppressLint("InflateParams")
+        View popup = inflater.inflate(R.layout.complaint_popup, null);
+        popup.setBackgroundColor(Color.BLACK);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+
+        final PopupWindow popupWindow = new PopupWindow(popup, width, height, focusable);
+
+        Button submit = popup.findViewById(R.id.complaintSubmit);
+        EditText subject = popup.findViewById(R.id.complaintSubjectP);
+        EditText description = popup.findViewById(R.id.complaintDescriptionP);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popup.setOnTouchListener((v, event) -> {
+            popupWindow.dismiss();
+            return true;
+        });
+
+        submit.setOnClickListener(c ->{
+            Complaint complaint = new Complaint(
+                    subject.getText().toString(),
+                    description.getText().toString(),
+                    cookId);
+
+            cRef.child(complaint.getComplaintID()).setValue(complaint);
+            popupWindow.dismiss();
+            updateUI(getArguments(), reload);
+        });
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         binding = null;
+    }
+
+    /**
+     * Opens a small popup window where the admin can input the length of the cooks suspension
+     * @param view androidStudio view to show popup
+     */
+    @SuppressLint({"ClickableViewAccessibility", "MissingInflatedId", "SetTextI18n"})
+    public void openPopup(View view, CookUser user, String cookId){
+        LayoutInflater inflater = getLayoutInflater();
+        @SuppressLint("InflateParams")
+        View popup = inflater.inflate(R.layout.suspension_popup, null);
+        popup.setBackgroundColor(Color.GREEN);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+
+        final PopupWindow popupWindow = new PopupWindow(popup, width, height, focusable);
+
+        Spinner monthDayChoice = popup.findViewById(R.id.spinner);
+        monthDayChoice.setVisibility(View.GONE);
+
+        Button rate = popup.findViewById(R.id.completeSuspension);
+        rate.setText("Rate");
+
+        EditText rating = popup.findViewById(R.id.suspensionLength);
+        rating.setHint("Rating / 100");
+        rating.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popup.setOnTouchListener((v, event) -> {
+            popupWindow.dismiss();
+            return true;
+        });
+
+        rate.setOnClickListener(onClick -> {
+            HashMap<String, Object> update = new HashMap<>();
+            int input = Integer.parseInt(rating.getText().toString());
+            int newRating = (input + user.getIntRating())/2; // 50 == rating input
+            user.setRating(newRating);
+            update.put("rating", String.valueOf(user.getIntRating()));
+            dbRef.child(cookId).updateChildren(update);
+            popupWindow.dismiss();
+            updateUI(getArguments(), reload);
+        });
     }
 
     /**

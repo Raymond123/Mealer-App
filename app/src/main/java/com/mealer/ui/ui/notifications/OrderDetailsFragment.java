@@ -123,7 +123,7 @@ public class OrderDetailsFragment extends Fragment {
 
             if(order.getOrderStatus().equals("accepted")){
                 reject.setVisibility(View.GONE);
-                accept.setText("Order Completed");
+                accept.setText("Complete Order");
                 accept.setOnClickListener(onCLick -> removeItem(true)); //do nothing atm
             }else if(order.getOrderStatus().equals("rejected")){
                 reject.setVisibility(View.GONE);
@@ -146,7 +146,7 @@ public class OrderDetailsFragment extends Fragment {
                     String fName = user.getFirstName();
                     String lName = user.getLastName();
 
-                    if(user.getUserType().equals("cook")) {
+                    if(!user.getUserType().equals("cook")) {
                         title.setText("Order From: \n" +
                                 fName.substring(0, 1).toUpperCase(Locale.ROOT) + fName.substring(1) + " " +
                                 lName.substring(0, 1).toUpperCase(Locale.ROOT) + lName.substring(1));

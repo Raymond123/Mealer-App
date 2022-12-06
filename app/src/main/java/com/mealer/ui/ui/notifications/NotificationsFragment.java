@@ -131,7 +131,10 @@ public class NotificationsFragment extends Fragment {
                             if ("cook".equals(Objects.requireNonNull(child.getValue(CookUser.class)).getUserType())) {
                                 for (DataSnapshot grandChild : child.child("orders").getChildren()) {
                                     Order order = grandChild.getValue(Order.class);
-                                    if (order != null && currentUser.getUid().equals(order.getOrderFrom())) {
+                                    if (order != null
+                                            && !order.getOrderStatus().equals("deleted")
+                                            && !order.getOrderStatus().equals("completed")
+                                            && currentUser.getUid().equals(order.getOrderFrom())) {
                                         orderList.add(order);
                                     }
                                 }

@@ -22,12 +22,14 @@
             android:id="@+id/suspensionLength"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:layout_weight="2"
             android:ems="10"
             android:hint="@string/length"
             android:inputType="number"
             android:textColor="@color/white"
-            tools:ignore="TextFields" />
+            tools:ignore="TextFields"
+            android:autofillHints="" />
 
         <Space
             android:layout_width="5dp"
@@ -37,7 +39,9 @@
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0" />
+            android:minHeight="48dp"
+            android:layout_weight="0"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Space
             android:layout_width="25dp"
@@ -48,7 +52,6 @@
         android:id="@+id/completeSuspension"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:backgroundTint="@color/lightBrown"
         android:text="@string/suspend" />
 </LinearLayout>

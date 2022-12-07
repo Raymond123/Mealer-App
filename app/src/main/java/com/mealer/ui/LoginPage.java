@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mealer.app.Admin;
 import com.mealer.app.ClientUser;
 import com.mealer.app.CookUser;
+import com.mealer.app.NotificationService;
 import com.mealer.app.User;
 
 import java.text.ParseException;
@@ -47,6 +48,8 @@ public class LoginPage extends AppCompatActivity {
     // initializing firebase objects
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
+    String userId;
+    User user;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -159,12 +162,12 @@ public class LoginPage extends AppCompatActivity {
                             // check if the user is banned or suspended
                             // -1 is banned, 0 is nothing
                             // any value >0 is the number of days the account is suspended
-                            if("0".equals(userAttributes.get("accountStatus"))) {
+                            if ("client".equals(userAttributes.get("userType"))) {
+                                updateUI(currentFirebaseUser, new ClientUser(userAttributes));
+                            }else if("0".equals(userAttributes.get("accountStatus"))) {
                                 // check user type and update ui with new user object of that type
                                 if ("cook".equals(userAttributes.get("userType"))) {
                                     updateUI(currentFirebaseUser, new CookUser(userAttributes));
-                                } else if ("client".equals(userAttributes.get("userType"))) {
-                                    updateUI(currentFirebaseUser, new ClientUser(userAttributes));
                                 } else {
                                     Log.e("signIn", "failed to detemine user type, userType: " + userAttributes.get("userType"));
                                 }
@@ -248,12 +251,15 @@ public class LoginPage extends AppCompatActivity {
             startActivity(getIntent());
             return;
         }
+        user = currentUser;
+        userId = currentFirebaseUser.getUid();
         Intent signIn = new Intent(this, ClientHomePage.class);
         if("cook".equals(currentUser.getUserType())){
             signIn = new Intent(this, CookHomePage.class);
         }
         signIn.putExtra("TYPE", currentUser);
         startActivity(signIn);
+        finish();
     }
 
     /**
@@ -266,4 +272,12 @@ public class LoginPage extends AppCompatActivity {
         return email.equals(adminEmail);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent notifs = new Intent(this, NotificationService.class );
+        notifs.putExtra("USER", user);
+        notifs.putExtra("ID", userId);
+        startService(notifs) ;
+    }
 }

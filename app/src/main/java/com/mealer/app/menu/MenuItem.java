@@ -23,14 +23,14 @@ public class MenuItem implements Parcelable {
 
     }
 
-    public MenuItem (String itemName, String itemDescription,
-                    String calories, String mainIngredients, boolean active){
+    public MenuItem (String itemName, String itemDescription, String calories,
+                     String mainIngredients, double price, boolean active){
         this.itemId = UUID.randomUUID().toString();
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.calories = calories;
         this.mainIngredients = mainIngredients;
-        //this.price = price;
+        this.price = price;
         this.active = active;
     }
 
@@ -40,7 +40,7 @@ public class MenuItem implements Parcelable {
         this.itemDescription = in.readString();
         this.calories = in.readString();
         this.mainIngredients = in.readString();
-        //this.price = in.readDouble();
+        this.price = in.readDouble();
         this.active = in.readInt()==1;
     }
 
@@ -67,6 +67,10 @@ public class MenuItem implements Parcelable {
 
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setMainIngredients(String mainIngredients) {
@@ -123,7 +127,7 @@ public class MenuItem implements Parcelable {
         parcel.writeString(itemDescription);
         parcel.writeString(calories);
         parcel.writeString(mainIngredients);
-        //parcel.writeDouble(price);
+        parcel.writeDouble(price);
         parcel.writeInt(active?1:0);
     }
 }

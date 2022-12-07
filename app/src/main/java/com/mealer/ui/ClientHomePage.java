@@ -12,15 +12,18 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.mealer.ui.databinding.ActivityClientHomePageBinding;
 
-public class ClientHomePage extends AppCompatActivity {
+import java.util.Objects;
+
+public class ClientHomePage extends AppCompatActivity implements OnFragmentInteractionListener {
 
     private ActivityClientHomePageBinding binding;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         binding = ActivityClientHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -28,15 +31,19 @@ public class ClientHomePage extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_account)
+                R.id.navigation_client_home, R.id.navigation_notifications, R.id.navigation_account)
                 .build();
 
         final NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_activity_client_home_page);
-        final NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(navView, navController);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.clientNavView, navController);
     }
 
+    @Override
+    public void changeFragment(Bundle args, int id) {
+        navController.navigate(id, args);
+    }
 }

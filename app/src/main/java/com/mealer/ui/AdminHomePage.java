@@ -23,17 +23,18 @@ import com.mealer.ui.databinding.ActivityAdminHomePageBinding;
 import com.mealer.ui.ui.complaint.ComplaintFragment;
 import com.mealer.ui.ui.complaint.ComplaintsListFragment;
 
+import java.util.Objects;
+
 public class AdminHomePage extends AppCompatActivity implements OnFragmentInteractionListener {
 
     private NavController navController;
     private ActivityAdminHomePageBinding binding;
-    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         binding = ActivityAdminHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -41,7 +42,7 @@ public class AdminHomePage extends AppCompatActivity implements OnFragmentIntera
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_complaints, R.id.navigation_notifications, R.id.navigation_account)
+                R.id.navigation_complaints, R.id.navigation_account)
                 .build();
 
         final NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()

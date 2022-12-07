@@ -64,19 +64,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.235" />
 
-    <Button
-        android:id="@+id/accountPageNextBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nextBtn"
-        android:backgroundTint="@color/lightBrown"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="642dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
